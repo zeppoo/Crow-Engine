@@ -1,0 +1,6 @@
+[submodule "CrowEngine/external/glfw"]
+	path = CrowEngine/external/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "CrowEngine/external/imgui"]
+	path = CrowEngine/external/imgui
+	url = https://github.com/ocornut/imgui.git
