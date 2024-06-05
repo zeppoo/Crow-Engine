@@ -37,7 +37,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 37,
+				"line" : 38,
 				"parent" : 2
 			},
 			{
@@ -49,7 +49,7 @@
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 34,
+				"line" : 35,
 				"parent" : 2
 			}
 		]
@@ -60,7 +60,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++17 -fdiagnostics-color=always"
+					"fragment" : "-O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always"
 				}
 			],
 			"includes" : 

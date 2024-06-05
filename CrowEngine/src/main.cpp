@@ -1,6 +1,13 @@
 #include <iostream>
+#include "Core/App.hpp"
 
-int main() {
-  std::cout << "Hello, World!" << std::endl;
-  return 0;
+int main()
+{
+  crowe::App app{};
+
+  app.StartApplication();
+
+  app.RunApplication();
+
+  app.ShutdownApplication();
 }
