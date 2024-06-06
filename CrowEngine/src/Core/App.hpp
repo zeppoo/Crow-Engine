@@ -1,6 +1,4 @@
-#ifndef APP_HPP
-#define APP_HPP
-
+#pragma once
 namespace crowe
 {
 class App {
@@ -10,5 +8,3 @@ public:
   void ShutdownApplication();
 };
 }
-
-#endif //APP_HPP

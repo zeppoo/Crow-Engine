@@ -1,13 +1,15 @@
-#ifndef VULK_DEVICE
-#define VULK_DEVICE
+#pragma once
 
 #include "../crow_lib.hpp"
 
 namespace crowe
 {
- void FindPhysicalDevice();
- void CreateLogicalDevice();
- void CheckDeviceSuitability(VkPhysicalDevice device);
-}
+  VkPhysicalDevice FindPhysicalDevice(VkInstance instance);
+  void CreateLogicalDevice();
 
-#endif //VULK_DEVICE
+
+  bool checkDeviceExtensionSupport(VkPhysicalDevice physicDevice);
+  bool CheckDeviceSuitability(VkPhysicalDevice device);
+  int RateDevice(VkPhysicalDevice device);
+
+} // namespace crowe

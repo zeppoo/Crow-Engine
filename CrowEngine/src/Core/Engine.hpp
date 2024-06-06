@@ -1,5 +1,4 @@
-#ifndef ENGINE_HPP
-#define ENGINE_HPP
+#pragma once
 
 namespace crowe
 {
@@ -21,5 +20,3 @@ private:
   static void Cleanup();
 };
 }
-
-#endif //ENGINE_HPP

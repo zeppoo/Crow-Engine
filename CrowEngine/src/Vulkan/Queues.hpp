@@ -1,5 +1,4 @@
-#ifndef QUEUES_HPP
-#define QUEUES_HPP
+#pragma once
 
 #include "../crow_lib.hpp"
 #include <optional>
@@ -7,14 +6,19 @@
 namespace crowe
 {
 struct QueueFamilyIndices {
-  std::optional<uint32_t> graphicsFamily;
-  std::optional<uint32_t> presentFamily;
-  std::optional<uint32_t> transferFamily;
+  VkQueue familyQueue;
+  std::vector<VkQueueFlagBits> Bits;
+  std::optional<uint32_t> queue1;
+  std::optional<uint32_t> queue2;
+  VkCommandPool commandPool;
 
-  bool isComplete() { return graphicsFamily.has_value() && presentFamily.has_value(); }
+  bool isComplete()
+  { return
+        queue1.has_value() &&
+        queue2.has_value();
+  }
 };
 
 QueueFamilyIndices findQueueFamilies(VkPhysicalDevice physicDevice, VkSurfaceKHR surface);
 
 }
-#endif //QUEUES_HPP

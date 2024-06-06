@@ -1,4 +1,13 @@
-"C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S D:\Rein\Coding\C++\Projects\Crow-Engine\CrowEngine -B D:\Rein\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release
+"C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - MinGW Makefiles" -S C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine -B C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
 -- The C compiler identification is GNU 13.1.0
 -- The CXX compiler identification is GNU 13.1.0
 -- Detecting C compiler ABI info
@@ -19,11 +28,10 @@
 -- Looking for dinput.h - found
 -- Looking for xinput.h
 -- Looking for xinput.h - found
--- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
--- Documentation generation requires Doxygen 1.9.8 or later
+-- Found Doxygen: C:/mingw64/bin/doxygen.exe (found version "1.10.0") found components: doxygen 
 -- GLM: Version 1.0.2
 -- GLM: Build with C++ features auto detection
 -- Found Vulkan: C:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib (found version "1.3.280") found components: glslc glslangValidator 
--- Configuring done (2.9s)
--- Generating done (0.0s)
--- Build files have been written to: D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-release
+-- Configuring done (3.9s)
+-- Generating done (0.3s)
+-- Build files have been written to: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-release

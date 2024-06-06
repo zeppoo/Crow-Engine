@@ -1,5 +1,4 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#pragma once
 
 #include "../crow_lib.hpp"
 
@@ -18,9 +17,4 @@ void InitializeWindow();
 VkSurfaceKHR CreateVulkanSurface(VkInstance instance);
 static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 void windowLoop();
-
-bool framebufferResized;
-
 }
-
-#endif //WINDOW_HPP

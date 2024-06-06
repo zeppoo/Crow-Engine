@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt\"")
+if (NOT EXISTS "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt\"")
 endif()
 
-file(READ "D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt" files)
+file(READ "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/external/glfw/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

@@ -33,14 +33,7 @@ VkSurfaceKHR CreateVulkanSurface(VkInstance instance)
   {
     throw std::runtime_error("Failed to create window surface");
   }
-  glfwSetWindowUserPointer(window, window);
-  glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
-
   return surface;
-}
-
-static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
-  framebufferResized = true;
 }
 
 void windowLoop()

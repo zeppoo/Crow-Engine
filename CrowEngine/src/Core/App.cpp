@@ -1,6 +1,7 @@
 #include "App.hpp"
-
 #include "Window.hpp"
+#include "../Vulkan/VulkanBackend.hpp"
+
 
 namespace crowe
 {
@@ -8,6 +9,7 @@ namespace crowe
   {
     InitializeGLFW();
     InitializeWindow();
+    VulkanStartup();
   }
 
   void App::RunApplication()

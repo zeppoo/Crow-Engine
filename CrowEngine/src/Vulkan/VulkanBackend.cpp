@@ -45,7 +45,7 @@ void VulkanStartup()
   InitVulkan();
   if (enableValidationLayers) { setupDebugMessenger(); }
   surface = CreateVulkanSurface(vkInstance);
-
+  physicDevice = FindPhysicalDevice(vkInstance);
 }
 
 void InitVulkan()

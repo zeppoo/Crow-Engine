@@ -1,55 +1,111 @@
 #include "Device.hpp"
 #include "VulkanBackend.hpp"
+#include "Queues.hpp"
+#include "SwapChain.hpp"
+
+#include <set>
 
 namespace crowe
 {
-VkPhysicalDevice FindPhysicalDevice(VkInstance instance)
-{
-  uint32_t deviceCount = 0;
-  VkPhysicalDevice physicDevice;
-
-  vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
-  if (deviceCount == 0)
+  VkPhysicalDevice FindPhysicalDevice(VkInstance instance)
   {
-    throw std::runtime_error("failed to find GPUs with Vulkan support!");
-  }
+    uint32_t deviceCount = 0;
+    VkPhysicalDevice physicDevice;
 
-  std::vector<VkPhysicalDevice> devices(deviceCount);
-  vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
-
-  for (const auto &device: devices)
-  {
-    if (CheckDeviceSuitability(device))
+    vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+    if (deviceCount == 0)
     {
-      physicDevice = device;
-      break;
+      throw std::runtime_error("failed to find GPUs with Vulkan support!");
+    }
+
+    std::vector<VkPhysicalDevice> devices(deviceCount);
+    vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
+
+    int bestScore = 0;
+    for (const auto &device: devices)
+    {
+      if (RateDevice(device) > bestScore)
+      {
+        physicDevice = device;
+      }
+    }
+
+    if (physicDevice == VK_NULL_HANDLE)
+    {
+      throw std::runtime_error("failed to find a suitable GPU!");
+    } else {
+      VkPhysicalDeviceProperties properties;
+      vkGetPhysicalDeviceProperties(physicDevice, &properties);
+      std::cout << "\n\nDevice Name: " << properties.deviceName << ":\n";
+      return physicDevice;
     }
   }
 
-  if (physicDevice == VK_NULL_HANDLE)
+  void CreateLogicalDevice() {}
+
+  bool checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
   {
-    throw std::runtime_error("failed to find a suitable GPU!");
-  } else {
-    return physicDevice;
-  }
-}
+    std::vector<const char*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+    uint32_t extensionCount;
+    vkEnumerateDeviceExtensionProperties(physicDevice, nullptr, &extensionCount, nullptr);
 
-void CreateLogicalDevice() {}
+    std::vector<VkExtensionProperties> availableExtensions(extensionCount);
+    vkEnumerateDeviceExtensionProperties(physicDevice, nullptr, &extensionCount, availableExtensions.data());
 
-void CheckDeviceSuitability(VkPhysicalDevice device)
-{
-  QueueFamilyIndices indices = findQueueFamilies(device, GetSurface());
+    std::set<std::string> requiredExtensions((deviceExtensions).begin(), (deviceExtensions).end());
 
-  bool extensionsSupported = checkDeviceExtensionSupport(physicDevice);
+    for (const auto &extension: availableExtensions)
+    {
+      requiredExtensions.erase(extension.extensionName);
+    }
 
-  bool swapChainAdequate = false;
-  if (extensionsSupported)
-  {
-    SwapChainSupportDetails swapChainSupport = querySwapChainSupport(physicDevice, surface);
-    swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+    return requiredExtensions.empty();
   }
 
-  return indices.isComplete() && extensionsSupported && swapChainAdequate;
-}
+  bool CheckDeviceSuitability(VkPhysicalDevice device)
+  {
+    bool extensionsSupported = checkDeviceExtensionSupport(device);
 
+    bool swapChainAdequate = false;
+    if (extensionsSupported)
+    {
+      SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device, getSurface());
+      swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+    }
+
+    return extensionsSupported && swapChainAdequate;
+  }
+
+  int RateDevice(VkPhysicalDevice device)
+  {
+    int score = 0;
+
+    VkPhysicalDeviceProperties deviceProperties;
+    VkPhysicalDeviceFeatures deviceFeatures;
+    vkGetPhysicalDeviceProperties(device, &deviceProperties);
+    vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+    if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+      score += 1000; // Discrete GPUs have the highest performance
+    }
+
+    // Maximum dimension of 2D images
+    score += deviceProperties.limits.maxImageDimension2D;
+
+    if (deviceFeatures.geometryShader) {
+      score += 100; // Support for geometry shaders
+    }
+
+    QueueFamilyIndices indices = findQueueFamilies(device, getSurface());
+    if (indices.isComplete())
+    {
+      score += 500; // Has all necessary queue families
+    }
+
+    if (CheckDeviceSuitability(device)) {
+      score += 500; // Supports necessary extensions and Swapchain
+    }
+
+    return score;
+  }
 }

@@ -1,12 +1,10 @@
-#ifndef VULKANBACKEND
-#define VULKANBACKEND
+#pragma once
 
 #include "../crow_lib.hpp"
 
 namespace crowe{
 
 void VulkanStartup();
-
 VkInstance getVkInstance();
 VkDevice getLogicDevice();
 VkPhysicalDevice getPhysicDevice();
@@ -19,5 +17,3 @@ std::vector<const char *> getRequiredExtensions();
 void setupDebugMessenger();
 
 }
-
-#endif //VULKANBACKEND
