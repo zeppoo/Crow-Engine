@@ -36,7 +36,7 @@ namespace crowe
     } else {
       VkPhysicalDeviceProperties properties;
       vkGetPhysicalDeviceProperties(physicDevice, &properties);
-      std::cout << "\n\nDevice Name: " << properties.deviceName << ":\n";
+      std::cout << "\n\nChosen Device: " << properties.deviceName << ":\n";
       return physicDevice;
     }
   }
@@ -88,6 +88,7 @@ namespace crowe
     if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
       score += 1000; // Discrete GPUs have the highest performance
     }
+
 
     // Maximum dimension of 2D images
     score += deviceProperties.limits.maxImageDimension2D;

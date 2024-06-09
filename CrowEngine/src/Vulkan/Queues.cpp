@@ -19,34 +19,34 @@ namespace crowe {
     std::cout << "Driver Version " << properties.driverVersion << ":\n";
     std::cout << "Max Memory Allocation Amount: " << properties.limits.maxMemoryAllocationCount << ":\n";
 
-    for (uint32_t i = 0; i < queueFamilyCount; i++) {
-      const VkQueueFamilyProperties& queueFamily = queueFamilies[i];
+      for (uint32_t i = 0; i < queueFamilyCount; i++) {
+        const VkQueueFamilyProperties& queueFamily = queueFamilies[i];
 
-      std::cout << "Queue Family " << i << ":\n";
-      std::cout << "  Queue Count: " << queueFamily.queueCount << "\n";
-      std::cout << "  Queue Flags: " << queueFamily.queueFlags << "\n";
-
-      if (queueFamily.queueFlags & queueFamilyIndices.Bits[1]) {
-        std::cout << "    Supports Graphics\n";
-        queueFamilyIndices.queue1 = i;
+        if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+          std::cout << "Queue Family " << i << ":\n";
+          std::cout << "  Has Independent Graphics Queue\n";
+          queueFamilyIndices.GraphicsQueue = i;
+          VkBool32 presentSupport = false;
+          vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, i, surface, &presentSupport);
+          if (presentSupport)
+          {
+            std::cout << "    Supports Presentation\n";
+          }
+        }
+        if (queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT &&
+            !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
+          std::cout << "Queue Family " << i << ":\n";
+          std::cout << "  Has Independent Compute Queue\n";
+          queueFamilyIndices.ComputeQueue = i;
+        }
+        if (queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT &&
+            !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) &&
+            !(queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT)) {
+          std::cout << "Queue Family " << i << ":\n";
+          std::cout << "  Has Independent Transfer Queue\n";
+          queueFamilyIndices.TransferQueue = i;
+        }
       }
-      if (queueFamily.queueFlags & queueFamilyIndices.Bits[2]) {
-        std::cout << "    Supports Compute\n";
-        queueFamilyIndices.queue2 = i;
-      }
-      VkBool32 presentSupport = false;
-      vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, i, surface, &presentSupport);
-      if (presentSupport)
-      {
-        std::cout << "    Supports Presentation\n";
-      }
-
-      std::cout << "  Timestamp Valid Bits: " << queueFamily.timestampValidBits << "\n";
-      std::cout << "  Min Image Transfer Granularity: ("
-                << queueFamily.minImageTransferGranularity.width << ", "
-                << queueFamily.minImageTransferGranularity.height << ", "
-                << queueFamily.minImageTransferGranularity.depth << ")\n";
-    }
 
     return queueFamilyIndices;
   }

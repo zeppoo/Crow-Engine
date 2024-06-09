@@ -33,6 +33,7 @@ VkSurfaceKHR CreateVulkanSurface(VkInstance instance)
   {
     throw std::runtime_error("Failed to create window surface");
   }
+
   return surface;
 }
 

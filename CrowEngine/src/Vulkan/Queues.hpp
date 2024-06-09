@@ -7,15 +7,16 @@ namespace crowe
 {
 struct QueueFamilyIndices {
   VkQueue familyQueue;
-  std::vector<VkQueueFlagBits> Bits;
-  std::optional<uint32_t> queue1;
-  std::optional<uint32_t> queue2;
+  std::optional<uint32_t> GraphicsQueue;
+  std::optional<uint32_t> ComputeQueue;
+  std::optional<uint32_t> TransferQueue;
   VkCommandPool commandPool;
 
   bool isComplete()
   { return
-        queue1.has_value() &&
-        queue2.has_value();
+        GraphicsQueue.has_value() &&
+        ComputeQueue.has_value() &&
+        TransferQueue.has_value();
   }
 };
 

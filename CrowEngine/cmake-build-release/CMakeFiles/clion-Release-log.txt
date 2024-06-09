@@ -32,6 +32,6 @@ CMake Deprecation Warning:
 -- GLM: Version 1.0.2
 -- GLM: Build with C++ features auto detection
 -- Found Vulkan: C:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib (found version "1.3.280") found components: glslc glslangValidator 
--- Configuring done (3.9s)
--- Generating done (0.3s)
+-- Configuring done (6.3s)
+-- Generating done (0.4s)
 -- Build files have been written to: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-release
