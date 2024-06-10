@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui
+# Install script for directory: D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

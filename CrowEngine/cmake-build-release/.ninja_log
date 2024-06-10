@@ -1,15 +1,12 @@
 # ninja log v5
-16	101	7393173831308331	CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.obj	970d165276aa62b3
 10036	10111	7393174191162517	external/imgui/libimgui.a	315db52096ea92ed
 38	843	7393173838563223	CMakeFiles/CrowEngine.dir/src/main.cpp.obj	f8a2b5b959fd3554
 8618	10206	7393174192117127	external/glm/glm/libglm.a	9a6fc7e816a779a7
 2457	3037	7393174120415084	external/glfw/src/libglfw3.a	94ce0bac275cc3f7
 10	134	7393173831554354	CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj	e17247cb1a630850
 59	2057	7393173850877801	external/glfw/src/CMakeFiles/glfw.dir/monitor.c.obj	d9c48de51ec11270
-19	984	7393173840108922	CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.obj	d24005e4e60c7f1c
-24	997	7393173840226765	CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.obj	581284c1fbe5a217
-13	1021	7393173840485957	CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj	9cf4b9190e3bdc8f
 34	1015	7393173840409988	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj	7f9289e713e2cb2e
+13	1021	7393173840485957	CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj	9cf4b9190e3bdc8f
 6	1008	7393173840379983	CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj	898f4ac655e0faa1
 83	1884	7393173849153658	external/glfw/src/CMakeFiles/glfw.dir/platform.c.obj	ad389ed3132c3f8f
 16	1578	7393174105537840	external/glfw/src/CMakeFiles/glfw.dir/win32_time.c.obj	2f212b6d7d1ff018
@@ -41,3 +38,16 @@
 43	8616	7393174176082604	external/glm/glm/CMakeFiles/glm.dir/detail/glm.cpp.obj	a60f3a63eb00b9ae
 47	10036	7393174190334688	external/imgui/CMakeFiles/imgui.dir/imgui.cpp.obj	fe286fc696b3939e
 10206	10321	7393174193190085	CrowEngine.exe	6948aef00c2267ce
+71	666	7396425284458839	CMakeFiles/CrowEngine.dir/src/main.cpp.obj	f8a2b5b959fd3554
+38	729	7396425285074408	CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj	e17247cb1a630850
+31	729	7396425285084430	CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj	898f4ac655e0faa1
+62	743	7396425285218259	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj	5b0ebb646a3faafa
+58	749	7396425285276695	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj	9539d5e8451b4ca7
+43	762	7396425285412809	CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj	9cf4b9190e3bdc8f
+50	771	7396425285515141	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj	7f9289e713e2cb2e
+67	914	7396425286935223	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj	84c905d92093cda5
+47	960	7396425287407774	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj	3df06f4c5a06204e
+54	1140	7396425289204042	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj	b4d52dccc2302720
+1140	1375	7396425291515981	CrowEngine.exe	ea9f897e58b9705c
+11	683	7396426093986430	CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj	3df06f4c5a06204e
+684	794	7396426095062996	CrowEngine.exe	ea9f897e58b9705c

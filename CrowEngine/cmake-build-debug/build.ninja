@@ -76,42 +76,6 @@ build CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj: CXX_COMPILER__CrowEngin
   TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
   TARGET_PDB = CrowEngine.pdb
 
-build CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Device.cpp || cmake_object_order_depends_target_CrowEngine
-  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\Device.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
-  OBJECT_DIR = CMakeFiles\CrowEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
-  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
-  TARGET_PDB = CrowEngine.pdb
-
-build CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/GraphicsPipeline.cpp || cmake_object_order_depends_target_CrowEngine
-  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\GraphicsPipeline.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
-  OBJECT_DIR = CMakeFiles\CrowEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
-  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
-  TARGET_PDB = CrowEngine.pdb
-
-build CMakeFiles/CrowEngine.dir/src/Vulkan/Queues.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Queues.cpp || cmake_object_order_depends_target_CrowEngine
-  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\Queues.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
-  OBJECT_DIR = CMakeFiles\CrowEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
-  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
-  TARGET_PDB = CrowEngine.pdb
-
-build CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/SwapChain.cpp || cmake_object_order_depends_target_CrowEngine
-  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\SwapChain.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
-  OBJECT_DIR = CMakeFiles\CrowEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
-  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
-  TARGET_PDB = CrowEngine.pdb
-
 build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp || cmake_object_order_depends_target_CrowEngine
   DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanBackend.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -123,6 +87,42 @@ build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: CXX_COMPILER__
 
 build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.cpp || cmake_object_order_depends_target_CrowEngine
   DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDebugger.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
+  OBJECT_DIR = CMakeFiles\CrowEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
+  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
+  TARGET_PDB = CrowEngine.pdb
+
+build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDevice.cpp || cmake_object_order_depends_target_CrowEngine
+  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDevice.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
+  OBJECT_DIR = CMakeFiles\CrowEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
+  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
+  TARGET_PDB = CrowEngine.pdb
+
+build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanGraphicsPipeline.cpp || cmake_object_order_depends_target_CrowEngine
+  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanGraphicsPipeline.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
+  OBJECT_DIR = CMakeFiles\CrowEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
+  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
+  TARGET_PDB = CrowEngine.pdb
+
+build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanSwapChain.cpp || cmake_object_order_depends_target_CrowEngine
+  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanSwapChain.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
+  OBJECT_DIR = CMakeFiles\CrowEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CrowEngine.dir\src\Vulkan
+  TARGET_COMPILE_PDB = CMakeFiles\CrowEngine.dir\
+  TARGET_PDB = CrowEngine.pdb
+
+build CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj: CXX_COMPILER__CrowEngine_unscanned_Debug D$:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.cpp || cmake_object_order_depends_target_CrowEngine
+  DEP_FILE = CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanUtilities.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glfw/include -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm -ID:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/imgui -isystem C:/VulkanSDK/1.3.280.0/Include
   OBJECT_DIR = CMakeFiles\CrowEngine.dir
@@ -147,7 +147,7 @@ build CMakeFiles/CrowEngine.dir/src/main.cpp.obj: CXX_COMPILER__CrowEngine_unsca
 #############################################
 # Link the executable CrowEngine.exe
 
-build CrowEngine.exe: CXX_EXECUTABLE_LINKER__CrowEngine_Debug CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/Queues.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj CMakeFiles/CrowEngine.dir/src/main.cpp.obj | external/glfw/src/libglfw3.a external/glm/glm/libglm.a external/imgui/libimgui.a C$:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib external/glfw/src/libglfw3.a C$:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib || external/glfw/src/libglfw3.a external/glm/glm/libglm.a external/imgui/libimgui.a
+build CrowEngine.exe: CXX_EXECUTABLE_LINKER__CrowEngine_Debug CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj CMakeFiles/CrowEngine.dir/src/main.cpp.obj | external/glfw/src/libglfw3.a external/glm/glm/libglm.a external/imgui/libimgui.a C$:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib external/glfw/src/libglfw3.a C$:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib || external/glfw/src/libglfw3.a external/glm/glm/libglm.a external/imgui/libimgui.a
   FLAGS = -g
   LINK_LIBRARIES = external/glfw/src/libglfw3.a  external/glm/glm/libglm.a  external/imgui/libimgui.a  C:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib  external/glfw/src/libglfw3.a  C:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\CrowEngine.dir

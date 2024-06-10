@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm/glm
+# Install script for directory: D:/Rein/Coding/C++/Projects/Crow-Engine/CrowEngine/external/glm/glm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

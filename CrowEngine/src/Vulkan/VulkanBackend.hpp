@@ -5,15 +5,18 @@
 namespace crowe{
 
 void VulkanStartup();
+
 VkInstance getVkInstance();
-VkDevice getLogicDevice();
-VkPhysicalDevice getPhysicDevice();
 VkSurfaceKHR getSurface();
-VkSwapchainKHR getSwapchain();
+const bool getEnableValidationLayers();
+const std::vector<const char*>& getValidationLayers();
+const std::vector<const char*>& getDeviceExtensions();
+
+const char* VkResultToString(VkResult result);
 
 void InitVulkan();
 bool checkValidationLayerSupport();
-std::vector<const char *> getRequiredExtensions();
+bool checkExtensionSupport(const std::vector<const char*>& requiredExtensions);
 void setupDebugMessenger();
 
 }

@@ -2,7 +2,6 @@
 #include "Window.hpp"
 #include "../Vulkan/VulkanBackend.hpp"
 
-
 namespace crowe
 {
   void App::StartApplication()

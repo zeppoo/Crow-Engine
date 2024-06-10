@@ -1,5 +1,4 @@
-#ifndef VULKANDEBUGGER_HPP
-#define VULKANDEBUGGER_HPP
+#pragma once
 
 #include "../crow_lib.hpp"
 
@@ -28,4 +27,3 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 }
 
-#endif //VULKANDEBUGGER_HPP
