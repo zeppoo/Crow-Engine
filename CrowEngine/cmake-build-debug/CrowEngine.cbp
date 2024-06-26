@@ -1763,40 +1763,46 @@
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Window.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Device.cpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Device.hpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/GraphicsPipeline.cpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/GraphicsPipeline.hpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Queues.cpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/Queues.hpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/SwapChain.cpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/SwapChain.hpp">
-			<Option target="CrowEngine"/>
-		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp">
 			<Option target="CrowEngine"/>
 		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBuffer.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBuffer.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.cpp">
 			<Option target="CrowEngine"/>
 		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDevice.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDevice.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanGraphicsPipeline.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanGraphicsPipeline.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanSwapChain.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanSwapChain.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/main.cpp">

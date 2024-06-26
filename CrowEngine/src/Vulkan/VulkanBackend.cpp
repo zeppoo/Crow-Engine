@@ -14,7 +14,7 @@ VkInstance vkInstance = VK_NULL_HANDLE;
 VkSurfaceKHR surface;
 VkDebugUtilsMessengerEXT debugMessenger;
 std::unique_ptr<VulkanDevice> device;
-//std::unique_ptr<VulkanSwapChain> swapchain;
+std::unique_ptr<VulkanSwapChain> swapchain;
 //std::unique_ptr<VulkanGraphicsPipeline> pipeline;
 
 #ifdef NDEBUG // NDEBUG = No Debug
@@ -32,7 +32,6 @@ const bool getEnableValidationLayers() { return enableValidationLayers; }
 const std::vector<const char*>& getValidationLayers() { return validationLayers; }
 const std::vector<const char*>& getDeviceExtensions() { return deviceExtensions; }
 
-
 void VulkanStartup()
 {
   InitVulkan();
@@ -40,6 +39,11 @@ void VulkanStartup()
   device = std::make_unique<VulkanDevice>(vkInstance);
   //swapchain = std::make_unique<VulkanSwapChain>(*device, surface);
   //pipeline = std::make_unique<VulkanGraphicsPipeline>();
+}
+
+void CleanupVulkan()
+{
+
 }
 
 void InitVulkan()
@@ -84,6 +88,8 @@ void InitVulkan()
     createInfo.ppEnabledLayerNames = validationLayers.data();
     populateDebugMessengerCreateInfo(debugCreateInfo);
     createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
+
+
   } else
   {
     createInfo.enabledLayerCount = 0;
@@ -92,6 +98,11 @@ void InitVulkan()
 
   if (vkCreateInstance(&createInfo, nullptr, &vkInstance) != VK_SUCCESS) {
     throw std::runtime_error("Failed to create Vulkan instance!");
+  }
+
+  if (enableValidationLayers && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
+  {
+    throw std::runtime_error("failed to set up debug messenger!");
   }
 }
 

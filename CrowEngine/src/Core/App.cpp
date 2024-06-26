@@ -6,6 +6,7 @@ namespace crowe
 {
   void App::StartApplication()
   {
+    std::string Stages[4] = {"Window", "Vulkan","Engine", "Game"};
     InitializeGLFW();
     InitializeWindow();
     VulkanStartup();
@@ -18,7 +19,7 @@ namespace crowe
 
   void App::ShutdownApplication()
   {
-    glfwDestroyWindow(GetWindow());
+    glfwDestroyWindow(getWindow());
     glfwTerminate();
   }
 }

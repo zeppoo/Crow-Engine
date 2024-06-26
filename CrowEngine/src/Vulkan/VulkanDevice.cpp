@@ -8,7 +8,9 @@ namespace crowe
 {
   VulkanDevice::VulkanDevice(VkInstance instance)
   {
+    std::cout << "Setting up Vulkan Device" << std::endl;
     FindPhysicalDevice(instance);
+    CreateLogicalDevice();
   }
 
   VulkanDevice::~VulkanDevice()
@@ -19,7 +21,6 @@ namespace crowe
   void VulkanDevice::FindPhysicalDevice(VkInstance instance)
   {
     uint32_t deviceCount = 0;
-    VkPhysicalDevice physicDevice;
 
     vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
     if (deviceCount == 0)
@@ -53,21 +54,18 @@ namespace crowe
 
   void VulkanDevice::CreateLogicalDevice()
   {
-    VkDevice logicDevice;
     // Find queue families
-    QueueFamilyIndices indices = findQueueFamilies(getPhysicDevice(), getSurface());
+    QueueFamilyIndices indices = findQueueFamilies(physicDevice, getSurface());
 
-    // Ensure queue families are complete before proceeding
-    if (!indices.isComplete())
-    {
-      throw std::runtime_error("failed to find all necessary queue families!");
-    }
+    GraphicsQueue.queueIndex = indices.graphicsFamily.value();
+    ComputeQueue.queueIndex = indices.computeFamily.value();
+    TransferQueue.queueIndex = indices.transferFamily.value();
 
     // Unique queue families
     std::set<uint32_t> uniqueQueueFamilies = {
-        indices.GraphicsQueue.value(),
-        indices.ComputeQueue.value(),
-        indices.TransferQueue.value()
+        indices.graphicsFamily.value(),
+        indices.computeFamily.value(),
+        indices.transferFamily.value()
     };
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
@@ -107,15 +105,59 @@ namespace crowe
     }
 
     // Create the logical device
-    if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &logicDevice) != VK_SUCCESS)
+    if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS)
     {
       throw std::runtime_error("failed to create logical device!");
     }
 
     // Retrieve the queue handles
-    vkGetDeviceQueue(logicDevice, indices.GraphicsQueue.value(), 0, &GraphicsQueue);
-    vkGetDeviceQueue(logicDevice, indices.ComputeQueue.value(), 0, &ComputeQueue);
-    vkGetDeviceQueue(logicDevice, indices.TransferQueue.value(), 0, &TransferQueue);
+    if (indices.isComplete())
+    {
+      vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &GraphicsQueue.queue);
+      createCommanPool(&GraphicsQueue);
+      createCommandBuffers(&GraphicsQueue);
+      vkGetDeviceQueue(device, indices.computeFamily.value(), 0, &ComputeQueue.queue);
+      createCommanPool(&ComputeQueue);
+      createCommandBuffers(&ComputeQueue);
+      vkGetDeviceQueue(device, indices.transferFamily.value(), 0, &TransferQueue.queue);
+      createCommanPool(&TransferQueue);
+      createCommandBuffers(&TransferQueue);
+    }
+    else
+    {
+      throw std::runtime_error("GPU doesn't support necessary queue families");
+    }
+
+    std::cout << "Vulkan Device is Setup" << std::endl;
+  }
+
+  void VulkanDevice::createCommanPool(VulkanQueue* vulkanQueue)
+  {
+    VkCommandPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    poolInfo.queueFamilyIndex = vulkanQueue->queueIndex;
+    poolInfo.flags = 0;
+
+    if (vkCreateCommandPool(device, &poolInfo, nullptr, &vulkanQueue->commandPool) != VK_SUCCESS)
+    {
+      throw std::runtime_error("failed to create command pool!");
+    }
+  }
+
+  void VulkanDevice::createCommandBuffers(crowe::VulkanQueue *vulkanQueue)
+  {
+    vulkanQueue->commandBuffers.resize(MAX_FRAMES_IN_FLIGHT);
+
+    VkCommandBufferAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    allocInfo.commandPool = vulkanQueue->commandPool;
+    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocInfo.commandBufferCount = (uint32_t) vulkanQueue->commandBuffers.size();
+
+    if (vkAllocateCommandBuffers(device, &allocInfo, vulkanQueue->commandBuffers.data()) != VK_SUCCESS)
+    {
+      throw std::runtime_error("failed to allocate command buffers!");
+    }
   }
 
   bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
@@ -181,8 +223,6 @@ namespace crowe
     if (CheckDeviceSuitability(device)) {
       score += 500; // Supports necessary extensions and Swapchain
     }
-
-    std::cout << score << "\n";
 
     return score;
   }

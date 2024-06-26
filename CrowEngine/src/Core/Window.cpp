@@ -5,7 +5,7 @@ namespace crowe
 
 GLFWwindow* window;
 WinProps win_props = {1000, 800, "Crow Engine"};
-GLFWwindow *GetWindow() { return window; }
+GLFWwindow *getWindow() { return window; }
 
 void InitializeGLFW()
 {

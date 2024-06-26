@@ -38,41 +38,45 @@ namespace crowe
 
     VkPhysicalDeviceProperties properties;
     vkGetPhysicalDeviceProperties(physicDevice, &properties);
-    std::cout << "\n\nDevice Name: " << properties.deviceName << ":\n";
-    std::cout << "Device Type: " << properties.deviceType << ":\n";
-    std::cout << "API Version: " << properties.apiVersion << ":\n";
-    std::cout << "Driver Version " << properties.driverVersion << ":\n";
-    std::cout << "Max Memory Allocation Amount: " << properties.limits.maxMemoryAllocationCount << ":\n";
 
       for (uint32_t i = 0; i < queueFamilyCount; i++) {
         const VkQueueFamilyProperties& queueFamily = queueFamilies[i];
 
         if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-          std::cout << "Queue Family " << i << ":\n";
-          std::cout << "  Has Independent Graphics Queue\n";
-          queueFamilyIndices.GraphicsQueue = i;
+          queueFamilyIndices.graphicsFamily = i;
           VkBool32 presentSupport = false;
           vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, i, surface, &presentSupport);
-          if (presentSupport)
+          if (!presentSupport)
           {
-            std::cout << "    Supports Presentation\n";
+            throw std::runtime_error("Queue does not support Presentation!");
           }
         }
         if (queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT &&
             !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
-          std::cout << "Queue Family " << i << ":\n";
-          std::cout << "  Has Independent Compute Queue\n";
-          queueFamilyIndices.ComputeQueue = i;
+          queueFamilyIndices.computeFamily = i;
         }
         if (queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT &&
             !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) &&
             !(queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT)) {
-          std::cout << "Queue Family " << i << ":\n";
-          std::cout << "  Has Independent Transfer Queue\n";
-          queueFamilyIndices.TransferQueue = i;
+          queueFamilyIndices.transferFamily = i;
         }
       }
 
     return queueFamilyIndices;
+  }
+
+  std::vector<char> readFile(const std::string &filepath)
+  {
+    std::ifstream file{filepath, std::ios::ate | std::ios::binary};
+    if (!file.is_open())
+    {
+      throw std::runtime_error("failed to open file: " + filepath);
+    }
+    size_t fileSize = static_cast<size_t>(file.tellg());
+    std::vector<char> buffer(fileSize);
+    file.seekg(0);
+    file.read(buffer.data(), fileSize);
+    file.close();
+    return buffer;
   }
 }

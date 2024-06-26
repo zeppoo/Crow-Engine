@@ -323,102 +323,6 @@ src/Core/Window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.s
 .PHONY : src/Core/Window.cpp.s
 
-src/Vulkan/Device.obj: src/Vulkan/Device.cpp.obj
-.PHONY : src/Vulkan/Device.obj
-
-# target to build an object file
-src/Vulkan/Device.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.obj
-.PHONY : src/Vulkan/Device.cpp.obj
-
-src/Vulkan/Device.i: src/Vulkan/Device.cpp.i
-.PHONY : src/Vulkan/Device.i
-
-# target to preprocess a source file
-src/Vulkan/Device.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.i
-.PHONY : src/Vulkan/Device.cpp.i
-
-src/Vulkan/Device.s: src/Vulkan/Device.cpp.s
-.PHONY : src/Vulkan/Device.s
-
-# target to generate assembly for a file
-src/Vulkan/Device.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Device.cpp.s
-.PHONY : src/Vulkan/Device.cpp.s
-
-src/Vulkan/GraphicsPipeline.obj: src/Vulkan/GraphicsPipeline.cpp.obj
-.PHONY : src/Vulkan/GraphicsPipeline.obj
-
-# target to build an object file
-src/Vulkan/GraphicsPipeline.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.obj
-.PHONY : src/Vulkan/GraphicsPipeline.cpp.obj
-
-src/Vulkan/GraphicsPipeline.i: src/Vulkan/GraphicsPipeline.cpp.i
-.PHONY : src/Vulkan/GraphicsPipeline.i
-
-# target to preprocess a source file
-src/Vulkan/GraphicsPipeline.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.i
-.PHONY : src/Vulkan/GraphicsPipeline.cpp.i
-
-src/Vulkan/GraphicsPipeline.s: src/Vulkan/GraphicsPipeline.cpp.s
-.PHONY : src/Vulkan/GraphicsPipeline.s
-
-# target to generate assembly for a file
-src/Vulkan/GraphicsPipeline.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/GraphicsPipeline.cpp.s
-.PHONY : src/Vulkan/GraphicsPipeline.cpp.s
-
-src/Vulkan/Queues.obj: src/Vulkan/Queues.cpp.obj
-.PHONY : src/Vulkan/Queues.obj
-
-# target to build an object file
-src/Vulkan/Queues.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Queues.cpp.obj
-.PHONY : src/Vulkan/Queues.cpp.obj
-
-src/Vulkan/Queues.i: src/Vulkan/Queues.cpp.i
-.PHONY : src/Vulkan/Queues.i
-
-# target to preprocess a source file
-src/Vulkan/Queues.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Queues.cpp.i
-.PHONY : src/Vulkan/Queues.cpp.i
-
-src/Vulkan/Queues.s: src/Vulkan/Queues.cpp.s
-.PHONY : src/Vulkan/Queues.s
-
-# target to generate assembly for a file
-src/Vulkan/Queues.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/Queues.cpp.s
-.PHONY : src/Vulkan/Queues.cpp.s
-
-src/Vulkan/SwapChain.obj: src/Vulkan/SwapChain.cpp.obj
-.PHONY : src/Vulkan/SwapChain.obj
-
-# target to build an object file
-src/Vulkan/SwapChain.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.obj
-.PHONY : src/Vulkan/SwapChain.cpp.obj
-
-src/Vulkan/SwapChain.i: src/Vulkan/SwapChain.cpp.i
-.PHONY : src/Vulkan/SwapChain.i
-
-# target to preprocess a source file
-src/Vulkan/SwapChain.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.i
-.PHONY : src/Vulkan/SwapChain.cpp.i
-
-src/Vulkan/SwapChain.s: src/Vulkan/SwapChain.cpp.s
-.PHONY : src/Vulkan/SwapChain.s
-
-# target to generate assembly for a file
-src/Vulkan/SwapChain.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/SwapChain.cpp.s
-.PHONY : src/Vulkan/SwapChain.cpp.s
-
 src/Vulkan/VulkanBackend.obj: src/Vulkan/VulkanBackend.cpp.obj
 .PHONY : src/Vulkan/VulkanBackend.obj
 
@@ -443,6 +347,30 @@ src/Vulkan/VulkanBackend.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.s
 .PHONY : src/Vulkan/VulkanBackend.cpp.s
 
+src/Vulkan/VulkanBuffer.obj: src/Vulkan/VulkanBuffer.cpp.obj
+.PHONY : src/Vulkan/VulkanBuffer.obj
+
+# target to build an object file
+src/Vulkan/VulkanBuffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBuffer.cpp.obj
+.PHONY : src/Vulkan/VulkanBuffer.cpp.obj
+
+src/Vulkan/VulkanBuffer.i: src/Vulkan/VulkanBuffer.cpp.i
+.PHONY : src/Vulkan/VulkanBuffer.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBuffer.cpp.i
+.PHONY : src/Vulkan/VulkanBuffer.cpp.i
+
+src/Vulkan/VulkanBuffer.s: src/Vulkan/VulkanBuffer.cpp.s
+.PHONY : src/Vulkan/VulkanBuffer.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBuffer.cpp.s
+.PHONY : src/Vulkan/VulkanBuffer.cpp.s
+
 src/Vulkan/VulkanDebugger.obj: src/Vulkan/VulkanDebugger.cpp.obj
 .PHONY : src/Vulkan/VulkanDebugger.obj
 
@@ -466,6 +394,102 @@ src/Vulkan/VulkanDebugger.s: src/Vulkan/VulkanDebugger.cpp.s
 src/Vulkan/VulkanDebugger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.s
 .PHONY : src/Vulkan/VulkanDebugger.cpp.s
+
+src/Vulkan/VulkanDevice.obj: src/Vulkan/VulkanDevice.cpp.obj
+.PHONY : src/Vulkan/VulkanDevice.obj
+
+# target to build an object file
+src/Vulkan/VulkanDevice.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj
+.PHONY : src/Vulkan/VulkanDevice.cpp.obj
+
+src/Vulkan/VulkanDevice.i: src/Vulkan/VulkanDevice.cpp.i
+.PHONY : src/Vulkan/VulkanDevice.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanDevice.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.i
+.PHONY : src/Vulkan/VulkanDevice.cpp.i
+
+src/Vulkan/VulkanDevice.s: src/Vulkan/VulkanDevice.cpp.s
+.PHONY : src/Vulkan/VulkanDevice.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanDevice.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.s
+.PHONY : src/Vulkan/VulkanDevice.cpp.s
+
+src/Vulkan/VulkanGraphicsPipeline.obj: src/Vulkan/VulkanGraphicsPipeline.cpp.obj
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.obj
+
+# target to build an object file
+src/Vulkan/VulkanGraphicsPipeline.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.cpp.obj
+
+src/Vulkan/VulkanGraphicsPipeline.i: src/Vulkan/VulkanGraphicsPipeline.cpp.i
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanGraphicsPipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.i
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.cpp.i
+
+src/Vulkan/VulkanGraphicsPipeline.s: src/Vulkan/VulkanGraphicsPipeline.cpp.s
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanGraphicsPipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.s
+.PHONY : src/Vulkan/VulkanGraphicsPipeline.cpp.s
+
+src/Vulkan/VulkanSwapChain.obj: src/Vulkan/VulkanSwapChain.cpp.obj
+.PHONY : src/Vulkan/VulkanSwapChain.obj
+
+# target to build an object file
+src/Vulkan/VulkanSwapChain.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj
+.PHONY : src/Vulkan/VulkanSwapChain.cpp.obj
+
+src/Vulkan/VulkanSwapChain.i: src/Vulkan/VulkanSwapChain.cpp.i
+.PHONY : src/Vulkan/VulkanSwapChain.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanSwapChain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.i
+.PHONY : src/Vulkan/VulkanSwapChain.cpp.i
+
+src/Vulkan/VulkanSwapChain.s: src/Vulkan/VulkanSwapChain.cpp.s
+.PHONY : src/Vulkan/VulkanSwapChain.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanSwapChain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.s
+.PHONY : src/Vulkan/VulkanSwapChain.cpp.s
+
+src/Vulkan/VulkanUtilities.obj: src/Vulkan/VulkanUtilities.cpp.obj
+.PHONY : src/Vulkan/VulkanUtilities.obj
+
+# target to build an object file
+src/Vulkan/VulkanUtilities.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj
+.PHONY : src/Vulkan/VulkanUtilities.cpp.obj
+
+src/Vulkan/VulkanUtilities.i: src/Vulkan/VulkanUtilities.cpp.i
+.PHONY : src/Vulkan/VulkanUtilities.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanUtilities.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.i
+.PHONY : src/Vulkan/VulkanUtilities.cpp.i
+
+src/Vulkan/VulkanUtilities.s: src/Vulkan/VulkanUtilities.cpp.s
+.PHONY : src/Vulkan/VulkanUtilities.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanUtilities.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.s
+.PHONY : src/Vulkan/VulkanUtilities.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -519,24 +543,27 @@ help:
 	@echo ... src/Core/Window.obj
 	@echo ... src/Core/Window.i
 	@echo ... src/Core/Window.s
-	@echo ... src/Vulkan/Device.obj
-	@echo ... src/Vulkan/Device.i
-	@echo ... src/Vulkan/Device.s
-	@echo ... src/Vulkan/GraphicsPipeline.obj
-	@echo ... src/Vulkan/GraphicsPipeline.i
-	@echo ... src/Vulkan/GraphicsPipeline.s
-	@echo ... src/Vulkan/Queues.obj
-	@echo ... src/Vulkan/Queues.i
-	@echo ... src/Vulkan/Queues.s
-	@echo ... src/Vulkan/SwapChain.obj
-	@echo ... src/Vulkan/SwapChain.i
-	@echo ... src/Vulkan/SwapChain.s
 	@echo ... src/Vulkan/VulkanBackend.obj
 	@echo ... src/Vulkan/VulkanBackend.i
 	@echo ... src/Vulkan/VulkanBackend.s
+	@echo ... src/Vulkan/VulkanBuffer.obj
+	@echo ... src/Vulkan/VulkanBuffer.i
+	@echo ... src/Vulkan/VulkanBuffer.s
 	@echo ... src/Vulkan/VulkanDebugger.obj
 	@echo ... src/Vulkan/VulkanDebugger.i
 	@echo ... src/Vulkan/VulkanDebugger.s
+	@echo ... src/Vulkan/VulkanDevice.obj
+	@echo ... src/Vulkan/VulkanDevice.i
+	@echo ... src/Vulkan/VulkanDevice.s
+	@echo ... src/Vulkan/VulkanGraphicsPipeline.obj
+	@echo ... src/Vulkan/VulkanGraphicsPipeline.i
+	@echo ... src/Vulkan/VulkanGraphicsPipeline.s
+	@echo ... src/Vulkan/VulkanSwapChain.obj
+	@echo ... src/Vulkan/VulkanSwapChain.i
+	@echo ... src/Vulkan/VulkanSwapChain.s
+	@echo ... src/Vulkan/VulkanUtilities.obj
+	@echo ... src/Vulkan/VulkanUtilities.i
+	@echo ... src/Vulkan/VulkanUtilities.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

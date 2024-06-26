@@ -10,7 +10,7 @@ struct WinProps {
   const std::string name;
 };
 
-GLFWwindow* GetWindow();
+GLFWwindow* getWindow();
 
 void InitializeGLFW();
 void InitializeWindow();

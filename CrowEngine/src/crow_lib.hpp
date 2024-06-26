@@ -6,3 +6,5 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
+const int MAX_FRAMES_IN_FLIGHT = 2;
