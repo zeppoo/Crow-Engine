@@ -27,43 +27,7 @@ namespace crowe
     return details;
   }
 
-  QueueFamilyIndices findQueueFamilies(VkPhysicalDevice physicDevice, VkSurfaceKHR surface) {
-    QueueFamilyIndices queueFamilyIndices;
 
-    uint32_t queueFamilyCount = 0;
-    vkGetPhysicalDeviceQueueFamilyProperties(physicDevice, &queueFamilyCount, nullptr);
-
-    std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
-    vkGetPhysicalDeviceQueueFamilyProperties(physicDevice, &queueFamilyCount, queueFamilies.data());
-
-    VkPhysicalDeviceProperties properties;
-    vkGetPhysicalDeviceProperties(physicDevice, &properties);
-
-      for (uint32_t i = 0; i < queueFamilyCount; i++) {
-        const VkQueueFamilyProperties& queueFamily = queueFamilies[i];
-
-        if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-          queueFamilyIndices.graphicsFamily = i;
-          VkBool32 presentSupport = false;
-          vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, i, surface, &presentSupport);
-          if (!presentSupport)
-          {
-            throw std::runtime_error("Queue does not support Presentation!");
-          }
-        }
-        if (queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT &&
-            !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
-          queueFamilyIndices.computeFamily = i;
-        }
-        if (queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT &&
-            !(queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) &&
-            !(queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT)) {
-          queueFamilyIndices.transferFamily = i;
-        }
-      }
-
-    return queueFamilyIndices;
-  }
 
   std::vector<char> readFile(const std::string &filepath)
   {

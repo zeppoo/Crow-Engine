@@ -1,19 +1,25 @@
 #pragma once
 
 #include "../crow_lib.hpp"
+#include "VulkanQueueManager.hpp"
+#include "VulkanDevice.hpp"
+#include "VulkanSwapChain.hpp"
+#include "VulkanGraphicsPipeline.hpp"
+#include "VulkanDebugger.hpp"
+#include "../Core/Window.hpp"
 
 namespace crowe{
 
-void VulkanStartup();
-void CleanupVulkan();
+  class VulkanModule
+  {
+  public:
+    VulkanModule();
+    ~VulkanModule();
 
-VkInstance getVkInstance();
-VkSurfaceKHR getSurface();
-const bool getEnableValidationLayers();
-const std::vector<const char*>& getValidationLayers();
-const std::vector<const char*>& getDeviceExtensions();
-
-void InitVulkan();
-bool checkValidationLayerSupport();
-bool checkExtensionSupport(const std::vector<const char*>& requiredExtensions);
+    void VulkanStartup();
+    void CheckPhysicalDevice();
+    void RecreateLogicalDevice();
+    void RecreateGraphicsPipeline();
+    void RecreateSwapchain();
+  };
 }

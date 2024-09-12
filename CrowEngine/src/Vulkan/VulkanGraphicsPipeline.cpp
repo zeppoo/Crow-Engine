@@ -1,7 +1,7 @@
 #include "VulkanGraphicsPipeline.hpp"
 #include "VulkanShaderModule.hpp"
 
-namespace crowe {
+/*namespace crowe {
 
   VulkanGraphicsPipeline::VulkanGraphicsPipeline(VulkanDevice &device, VulkanSwapChain &swapchain) : device{device}, swapchain{swapchain}
   {
@@ -12,9 +12,9 @@ namespace crowe {
 
   void VulkanGraphicsPipeline::createGraphicsPipeline()
   {
-    VulkanShaderModule vertShader(device, "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Shaders/CompiledShaders/Crow.vert.spv");
+    VulkanShaderModule vertShader(device, "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/gfx/CompiledShaders/Crow.vert.spv");
     vertShader.createShaderStageInfo(VK_SHADER_STAGE_VERTEX_BIT);
-    VulkanShaderModule fragShader(device, "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Shaders/CompiledShaders/Crow.frag.spv");
+    VulkanShaderModule fragShader(device, "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/gfx/CompiledShaders/Crow.frag.spv");
     fragShader.createShaderStageInfo(VK_SHADER_STAGE_FRAGMENT_BIT);
     VkPipelineShaderStageCreateInfo shaderStages[] = {vertShader.shaderStageCreateInfo, fragShader.shaderStageCreateInfo};
 
@@ -177,4 +177,4 @@ namespace crowe {
       vkUpdateDescriptorSets(device.getDevice(), 1, &descriptorWrite, 0, nullptr);
     }
   }
-}
+}*/

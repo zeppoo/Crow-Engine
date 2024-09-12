@@ -9,7 +9,7 @@
 
 namespace crowe
 {
-  VulkanSwapChain::VulkanSwapChain(VulkanDevice &device) : device{device}
+  VulkanSwapChain::VulkanSwapChain(VulkanDevice &device, VulkanQueueManager& queueManager) : device{device}, queueManager{queueManager}
   {
     std::cout << "Setting up Vulkan Device" << std::endl;
     createSwapChain();
@@ -28,7 +28,7 @@ namespace crowe
 
   void VulkanSwapChain::createSwapChain()
   {
-    SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device.getPhysicDevice(), getSurface());
+    SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device.getPhysicDevice(), device.getSurface());
 
     VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
     VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
@@ -42,7 +42,7 @@ namespace crowe
 
     VkSwapchainCreateInfoKHR createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    createInfo.surface = getSurface();
+    createInfo.surface = device.getSurface();
 
     createInfo.minImageCount = imageCount;
     createInfo.imageFormat = surfaceFormat.format;
@@ -51,11 +51,9 @@ namespace crowe
     createInfo.imageArrayLayers = 1;
     createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-    uint32_t queueFamilyIndices[] = {device.getGraphicsQueue().queueIndex, device.getComputeQueue().queueIndex, device.getTransferQueue().queueIndex};
-
-    createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
-    createInfo.queueFamilyIndexCount = 2;
-    createInfo.pQueueFamilyIndices = queueFamilyIndices;
+    createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    createInfo.queueFamilyIndexCount = 0;
+    createInfo.pQueueFamilyIndices = nullptr;
     createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
     createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
     createInfo.presentMode = presentMode;

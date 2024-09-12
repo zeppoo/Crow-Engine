@@ -1,6 +1,6 @@
 #include "App.hpp"
 #include "Window.hpp"
-#include "../Vulkan/VulkanBackend.hpp"
+#include "core_globals.hpp"
 
 namespace crowe
 {
@@ -9,7 +9,7 @@ namespace crowe
     std::string Stages[4] = {"Window", "Vulkan","Engine", "Game"};
     InitializeGLFW();
     InitializeWindow();
-    VulkanStartup();
+    vulkanModule = new VulkanModule();
   }
 
   void App::RunApplication()
@@ -21,5 +21,6 @@ namespace crowe
   {
     glfwDestroyWindow(getWindow());
     glfwTerminate();
+    delete vulkanModule;
   }
 }

@@ -17,6 +17,7 @@ namespace crowe
 
   private:
     void createGraphicsPipeline();
+    void createGraphicsPipelineInfo();
     void createPipelineLayout();
     void createDescriptorSetLayout();
     void createDescriptorPool();

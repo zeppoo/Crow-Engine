@@ -2,13 +2,14 @@
 
 #include "../crow_lib.hpp"
 #include "VulkanDevice.hpp"
+#include "VulkanQueueManager.hpp"
 
 namespace crowe
 {
 class VulkanSwapChain {
 public:
 
-  VulkanSwapChain(VulkanDevice& device);
+  VulkanSwapChain(VulkanDevice& device, VulkanQueueManager& queueManager);
   ~VulkanSwapChain();
   void recreateSwapChain();
 
@@ -28,6 +29,7 @@ private:
   VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
   VulkanDevice& device;
+  VulkanQueueManager& queueManager;
   VkSwapchainKHR swapchain;
   VkRenderPass renderPass;
   std::vector<VkImage> swapchainImages;
