@@ -1,6 +1,7 @@
 #include "VulkanDevice.hpp"
 #include "VulkanBackend.hpp"
 #include "VulkanUtilities.hpp"
+#include "../Logger.hpp"
 
 #include <set>
 #include <cstring>
@@ -9,7 +10,7 @@ namespace crowe
 {
   VulkanDevice::VulkanDevice(std::unique_ptr<VulkanQueueManager>& queueManager) : queueManager{queueManager}
   {
-    std::cout << "Setting up Vulkan Device" << std::endl;
+    Log("Setting Up Vulkan Device", INFO, VULKAN);
     InitVulkan();
     surface = CreateVulkanSurface(vkInstance);
     SetupLogicalDevice();
@@ -91,6 +92,9 @@ namespace crowe
   {
     FindPhysicalDevice();
     CreateLogicalDevice();
+    queueManager->CreateQueues(device);
+    queueManager->CreateCommandPools(device);
+    queueManager->AllocateCommandBuffers(device);
   }
 
   void VulkanDevice::FindPhysicalDevice()
@@ -123,7 +127,7 @@ namespace crowe
     } else {
       VkPhysicalDeviceProperties properties;
       vkGetPhysicalDeviceProperties(physicDevice, &properties);
-      std::cout << "\n\nChosen Device: " << properties.deviceName << ":\n";
+      Log("Chosen Device: " + (std::string)properties.deviceName, INFO, VULKAN);
     }
   }
 
@@ -158,7 +162,7 @@ namespace crowe
     createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
 
     // Validation layers
-    if (getEnableValidationLayers())
+    if (enableValidationLayers)
     {
       createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
       createInfo.ppEnabledLayerNames = getValidationLayers().data();
@@ -173,7 +177,7 @@ namespace crowe
       throw std::runtime_error("failed to create logical device!");
     }
 
-    std::cout << "Vulkan Device is Setup" << std::endl;
+    Log("Vulkan Device Created Succesfully", INFO, VULKAN);
   }
 
   bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
@@ -233,58 +237,9 @@ namespace crowe
       score += 500; // Supports necessary extensions and Swapchain
     }
 
-    /*std::cout << "Physical Device Properties:" << std::endl;
-    std::cout << "----------------------------" << std::endl;
-    std::cout << "Device Name: " << deviceProperties.deviceName << std::endl;
-    std::cout << "API Version: "
-              << VK_VERSION_MAJOR(deviceProperties.apiVersion) << "."
-              << VK_VERSION_MINOR(deviceProperties.apiVersion) << "."
-              << VK_VERSION_PATCH(deviceProperties.apiVersion) << std::endl;
-    std::cout << "Driver Version: "
-              << VK_VERSION_MAJOR(deviceProperties.driverVersion) << "."
-              << VK_VERSION_MINOR(deviceProperties.driverVersion) << "."
-              << VK_VERSION_PATCH(deviceProperties.driverVersion) << std::endl;
-    std::cout << "Vendor ID: " << deviceProperties.vendorID << std::endl;
-    std::cout << "Device ID: " << deviceProperties.deviceID << std::endl;
-    std::cout << "Device Type: " << deviceProperties.deviceType << std::endl;
-    std::cout << "Max Image Dimension 2D: " << deviceProperties.limits.maxImageDimension2D << std::endl;
-    std::cout << std::endl;
-
-    // Print more detailed device limits
-    std::cout << "Device Limits:" << std::endl;
-    std::cout << "----------------------------" << std::endl;
-    std::cout << "Max Image Dimension 3D: " << deviceProperties.limits.maxImageDimension3D << std::endl;
-    std::cout << "Max Image Dimension Cube: " << deviceProperties.limits.maxImageDimensionCube << std::endl;
-    std::cout << "Max Uniform Buffer Range: " << deviceProperties.limits.maxUniformBufferRange << std::endl;
-    std::cout << "Max Vertex Input Attributes: " << deviceProperties.limits.maxVertexInputAttributes << std::endl;
-    std::cout << "Max Viewports: " << deviceProperties.limits.maxViewports << std::endl;
-    std::cout << "Max Compute Work Group Count: "
-              << deviceProperties.limits.maxComputeWorkGroupCount[0] << ", "
-              << deviceProperties.limits.maxComputeWorkGroupCount[1] << ", "
-              << deviceProperties.limits.maxComputeWorkGroupCount[2] << std::endl;
-    std::cout << std::endl;
-
-    // Print Physical Device Features
-    std::cout << "Physical Device Features:" << std::endl;
-    std::cout << "----------------------------" << std::endl;
-    std::cout << "Geometry Shader: " << (deviceFeatures.geometryShader ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Tessellation Shader: " << (deviceFeatures.tessellationShader ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Wide Lines: " << (deviceFeatures.wideLines ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Large Points: " << (deviceFeatures.largePoints ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Multi Viewport: " << (deviceFeatures.multiViewport ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Sampler Anisotropy: " << (deviceFeatures.samplerAnisotropy ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Shader Clip Distance: " << (deviceFeatures.shaderClipDistance ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Shader Cull Distance: " << (deviceFeatures.shaderCullDistance ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Depth Bounds: " << (deviceFeatures.depthBounds ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Fill Mode Non-Solid: " << (deviceFeatures.fillModeNonSolid ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Depth Clamp: " << (deviceFeatures.depthClamp ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Multi Draw Indirect: " << (deviceFeatures.multiDrawIndirect ? "Supported" : "Not Supported") << std::endl;
-    std::cout << "Draw Indirect First Instance: " << (deviceFeatures.drawIndirectFirstInstance ? "Supported" : "Not Supported") << std::endl;
-    std::cout << std::endl;*/
-
     return score;
   }
-  
+
   bool VulkanDevice::checkValidationLayerSupport()
   {
     uint32_t layerCount;

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj"
   "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj.d"
+  "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj"
+  "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj"

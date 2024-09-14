@@ -20,7 +20,6 @@ namespace crowe
     VkSurfaceKHR getSurface() { return surface; }
     VkDevice getDevice() const { return device; }
     VkPhysicalDevice getPhysicDevice() const { return physicDevice; }
-    const bool getEnableValidationLayers() { return enableValidationLayers; }
     const std::vector<const char*>& getValidationLayers() { return validationLayers; }
     const std::vector<const char*>& getDeviceExtensions() { return deviceExtensions; }
 
@@ -40,11 +39,5 @@ namespace crowe
     VkDebugUtilsMessengerEXT debugMessenger;
     std::vector<const char*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
     std::vector<const char*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
-
-    #ifdef NDEBUG // NDEBUG = No Debug
-      const bool enableValidationLayers = false;
-    #else
-      const bool enableValidationLayers = true;
-    #endif
   };
 }

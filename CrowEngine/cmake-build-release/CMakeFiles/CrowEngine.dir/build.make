@@ -128,11 +128,26 @@ CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Core\core_globals.cpp -o CMakeFiles\CrowEngine.dir\src\Core\core_globals.cpp.s
 
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj: CMakeFiles/CrowEngine.dir/flags.make
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.cpp
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Logger.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Logger.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Logger.cpp
+
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CrowEngine.dir/src/Logger.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Logger.cpp > CMakeFiles\CrowEngine.dir\src\Logger.cpp.i
+
+CMakeFiles/CrowEngine.dir/src/Logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CrowEngine.dir/src/Logger.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Logger.cpp -o CMakeFiles\CrowEngine.dir\src\Logger.cpp.s
+
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: CMakeFiles/CrowEngine.dir/flags.make
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanBackend.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanBackend.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanBackend.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.i: cmake_force
@@ -147,7 +162,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj: CMakeFiles/CrowEngi
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDebugger.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDebugger.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanDebugger.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.i: cmake_force
@@ -162,7 +177,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj: CMakeFiles/CrowEngine
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDevice.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDevice.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanDevice.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanDevice.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.i: cmake_force
@@ -177,7 +192,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj: CMakeFiles/
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanGraphicsPipeline.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanGraphicsPipeline.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanGraphicsPipeline.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanGraphicsPipeline.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanGraphicsPipeline.cpp.i: cmake_force
@@ -192,7 +207,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj: CMakeFiles/Crow
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanQueueManager.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanQueueManager.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanQueueManager.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanQueueManager.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanQueueManager.cpp.i: cmake_force
@@ -207,7 +222,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj: CMakeFiles/Crow
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanShaderModule.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanShaderModule.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanShaderModule.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanShaderModule.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.i: cmake_force
@@ -222,7 +237,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj: CMakeFiles/CrowEng
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanSwapChain.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanSwapChain.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanSwapChain.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanSwapChain.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.i: cmake_force
@@ -237,7 +252,7 @@ CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj: CMakeFiles/CrowEng
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.cpp
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanUtilities.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\Vulkan\VulkanUtilities.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\Vulkan\VulkanUtilities.cpp
 
 CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.i: cmake_force
@@ -252,7 +267,7 @@ CMakeFiles/CrowEngine.dir/src/main.cpp.obj: CMakeFiles/CrowEngine.dir/flags.make
 CMakeFiles/CrowEngine.dir/src/main.cpp.obj: CMakeFiles/CrowEngine.dir/includes_CXX.rsp
 CMakeFiles/CrowEngine.dir/src/main.cpp.obj: C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/main.cpp
 CMakeFiles/CrowEngine.dir/src/main.cpp.obj: CMakeFiles/CrowEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CrowEngine.dir/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CrowEngine.dir/src/main.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CrowEngine.dir/src/main.cpp.obj -MF CMakeFiles\CrowEngine.dir\src\main.cpp.obj.d -o CMakeFiles\CrowEngine.dir\src\main.cpp.obj -c C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\src\main.cpp
 
 CMakeFiles/CrowEngine.dir/src/main.cpp.i: cmake_force
@@ -269,6 +284,7 @@ CrowEngine_OBJECTS = \
 "CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj" \
 "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj" \
 "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj" \
+"CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj" \
 "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj" \
 "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj" \
 "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj" \
@@ -286,6 +302,7 @@ CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj
+CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj
@@ -305,7 +322,7 @@ CrowEngine.exe: C:/VulkanSDK/1.3.280.0/Lib/vulkan-1.lib
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/linkLibs.rsp
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/objects1.rsp
 CrowEngine.exe: CMakeFiles/CrowEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable CrowEngine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable CrowEngine.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\CrowEngine.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

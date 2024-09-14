@@ -6,7 +6,6 @@ namespace crowe
 {
   void App::StartApplication()
   {
-    std::string Stages[4] = {"Window", "Vulkan","Engine", "Game"};
     InitializeGLFW();
     InitializeWindow();
     vulkanModule = new VulkanModule();

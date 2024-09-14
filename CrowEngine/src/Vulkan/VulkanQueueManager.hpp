@@ -31,7 +31,9 @@ namespace crowe
     VulkanQueueManager();
     ~VulkanQueueManager();
     void FindQueueFamilies(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface);
-    void CreateQueues();
+    void CreateQueues(VkDevice& device);
+    void CreateCommandPools(VkDevice& device);
+    void AllocateCommandBuffers(VkDevice& device);
 
     std::vector<QueueFamily> GetQueueFamilies() {return queueFamilies;}
 
@@ -39,8 +41,7 @@ namespace crowe
     // Helper function to create a command pool
     void AssignFamilyQueues(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface, VkQueueFlagBits flagBit, const std::vector<VkQueueFamilyProperties>& queueFamilyProperties, std::vector<uint32_t>& queueType);
     int CheckFlagSupportNum(VkQueueFlags flags);
-    void createCommandPool(uint32_t i);
-    void allocateCommandBuffers();
+
 
     std::vector<QueueFamily> queueFamilies;
 

@@ -117,37 +117,47 @@ namespace crowe
     return num;
   }
 
-  void VulkanQueueManager::CreateQueues()
+  void VulkanQueueManager::CreateQueues(VkDevice& device)
   {
+    for (int i = 0; i < queueFamilies.size(); i++)
+    {
+      for (int j = 0; j < queueFamilies[i].queues.size(); j++)
+      {
+        queueFamilies[i].queues[j].queueindex = j;
+        vkGetDeviceQueue(device, queueFamilies[i].queueFamilyIndex, queueFamilies[i].queues[j].queueindex, &queueFamilies[i].queues[j].queue);
+      }
+    }
+    int i = 0;
 
   }
 
-  /*void VulkanQueueManager::createCommandPool(uint32_t i) {
-    CommandPoolData commandPoolData;
-    commandPoolData.queueIndex = i;
-    VkCommandPoolCreateInfo poolInfo{};
-    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    poolInfo.queueFamilyIndex = i;
-    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+  void VulkanQueueManager::CreateCommandPools(VkDevice& device) {
+    for (int i = 0; i < queueFamilies.size(); i++)
+    {
+      VkCommandPoolCreateInfo poolInfo{};
+      poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+      poolInfo.queueFamilyIndex = queueFamilies[i].queueFamilyIndex;
+      poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
-    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPoolData.commandPool) != VK_SUCCESS) {
-      throw std::runtime_error("Failed to create command pool!");
+      if (vkCreateCommandPool(device, &poolInfo, nullptr, &queueFamilies[i].commandPool) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create command pool!");
+      }
     }
-    allocateCommandBuffers(&commandPoolData);
-    commandPools.push_back(commandPoolData);
   }
 
-  void VulkanQueueManager::allocateCommandBuffers(CommandPoolData* commandPoolData) {
-    commandPoolData->commandBuffers.resize(MAX_FRAMES_IN_FLIGHT + 3);
+  void VulkanQueueManager::AllocateCommandBuffers(VkDevice& device) {
+    for (int i = 0; i < queueFamilies.size(); i++)
+    {
+      queueFamilies[i].commandBuffers.resize(MAX_FRAMES_IN_FLIGHT + 3);
+      VkCommandBufferAllocateInfo allocInfo{};
+      allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+      allocInfo.commandPool = queueFamilies[i].commandPool;
+      allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;  // VK_COMMAND_BUFFER_LEVEL_PRIMARY or VK_COMMAND_BUFFER_LEVEL_SECONDARY
+      allocInfo.commandBufferCount = (uint32_t)queueFamilies[i].commandBuffers.size();  // Allocate 'count' number of command buffers
 
-    VkCommandBufferAllocateInfo allocInfo{};
-    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    allocInfo.commandPool = commandPoolData->commandPool;
-    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;  // VK_COMMAND_BUFFER_LEVEL_PRIMARY or VK_COMMAND_BUFFER_LEVEL_SECONDARY
-    allocInfo.commandBufferCount = (uint32_t)commandPoolData->commandBuffers.size();  // Allocate 'count' number of command buffers
-
-    if (vkAllocateCommandBuffers(device, &allocInfo, commandPoolData->commandBuffers.data()) != VK_SUCCESS) {
-      throw std::runtime_error("Failed to allocate command buffers.");
+      if (vkAllocateCommandBuffers(device, &allocInfo, queueFamilies[i].commandBuffers.data()) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate command buffers.");
+      }
     }
-  }*/
+  }
 }

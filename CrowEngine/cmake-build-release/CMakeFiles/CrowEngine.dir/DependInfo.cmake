@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Engine.cpp" "CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Window.cpp" "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/core_globals.cpp" "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj.d"
+  "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.cpp" "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDevice.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj.d"

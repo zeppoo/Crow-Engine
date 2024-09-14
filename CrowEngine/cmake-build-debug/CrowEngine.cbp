@@ -1769,6 +1769,12 @@
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/core_globals.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp">
 			<Option target="CrowEngine"/>
 		</Unit>

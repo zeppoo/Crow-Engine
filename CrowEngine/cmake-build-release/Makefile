@@ -347,6 +347,30 @@ src/Core/core_globals.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.s
 .PHONY : src/Core/core_globals.cpp.s
 
+src/Logger.obj: src/Logger.cpp.obj
+.PHONY : src/Logger.obj
+
+# target to build an object file
+src/Logger.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj
+.PHONY : src/Logger.cpp.obj
+
+src/Logger.i: src/Logger.cpp.i
+.PHONY : src/Logger.i
+
+# target to preprocess a source file
+src/Logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Logger.cpp.i
+.PHONY : src/Logger.cpp.i
+
+src/Logger.s: src/Logger.cpp.s
+.PHONY : src/Logger.s
+
+# target to generate assembly for a file
+src/Logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Logger.cpp.s
+.PHONY : src/Logger.cpp.s
+
 src/Vulkan/VulkanBackend.obj: src/Vulkan/VulkanBackend.cpp.obj
 .PHONY : src/Vulkan/VulkanBackend.obj
 
@@ -594,6 +618,9 @@ help:
 	@echo ... src/Core/core_globals.obj
 	@echo ... src/Core/core_globals.i
 	@echo ... src/Core/core_globals.s
+	@echo ... src/Logger.obj
+	@echo ... src/Logger.i
+	@echo ... src/Logger.s
 	@echo ... src/Vulkan/VulkanBackend.obj
 	@echo ... src/Vulkan/VulkanBackend.i
 	@echo ... src/Vulkan/VulkanBackend.s
