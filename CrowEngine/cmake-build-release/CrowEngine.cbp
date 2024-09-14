@@ -1763,12 +1763,6 @@
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Window.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/core_globals.cpp">
-			<Option target="CrowEngine"/>
-		</Unit>
-		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/core_globals.hpp">
-			<Option target="CrowEngine"/>
-		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.cpp">
 			<Option target="CrowEngine"/>
 		</Unit>
@@ -1821,6 +1815,12 @@
 			<Option target="CrowEngine"/>
 		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.hpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/config/SettingsManager.cpp">
+			<Option target="CrowEngine"/>
+		</Unit>
+		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/config/SettingsManager.hpp">
 			<Option target="CrowEngine"/>
 		</Unit>
 		<Unit filename="C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/main.cpp">

@@ -1,34 +1,35 @@
 #pragma once
-
+#include "config/SettingsManager.hpp"
 #include "crow_lib.hpp"
 
 namespace crowe
 {
-  enum LogType
+  enum LoggingLevel
   {
-    NONE,
     INFO,
     WARNING,
     ERROR,
   };
 
-  enum LogSource
+  class Logger
   {
-    UNKOWN,
-    APP,
-    VULKAN,
-    GUI,
-    ENGINE
+  public:
+    static Logger& GetInstance();
+    static void StopLogging();
+    void Log(std::string msg, LoggingLevel type);
+
+  private:
+    Logger();
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
+
+    void ProcessLogs();
+    std::string GetTime();
+    void WriteToLog(std::string log);
+
+    static Logger instance;
+    SettingsManager& settings = SettingsManager::getInstance();
+    static bool loggingDone;
   };
 
-  #ifdef NDEBUG // NDEBUG = No Debug
-    const bool enableValidationLayers = false;
-  #else
-    const bool enableValidationLayers = true;
-  #endif
-
-  void Log(std::string msg);
-  void Log(std::string msg, LogType type);
-  void Log(std::string msg, LogSource source);
-  void Log(std::string msg, LogType type, LogSource source);
 }

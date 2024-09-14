@@ -1,26 +1,53 @@
 #include "Logger.hpp"
-#include <time.h>
+#include <ctime>
+#include <thread>
+#include <queue>
 
 namespace crowe
 {
+  Logger Logger::instance;
+  bool Logger::loggingDone;
+
   std::string LogTypes[]
       {
-          "NONE",
           "INFO",
           "WARNING",
-          "ERROR",
+          "ERROR"
       };
 
-  std::string LogSources[]
+  std::queue<std::string> logQueue;
+
+  Logger::Logger()
+  {
+    loggingDone = false;
+    std::thread logThread(&Logger::ProcessLogs, this);
+    logThread.detach();
+  }
+
+  Logger& Logger::GetInstance()
+  {
+    return instance;
+  }
+
+  void Logger::StopLogging()
+  {
+    loggingDone = true;
+  }
+
+  void Logger::ProcessLogs()
+  {
+    while (true)
+    {
+      if (loggingDone && logQueue.empty()) {break;}
+
+      for (int i = 0; i < logQueue.size(); i++)
       {
-          "UNKOWN",
-          "APP",
-          "VULKAN",
-          "GUI",
-          "ENGINE"
-      };
+        std::cout << GetTime() << logQueue.front() << std::endl;
+      }
+    }
+  }
 
-  std::string GetTime()
+  std::string Logger::GetTime()
   {
     time_t currentTime = time(nullptr);
     tm* localTime = localtime(&currentTime);
@@ -29,32 +56,17 @@ namespace crowe
     return std::string(timeBuffer);
   }
 
-  void WriteToLog(std::string log)
+  void Logger::WriteToLog(std::string log)
   {
-    std::cout << GetTime() << log << std::endl;
+    logQueue.push(log);
   }
 
-  void Log(std::string msg)
+  void Logger::Log(std::string msg, LoggingLevel type)
   {
-    std::string log = "| Type: " + LogTypes[NONE] + "| Source: " + LogSources[UNKOWN] + "| Message: " + msg;
-    WriteToLog(log);
-  }
-
-  void Log(std::string msg, LogType type)
-  {
-    std::string log = "| Type: " + LogTypes[type] + "| Source: " + LogSources[UNKOWN] + "| Message: " + msg;
-    WriteToLog(log);
-  }
-
-  void Log(std::string msg, LogSource source)
-  {
-    std::string log = "| Type: " + LogTypes[NONE] + "| Source: " + LogSources[source] + "| Message: " + msg;
-    WriteToLog(log);
-  }
-
-  void Log(std::string msg, LogType type, LogSource source)
-  {
-    std::string log = "| Type: " + LogTypes[type] + "| Source: " + LogSources[source] + "| Message: " + msg;
-    WriteToLog(log);
+    std::string log = "| Type: " + LogTypes[type] + "| Message: " + msg;
+    if (settings.logConfig.loggingLevelSettings[type])
+    {
+      WriteToLog(log);
+    }
   }
 }
