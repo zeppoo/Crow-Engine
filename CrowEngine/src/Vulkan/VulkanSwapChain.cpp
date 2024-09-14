@@ -209,7 +209,7 @@ namespace crowe
     } else
     {
       int width, height;
-      glfwGetFramebufferSize(getWindow(), &width, &height);
+      //glfwGetFramebufferSize(getWindow(), &width, &height);
 
       VkExtent2D actualExtent = {
           static_cast<uint32_t>(width),

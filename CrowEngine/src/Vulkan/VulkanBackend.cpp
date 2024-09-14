@@ -4,23 +4,20 @@
 namespace crowe
 {
 
-std::unique_ptr<VulkanQueueManager> vulkanQueueManager;
-std::unique_ptr<VulkanDevice> device;
-std::unique_ptr<VulkanSwapChain> swapchain;
-
-//std::unique_ptr<VulkanGraphicsPipeline> pipeline;
-
-VulkanModule::VulkanModule()
+VulkanModule::VulkanModule(std::unique_ptr<Window>& window) : window{window}
 {
   VulkanStartup();
 }
 
-VulkanModule::~VulkanModule() {}
+VulkanModule::~VulkanModule()
+{
+
+}
 
 void VulkanModule::VulkanStartup()
 {
   vulkanQueueManager = std::make_unique<VulkanQueueManager>();
-  device = std::make_unique<VulkanDevice>(vulkanQueueManager);
+  device = std::make_unique<VulkanDevice>(window, vulkanQueueManager);
 }
 
 void VulkanModule::CheckPhysicalDevice()

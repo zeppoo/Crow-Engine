@@ -11,7 +11,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/App.cpp" "CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/App.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Engine.cpp" "CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/Engine.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/Window.cpp" "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.obj.d"
-  "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Core/core_globals.cpp" "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Logger.cpp" "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanBackend.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanDebugger.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj.d"
@@ -21,6 +20,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanShaderModule.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanShaderModule.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanSwapChain.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanSwapChain.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/Vulkan/VulkanUtilities.cpp" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.obj.d"
+  "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/config/SettingsManager.cpp" "CMakeFiles/CrowEngine.dir/src/config/SettingsManager.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/config/SettingsManager.cpp.obj.d"
   "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/src/main.cpp" "CMakeFiles/CrowEngine.dir/src/main.cpp.obj" "gcc" "CMakeFiles/CrowEngine.dir/src/main.cpp.obj.d"
   )
 

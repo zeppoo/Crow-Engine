@@ -1,20 +1,23 @@
 #pragma once
 
 #include "../crow_lib.hpp"
+#include "../config/SettingsManager.hpp"
 
 namespace crowe
 {
-struct WinProps {
-  uint32_t width;
-  uint32_t height;
-  const std::string name;
-};
+  class Window
+  {
+  public:
+    Window();
+    ~Window();
+    GLFWwindow* GetWindow() { return window; }
+    void InitializeGLFW();
+    void InitializeWindow();
+    VkSurfaceKHR CreateVulkanSurface(VkInstance instance);
+    void windowLoop();
+  private:
 
-GLFWwindow* getWindow();
-
-void InitializeGLFW();
-void InitializeWindow();
-VkSurfaceKHR CreateVulkanSurface(VkInstance instance);
-static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
-void windowLoop();
+    SettingsManager& settings = SettingsManager::getInstance();
+    GLFWwindow* window;
+  };
 }

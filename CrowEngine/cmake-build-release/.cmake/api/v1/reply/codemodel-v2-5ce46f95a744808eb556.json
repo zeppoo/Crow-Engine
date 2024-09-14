@@ -13,7 +13,7 @@
 						6
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.28"
@@ -33,7 +33,7 @@
 						3
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-external.glfw-Debug-e33412718314fe04fd5a.json",
+					"jsonFile" : "directory-external.glfw-Release-5c28f0bddac5fd77a6a3.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.4"
@@ -49,7 +49,7 @@
 				{
 					"build" : "external/glfw/src",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-external.glfw.src-Debug-30d43b80621f7f87663c.json",
+					"jsonFile" : "directory-external.glfw.src-Release-30d43b80621f7f87663c.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.4"
@@ -66,7 +66,7 @@
 				{
 					"build" : "external/glfw/docs",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-external.glfw.docs-Debug-5f46bcb48c9bd2cea316.json",
+					"jsonFile" : "directory-external.glfw.docs-Release-39ce251d9170bdb3b021.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.4"
@@ -85,7 +85,7 @@
 					[
 						5
 					],
-					"jsonFile" : "directory-external.glm-Debug-c35beecffdababf19b76.json",
+					"jsonFile" : "directory-external.glm-Release-c35beecffdababf19b76.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.6"
@@ -96,7 +96,7 @@
 				},
 				{
 					"build" : "external/glm/glm",
-					"jsonFile" : "directory-external.glm.glm-Debug-abc7302ed9fa59a98343.json",
+					"jsonFile" : "directory-external.glm.glm-Release-abc7302ed9fa59a98343.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.6"
@@ -111,7 +111,7 @@
 				},
 				{
 					"build" : "external/imgui",
-					"jsonFile" : "directory-external.imgui-Debug-8f2cd0809e5890c8092e.json",
+					"jsonFile" : "directory-external.imgui-Release-8f2cd0809e5890c8092e.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.28"
@@ -125,7 +125,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -182,49 +182,49 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "CrowEngine::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CrowEngine-Debug-245f4e6a6ef813a45c6b.json",
+					"jsonFile" : "target-CrowEngine-Release-a5bd07c753b766e4443c.json",
 					"name" : "CrowEngine",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "docs::@38dce7a113d824fc0c34",
-					"jsonFile" : "target-docs-Debug-3c9aed987b21278ee115.json",
+					"jsonFile" : "target-docs-Release-3c9aed987b21278ee115.json",
 					"name" : "docs",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "glfw::@ca12bac854c2ac6b2230",
-					"jsonFile" : "target-glfw-Debug-ecffa273ce7517ab2e81.json",
+					"jsonFile" : "target-glfw-Release-05d1f70a433fde05bb4c.json",
 					"name" : "glfw",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 5,
 					"id" : "glm::@d090a432591bc19a3a56",
-					"jsonFile" : "target-glm-Debug-2c1a02351a4b3708e916.json",
+					"jsonFile" : "target-glm-Release-1145ab72c5b6371dc754.json",
 					"name" : "glm",
 					"projectIndex" : 2
 				},
 				{
 					"directoryIndex" : 6,
 					"id" : "imgui::@408438dda4a3eccc02b1",
-					"jsonFile" : "target-imgui-Debug-9da9399f9b14226fcad6.json",
+					"jsonFile" : "target-imgui-Release-b8329cfc3ee98ea459b1.json",
 					"name" : "imgui",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "uninstall::@691b517da5fa0f694cd4",
-					"jsonFile" : "target-uninstall-Debug-94fe2834526d40320932.json",
+					"jsonFile" : "target-uninstall-Release-4605a5e76446994f4e0b.json",
 					"name" : "uninstall",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "update_mappings::@ca12bac854c2ac6b2230",
-					"jsonFile" : "target-update_mappings-Debug-ef228d4cdd0c85fd6bf0.json",
+					"jsonFile" : "target-update_mappings-Release-765fff8a23ff720ee0f2.json",
 					"name" : "update_mappings",
 					"projectIndex" : 1
 				}
@@ -234,7 +234,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug",
+		"build" : "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-release",
 		"source" : "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine"
 	},
 	"version" : 

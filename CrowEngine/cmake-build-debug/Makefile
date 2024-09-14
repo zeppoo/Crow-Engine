@@ -323,30 +323,6 @@ src/Core/Window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/Window.cpp.s
 .PHONY : src/Core/Window.cpp.s
 
-src/Core/core_globals.obj: src/Core/core_globals.cpp.obj
-.PHONY : src/Core/core_globals.obj
-
-# target to build an object file
-src/Core/core_globals.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.obj
-.PHONY : src/Core/core_globals.cpp.obj
-
-src/Core/core_globals.i: src/Core/core_globals.cpp.i
-.PHONY : src/Core/core_globals.i
-
-# target to preprocess a source file
-src/Core/core_globals.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.i
-.PHONY : src/Core/core_globals.cpp.i
-
-src/Core/core_globals.s: src/Core/core_globals.cpp.s
-.PHONY : src/Core/core_globals.s
-
-# target to generate assembly for a file
-src/Core/core_globals.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Core/core_globals.cpp.s
-.PHONY : src/Core/core_globals.cpp.s
-
 src/Logger.obj: src/Logger.cpp.obj
 .PHONY : src/Logger.obj
 
@@ -563,6 +539,30 @@ src/Vulkan/VulkanUtilities.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanUtilities.cpp.s
 .PHONY : src/Vulkan/VulkanUtilities.cpp.s
 
+src/config/SettingsManager.obj: src/config/SettingsManager.cpp.obj
+.PHONY : src/config/SettingsManager.obj
+
+# target to build an object file
+src/config/SettingsManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/config/SettingsManager.cpp.obj
+.PHONY : src/config/SettingsManager.cpp.obj
+
+src/config/SettingsManager.i: src/config/SettingsManager.cpp.i
+.PHONY : src/config/SettingsManager.i
+
+# target to preprocess a source file
+src/config/SettingsManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/config/SettingsManager.cpp.i
+.PHONY : src/config/SettingsManager.cpp.i
+
+src/config/SettingsManager.s: src/config/SettingsManager.cpp.s
+.PHONY : src/config/SettingsManager.s
+
+# target to generate assembly for a file
+src/config/SettingsManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/config/SettingsManager.cpp.s
+.PHONY : src/config/SettingsManager.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -615,9 +615,6 @@ help:
 	@echo ... src/Core/Window.obj
 	@echo ... src/Core/Window.i
 	@echo ... src/Core/Window.s
-	@echo ... src/Core/core_globals.obj
-	@echo ... src/Core/core_globals.i
-	@echo ... src/Core/core_globals.s
 	@echo ... src/Logger.obj
 	@echo ... src/Logger.i
 	@echo ... src/Logger.s
@@ -645,6 +642,9 @@ help:
 	@echo ... src/Vulkan/VulkanUtilities.obj
 	@echo ... src/Vulkan/VulkanUtilities.i
 	@echo ... src/Vulkan/VulkanUtilities.s
+	@echo ... src/config/SettingsManager.obj
+	@echo ... src/config/SettingsManager.i
+	@echo ... src/config/SettingsManager.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

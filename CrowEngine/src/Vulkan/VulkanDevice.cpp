@@ -1,18 +1,17 @@
 #include "VulkanDevice.hpp"
-#include "VulkanBackend.hpp"
 #include "VulkanUtilities.hpp"
-#include "../Logger.hpp"
+#include "VulkanDebugger.hpp"
 
 #include <set>
 #include <cstring>
 
 namespace crowe
 {
-  VulkanDevice::VulkanDevice(std::unique_ptr<VulkanQueueManager>& queueManager) : queueManager{queueManager}
+
+  VulkanDevice::VulkanDevice(std::unique_ptr<Window>& window, std::unique_ptr<VulkanQueueManager>& queueManager) : queueManager{queueManager}
   {
-    Log("Setting Up Vulkan Device", INFO, VULKAN);
     InitVulkan();
-    surface = CreateVulkanSurface(vkInstance);
+    surface = window->CreateVulkanSurface(vkInstance);
     SetupLogicalDevice();
   }
 
@@ -20,7 +19,7 @@ namespace crowe
   {
     vkDestroyDevice(device, nullptr);
 
-    if (enableValidationLayers) {
+    if (settings.enableValidationLayers) {
       DestroyDebugUtilsMessengerEXT(vkInstance, debugMessenger, nullptr);
     }
 
@@ -64,7 +63,7 @@ namespace crowe
     }
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
-    if (enableValidationLayers)
+    if (settings.enableValidationLayers)
     {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
       createInfo.ppEnabledLayerNames = validationLayers.data();
@@ -82,7 +81,7 @@ namespace crowe
       throw std::runtime_error("Failed to create Vulkan instance!");
     }
 
-    if (enableValidationLayers && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
+    if (settings.enableValidationLayers && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
     {
       throw std::runtime_error("failed to set up debug messenger!");
     }
@@ -127,7 +126,6 @@ namespace crowe
     } else {
       VkPhysicalDeviceProperties properties;
       vkGetPhysicalDeviceProperties(physicDevice, &properties);
-      Log("Chosen Device: " + (std::string)properties.deviceName, INFO, VULKAN);
     }
   }
 
@@ -162,7 +160,7 @@ namespace crowe
     createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
 
     // Validation layers
-    if (enableValidationLayers)
+    if (settings.enableValidationLayers)
     {
       createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
       createInfo.ppEnabledLayerNames = getValidationLayers().data();
@@ -176,8 +174,6 @@ namespace crowe
     {
       throw std::runtime_error("failed to create logical device!");
     }
-
-    Log("Vulkan Device Created Succesfully", INFO, VULKAN);
   }
 
   bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
