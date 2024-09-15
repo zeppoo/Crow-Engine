@@ -1,22 +1,34 @@
 #pragma once
-#include "config/SettingsManager.hpp"
+
 #include "crow_lib.hpp"
 
 namespace crowe
 {
   enum LoggingLevel
   {
-    INFO,
-    WARNING,
-    ERROR,
+    none,
+    info,
+    warning,
+    error
   };
+
+  struct Log
+  {
+    std::string message;
+    LoggingLevel lvl;
+  };
+
+  void INFO(std::string msg);
+  void WARNING(std::string msg);
+  void ERROR(std::string msg);
+  void FATAL_ERROR(std::string msg);
+  void SHUTDOWN_APP(std::string msg);
 
   class Logger
   {
   public:
-    static Logger& GetInstance();
+    static Logger& GetInstance(){return instance;}
     static void StopLogging();
-    void Log(std::string msg, LoggingLevel type);
 
   private:
     Logger();
@@ -25,10 +37,8 @@ namespace crowe
 
     void ProcessLogs();
     std::string GetTime();
-    void WriteToLog(std::string log);
 
     static Logger instance;
-    SettingsManager& settings = SettingsManager::getInstance();
     static bool loggingDone;
   };
 

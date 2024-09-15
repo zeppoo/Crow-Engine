@@ -1,7 +1,5 @@
 #pragma once
-
 #include "../crow_lib.hpp"
-#include "../config/SettingsManager.hpp"
 
 namespace crowe
 {
@@ -9,15 +7,13 @@ namespace crowe
   {
   public:
     Window();
-    ~Window();
+    void DestroyWindow();
     GLFWwindow* GetWindow() { return window; }
     void InitializeGLFW();
     void InitializeWindow();
     VkSurfaceKHR CreateVulkanSurface(VkInstance instance);
     void windowLoop();
   private:
-
-    SettingsManager& settings = SettingsManager::getInstance();
     GLFWwindow* window;
   };
 }

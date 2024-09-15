@@ -7,14 +7,19 @@ namespace crowe
 {
 class App {
 public:
+  static App& GetInstance(){return instance;}
+
   void StartApplication();
   void RunApplication();
-  void ShutdownApplication();
+  bool ShutdownApplication();
 
 private:
-  // References
-  Logger& logger = Logger::GetInstance();
+  App();
+  App(const App&) = delete;
+  App& operator=(const App&) = delete;
+
   // Members
+  static App instance;
   std::unique_ptr<Window> window;
   std::unique_ptr<VulkanModule> vulkanModule;
 };

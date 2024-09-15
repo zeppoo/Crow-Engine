@@ -2,7 +2,7 @@
 
 #include "../crow_lib.hpp"
 #include "../Core/Window.hpp"
-#include "../config/SettingsManager.hpp"
+
 #include "VulkanQueueManager.hpp"
 #include <memory>
 
@@ -11,30 +11,28 @@ namespace crowe
   class VulkanDevice {
   public:
     VulkanDevice(std::unique_ptr<Window>& window, std::unique_ptr<VulkanQueueManager>& queueManager);
-    ~VulkanDevice();
-
-    void SetupLogicalDevice();
-    void FindPhysicalDevice();
-    void CreateLogicalDevice();
 
     // Getters
     VkInstance getVkInstance() { return vkInstance; }
     VkSurfaceKHR getSurface() { return surface; }
     VkDevice getDevice() const { return device; }
     VkPhysicalDevice getPhysicDevice() const { return physicDevice; }
+    VkDebugUtilsMessengerEXT getDebugMessenger() const {return debugMessenger;}
     const std::vector<const char*>& getValidationLayers() { return validationLayers; }
     const std::vector<const char*>& getDeviceExtensions() { return deviceExtensions; }
 
   private:
+    bool InitVulkan();
+    void SetupDevice();
+    bool FindPhysicalDevice();
+    bool CreateLogicalDevice();
     bool checkDeviceExtensionSupport(VkPhysicalDevice physicDevice);
     bool CheckDeviceSuitability(VkPhysicalDevice device);
     int RateDevice(VkPhysicalDevice device);
-    void InitVulkan();
     bool checkValidationLayerSupport();
     bool checkExtensionSupport(const std::vector<const char*>& requiredExtensions);
 
     //References
-    SettingsManager& settings = SettingsManager::getInstance();
     std::unique_ptr<VulkanQueueManager>& queueManager;
     // Members
     VkInstance vkInstance;

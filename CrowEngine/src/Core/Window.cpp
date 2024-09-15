@@ -1,4 +1,6 @@
 #include "Window.hpp"
+#include "../config/SettingsManager.hpp"
+#include "../Logger.hpp"
 
 namespace crowe
 {
@@ -8,7 +10,7 @@ namespace crowe
     InitializeWindow();
   }
 
-  Window::~Window()
+  void Window::DestroyWindow()
   {
     glfwDestroyWindow(window);
     glfwTerminate();
@@ -22,7 +24,7 @@ namespace crowe
 
   void Window::InitializeWindow()
   {
-    window = glfwCreateWindow(settings.windowConfig.width, settings.windowConfig.height, settings.engineConfig.engineName.c_str(), nullptr, nullptr);
+    window = glfwCreateWindow(getWindowConfig().width, getWindowConfig().height, getEngineConfig().engineName.c_str(), nullptr, nullptr);
     if (!window)
     {
       std::cout << "Failed to create GLFW window\n";
@@ -44,10 +46,10 @@ namespace crowe
 
   void Window::windowLoop()
   {
-    while (!glfwWindowShouldClose(window))
+    if (glfwWindowShouldClose(window))
     {
-      glfwPollEvents();
+      SHUTDOWN_APP("Window Closed");
     }
+    glfwPollEvents();
   }
-
 }

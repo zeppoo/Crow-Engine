@@ -2,7 +2,6 @@
 
 #include "../crow_lib.hpp"
 #include "../Core/Window.hpp"
-#include "../Logger.hpp"
 #include "VulkanQueueManager.hpp"
 #include "VulkanDevice.hpp"
 #include "VulkanSwapChain.hpp"
@@ -17,17 +16,15 @@ namespace crowe{
     VulkanModule(std::unique_ptr<Window>& window);
     ~VulkanModule();
 
-    void VulkanStartup();
-    void CheckPhysicalDevice();
-    void RecreateLogicalDevice();
-    void RecreateGraphicsPipeline();
+    bool VulkanStartup();
+    void VulkanShutDown();
     void RecreateSwapchain();
+    void RecreateGraphicsPipeline();
   private:
     // References
-    Logger& logger = Logger::GetInstance();
     std::unique_ptr<Window>& window;
     // Memebers
-    std::unique_ptr<VulkanQueueManager> vulkanQueueManager;
+    std::unique_ptr<VulkanQueueManager> queueManager;
     std::unique_ptr<VulkanDevice> device;
     std::unique_ptr<VulkanSwapChain> swapchain;
   };
