@@ -72,7 +72,13 @@ namespace crowe
         }
         logQueue.pop();
       }
-      std::this_thread::sleep_for(0.5s);
+      if(logQueue.empty())
+      {
+        std::this_thread::sleep_for(5s);
+      } else
+      {
+        std::this_thread::sleep_for(0.5s);
+      }
     }
   }
 

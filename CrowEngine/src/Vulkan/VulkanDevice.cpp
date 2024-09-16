@@ -134,7 +134,7 @@ namespace crowe
     queueManager->FindQueueFamilies(physicDevice, surface);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-    float queuePriority = 0.9f;
+    float queuePriority = 1.0f;
 
     // Create queue create info structures
     for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++)

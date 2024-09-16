@@ -68,7 +68,7 @@ namespace crowe
       {
         queueFamilies.erase(queueFamilies.begin() + i);
         i--;
-        WARNING("Erased QueueFamily: " + std::to_string(i));
+        WARNING("Erased QueueFamily");
       }
     }
   };
