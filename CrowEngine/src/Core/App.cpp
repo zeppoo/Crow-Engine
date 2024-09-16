@@ -1,25 +1,40 @@
 #include "App.hpp"
 #include "../Logger.hpp"
+#include "../Config/SettingsManager.hpp"
 #include "Window.hpp"
-
 
 namespace crowe
 {
+  App App::instance;
+
+  App::App()
+  {
+    INFO("Application Started");
+  }
 
   void App::StartApplication()
   {
-    window = std::make_unique<Window>();
-    logger.Log("Window created succesfully!", INFO);
-    vulkanModule = std::make_unique<VulkanModule>(window);
+      StartRunning();
+      INFO("Creating Window...");
+      window = std::make_unique<Window>();
+      INFO("Window created succesfully!");
+      vulkanModule = std::make_unique<VulkanModule>(window);
   }
 
   void App::RunApplication()
   {
-    window->windowLoop();
+    while (getEngineConfig().isRunning)
+    {
+      window->windowLoop();
+      break;
+    }
   }
 
-  void App::ShutdownApplication()
+  bool App::ShutdownApplication()
   {
-
+    vulkanModule->VulkanShutDown();
+    window->DestroyWindow();
+    SHUTDOWN_APP("All Objects Succesfully Destroyed!");
+    return true;
   }
 }

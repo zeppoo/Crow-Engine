@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/CrowEngine.dir/src/Logger.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.obj.d"
+  "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanCommandBuffers.cpp.obj"
+  "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanCommandBuffers.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDebugger.cpp.obj.d"
   "CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanDevice.cpp.obj"

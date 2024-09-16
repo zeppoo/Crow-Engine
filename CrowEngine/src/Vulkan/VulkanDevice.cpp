@@ -1,36 +1,26 @@
 #include "VulkanDevice.hpp"
 #include "VulkanUtilities.hpp"
 #include "VulkanDebugger.hpp"
+#include "../config/SettingsManager.hpp"
+#include "../Logger.hpp"
 
 #include <set>
 #include <cstring>
 
 namespace crowe
 {
-
   VulkanDevice::VulkanDevice(std::unique_ptr<Window>& window, std::unique_ptr<VulkanQueueManager>& queueManager) : queueManager{queueManager}
   {
     InitVulkan();
+    INFO("Succesfully Created Vulkan Instance");
     surface = window->CreateVulkanSurface(vkInstance);
-    SetupLogicalDevice();
+    SetupDevice();
   }
 
-  VulkanDevice::~VulkanDevice()
-  {
-    vkDestroyDevice(device, nullptr);
-
-    if (settings.enableValidationLayers) {
-      DestroyDebugUtilsMessengerEXT(vkInstance, debugMessenger, nullptr);
-    }
-
-    vkDestroySurfaceKHR(vkInstance, surface, nullptr);
-    vkDestroyInstance(vkInstance, nullptr);
-  }
-
-  void VulkanDevice::InitVulkan()
+  bool VulkanDevice::InitVulkan()
   {
     if (!checkValidationLayerSupport()) {
-      throw std::runtime_error("Validation layers requested, but not available!");
+      FATAL_ERROR("Validation layers requested, but not available!");
     }
 
     VkApplicationInfo appInfo{};
@@ -63,14 +53,12 @@ namespace crowe
     }
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
-    if (settings.enableValidationLayers)
+    if (getEnableValidationLayers())
     {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
       createInfo.ppEnabledLayerNames = validationLayers.data();
       populateDebugMessengerCreateInfo(debugCreateInfo);
       createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
-
-
     } else
     {
       createInfo.enabledLayerCount = 0;
@@ -78,25 +66,35 @@ namespace crowe
     }
 
     if (vkCreateInstance(&createInfo, nullptr, &vkInstance) != VK_SUCCESS) {
-      throw std::runtime_error("Failed to create Vulkan instance!");
+      FATAL_ERROR("Failed to create Vulkan instance!");
     }
 
-    if (settings.enableValidationLayers && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
+    if (getEnableValidationLayers() && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
     {
-      throw std::runtime_error("failed to set up debug messenger!");
+      FATAL_ERROR("failed to set up debug messenger!");
+      return false;
+    }
+
+    return true;
+  }
+
+  void VulkanDevice::SetupDevice()
+  {
+    if (FindPhysicalDevice())
+    {
+      INFO("Found Physical Device!");
+    }
+    if (CreateLogicalDevice())
+    {
+      INFO("Created Logical Device!");
+    }
+    if (queueManager->CreateCommandPools(device))
+    {
+      INFO("Created Command Pools!");
     }
   }
 
-  void VulkanDevice::SetupLogicalDevice()
-  {
-    FindPhysicalDevice();
-    CreateLogicalDevice();
-    queueManager->CreateQueues(device);
-    queueManager->CreateCommandPools(device);
-    queueManager->AllocateCommandBuffers(device);
-  }
-
-  void VulkanDevice::FindPhysicalDevice()
+  bool VulkanDevice::FindPhysicalDevice()
   {
     uint32_t deviceCount = 0;
 
@@ -122,14 +120,16 @@ namespace crowe
 
     if (physicDevice == VK_NULL_HANDLE)
     {
-      throw std::runtime_error("failed to find a suitable GPU!");
+      FATAL_ERROR("failed to find a suitable GPU!");
+      return false;
     } else {
       VkPhysicalDeviceProperties properties;
       vkGetPhysicalDeviceProperties(physicDevice, &properties);
+      return true;
     }
   }
 
-  void VulkanDevice::CreateLogicalDevice()
+  bool VulkanDevice::CreateLogicalDevice()
   {
     queueManager->FindQueueFamilies(physicDevice, surface);
 
@@ -137,12 +137,12 @@ namespace crowe
     float queuePriority = 1.0f;
 
     // Create queue create info structures
-    for (QueueFamily family : queueManager->GetQueueFamilies())
+    for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++)
     {
       VkDeviceQueueCreateInfo queueCreateInfo{};
       queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-      queueCreateInfo.queueFamilyIndex = family.queueFamilyIndex;
-      queueCreateInfo.queueCount = family.queues.size();
+      queueCreateInfo.queueFamilyIndex = queueManager->GetQueueFamilies()[i].queueFamilyIndex;
+      queueCreateInfo.queueCount = queueManager->GetQueueFamilies()[i].queueCount;
       queueCreateInfo.pQueuePriorities = &queuePriority;
       queueCreateInfos.push_back(queueCreateInfo);
     }
@@ -160,7 +160,7 @@ namespace crowe
     createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
 
     // Validation layers
-    if (settings.enableValidationLayers)
+    if (getEnableValidationLayers())
     {
       createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
       createInfo.ppEnabledLayerNames = getValidationLayers().data();
@@ -172,8 +172,11 @@ namespace crowe
     // Create the logical device
     if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS)
     {
-      throw std::runtime_error("failed to create logical device!");
+      FATAL_ERROR("Failed to Create Logical Device");
+      return false;
     }
+    queueManager->CreateQueues(device);
+    return true;
   }
 
   bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)

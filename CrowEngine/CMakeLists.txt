@@ -12,7 +12,8 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 add_executable(CrowEngine ${SOURCE_FILES}
         src/Vulkan/VulkanQueueManager.hpp
         src/Logger.hpp
-        src/config/SettingsManager.hpp)
+        src/config/SettingsManager.hpp
+        src/Vulkan/VulkanCommandBuffers.hpp)
 
 # Find Libraries
 add_subdirectory ("external/glfw")

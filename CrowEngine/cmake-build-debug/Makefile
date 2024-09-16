@@ -371,6 +371,30 @@ src/Vulkan/VulkanBackend.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanBackend.cpp.s
 .PHONY : src/Vulkan/VulkanBackend.cpp.s
 
+src/Vulkan/VulkanCommandBuffers.obj: src/Vulkan/VulkanCommandBuffers.cpp.obj
+.PHONY : src/Vulkan/VulkanCommandBuffers.obj
+
+# target to build an object file
+src/Vulkan/VulkanCommandBuffers.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanCommandBuffers.cpp.obj
+.PHONY : src/Vulkan/VulkanCommandBuffers.cpp.obj
+
+src/Vulkan/VulkanCommandBuffers.i: src/Vulkan/VulkanCommandBuffers.cpp.i
+.PHONY : src/Vulkan/VulkanCommandBuffers.i
+
+# target to preprocess a source file
+src/Vulkan/VulkanCommandBuffers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanCommandBuffers.cpp.i
+.PHONY : src/Vulkan/VulkanCommandBuffers.cpp.i
+
+src/Vulkan/VulkanCommandBuffers.s: src/Vulkan/VulkanCommandBuffers.cpp.s
+.PHONY : src/Vulkan/VulkanCommandBuffers.s
+
+# target to generate assembly for a file
+src/Vulkan/VulkanCommandBuffers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/src/Vulkan/VulkanCommandBuffers.cpp.s
+.PHONY : src/Vulkan/VulkanCommandBuffers.cpp.s
+
 src/Vulkan/VulkanDebugger.obj: src/Vulkan/VulkanDebugger.cpp.obj
 .PHONY : src/Vulkan/VulkanDebugger.obj
 
@@ -621,6 +645,9 @@ help:
 	@echo ... src/Vulkan/VulkanBackend.obj
 	@echo ... src/Vulkan/VulkanBackend.i
 	@echo ... src/Vulkan/VulkanBackend.s
+	@echo ... src/Vulkan/VulkanCommandBuffers.obj
+	@echo ... src/Vulkan/VulkanCommandBuffers.i
+	@echo ... src/Vulkan/VulkanCommandBuffers.s
 	@echo ... src/Vulkan/VulkanDebugger.obj
 	@echo ... src/Vulkan/VulkanDebugger.i
 	@echo ... src/Vulkan/VulkanDebugger.s

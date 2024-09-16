@@ -9,6 +9,7 @@ namespace GeneralSettings
     std::string engineName = "Crow Engine";
     std::string version = "0.0.1";
     std::string credit = "Rein Verhaag, Clement Malaka";
+    bool isRunning = false;
   };
 
   struct WindowConfig
@@ -17,6 +18,14 @@ namespace GeneralSettings
     int height = 600;
     bool fullscreen = false;
     bool resizable = true;
+  };
+
+  struct QueueConfig
+  {
+    int presentQueuesCount = 1;
+    int graphicsQueuesCount = 1;
+    int computeQueuesCount = 1;
+    int transferQueuesCount = 1;
   };
 }
 
@@ -73,24 +82,42 @@ namespace DebugSettings
   struct LogConfig
   {
     std::unordered_map<int, bool> loggingLevelSettings =
-        { {0, false},
-          {1, false},
-          {2, false} };
+        { {0, true},
+          {1, true},
+          {2, true},
+          {3, true}};
+
     std::string logFile = "path/to/log.txt";
   };
 }
 
 namespace crowe
 {
+  GeneralSettings::EngineConfig& getEngineConfig();
+  GeneralSettings::WindowConfig& getWindowConfig();
+  GeneralSettings::QueueConfig& getQueueConfig();
+  RenderingSettings::MultiSampling& getMultiSamplingConfig();
+  RenderingSettings::Shadows& getShadowsConfig();
+  RenderingSettings::Textures& getTexturesConfig();
+  RenderingSettings::Lighting& getLightingConfig();
+  RenderingSettings::PostProcessing& getPostProcessingConfig();
+  ShaderSettings::ShaderConfig& getShaderConfig();
+  ShaderSettings::ShaderSettingsConfig& getShaderSettingsConfig();
+  DebugSettings::LogConfig& getLogConfig();
+  const bool getEnableValidationLayers();
+  void StartRunning();
+  void StopRunning();
+
 
   class SettingsManager
   {
   public:
-    static SettingsManager& getInstance();
-    static void destroyInstance();
+    static SettingsManager& getInstance(){return instance;};
+
     // General Settings
     GeneralSettings::EngineConfig engineConfig;
     GeneralSettings::WindowConfig windowConfig;
+    GeneralSettings::QueueConfig queueConfig;
     // Rendering Settings
     RenderingSettings::MultiSampling multiSamplingConfig;
     RenderingSettings::Shadows shadowsConfig;
@@ -110,6 +137,8 @@ namespace crowe
 
   private:
     SettingsManager();
+    SettingsManager(const SettingsManager&) = delete;
+    SettingsManager& operator=(const SettingsManager&) = delete;
 
     static SettingsManager instance;
   };
