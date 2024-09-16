@@ -46,10 +46,10 @@ namespace crowe
 
   void Window::windowLoop()
   {
-    if (glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window))
     {
-      SHUTDOWN_APP("Window Closed");
+      glfwPollEvents();
     }
-    glfwPollEvents();
+    SHUTDOWN_APP("Window Closed");
   }
 }

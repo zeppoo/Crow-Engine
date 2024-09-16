@@ -16,14 +16,14 @@ namespace crowe
 
   struct QueueData{
     VkQueue queue;
-    uint32_t queueindex;
-    uint32_t queueFamilyIndex;
+    int queueindex;
+    int queueFamilyIndex;
   };
 
   struct QueueFamily
   {
-    uint32_t queueFamilyIndex;
-    uint32_t queueCount = 0;
+    int queueFamilyIndex;
+    int queueCount = 0;
     VkCommandPool commandPool;
     std::vector<VkCommandBuffer> commandBuffers;
   };

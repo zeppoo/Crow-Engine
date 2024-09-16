@@ -26,6 +26,7 @@ namespace crowe
     while (getEngineConfig().isRunning)
     {
       window->windowLoop();
+      break;
     }
   }
 

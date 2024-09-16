@@ -26,12 +26,12 @@ namespace crowe
 
   void VulkanQueueManager::AssignQueues(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface, VkQueueFlagBits flagBit, const std::vector<VkQueueFamilyProperties>& queueFamilyProperties, std::vector<QueueData>& queueType, int queueCount, bool isPresentQueue)
   {
-    uint32_t bestQueueFamilyindex;
+    int bestQueueFamilyindex = 0;
     int bestQueueFamilySupportLevel = CheckFlagSupportNum(queueFamilyProperties[0].queueFlags);
     //To Do: zorg dat hij checkt of er een specifieke family, en niet alleen kijkt of hij de flagbit support
     for (int i = 0; i < queueCount; i++)
     {
-      for (uint32_t j = 0; j < queueFamilyProperties.size(); j++) {
+      for (int j = 0; j < queueFamilyProperties.size(); j++) {
         int supportedQueueCount = queueFamilyProperties[j].queueCount - queueFamilies[j].queueCount;
         if (supportedQueueCount <= 0) continue; // Skip if no queues are available
 
@@ -53,7 +53,7 @@ namespace crowe
           }
         }
       }
-      QueueData data = {VK_NULL_HANDLE, queueFamilies[bestQueueFamilyindex].queueCount - 1, bestQueueFamilyindex};
+      QueueData data = {VK_NULL_HANDLE, queueFamilies[bestQueueFamilyindex].queueCount, bestQueueFamilyindex};
       queueFamilies[bestQueueFamilyindex].queueCount++;
       queueType.push_back(data);
       queueCount--;
