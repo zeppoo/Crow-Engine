@@ -26,41 +26,37 @@ namespace crowe
 
   void VulkanQueueManager::AssignQueues(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface, VkQueueFlagBits flagBit, const std::vector<VkQueueFamilyProperties>& queueFamilyProperties, std::vector<QueueData>& queueType, int queueCount, bool isPresentQueue)
   {
+    uint32_t bestQueueFamilyindex;
+    int bestQueueFamilySupportLevel = CheckFlagSupportNum(queueFamilyProperties[0].queueFlags);
     //To Do: zorg dat hij checkt of er een specifieke family, en niet alleen kijkt of hij de flagbit support
-    for (uint32_t i = 0; i < queueFamilyProperties.size(); i++) {
-      if (queueCount <= 0) break; // Stop if all requested queues are assigned
-      int supportedQueueCount = queueFamilyProperties[i].queueCount - queueFamilies[i].queueCount;
+    for (int i = 0; i < queueCount; i++)
+    {
+      for (uint32_t j = 0; j < queueFamilyProperties.size(); j++) {
+        int supportedQueueCount = queueFamilyProperties[j].queueCount - queueFamilies[j].queueCount;
+        if (supportedQueueCount <= 0) continue; // Skip if no queues are available
 
-      if (supportedQueueCount <= 0) continue; // Skip if no queues are available
+        if (isPresentQueue && (queueFamilyProperties[j].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
+          VkBool32 presentSupport = VK_FALSE;
+          vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, j, surface, &presentSupport);
+          if (presentSupport) {
+            bestQueueFamilyindex = j;
+            continue;
+          }
+        }
 
-      QueueData data = {VK_NULL_HANDLE , queueFamilies[i].queueCount - 1, i};
+        if (queueFamilyProperties[j].queueFlags & flagBit) {
+          int flagSupportLevel = CheckFlagSupportNum(queueFamilyProperties[j].queueFlags);
 
-      if (isPresentQueue && (queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
-        VkBool32 presentSupport = VK_FALSE;
-        vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, i, surface, &presentSupport);
-        if (presentSupport) {
-          queueFamilies[i].queueCount++;
-          queueType.push_back(data);
-          queueCount--;
-          continue;
+          if (flagSupportLevel < bestQueueFamilySupportLevel) {
+            bestQueueFamilySupportLevel = flagSupportLevel;
+            bestQueueFamilyindex = j;
+          }
         }
       }
-
-      if (queueFamilyProperties[i].queueFlags & flagBit) {
-        int flagSupportLevel = CheckFlagSupportNum(queueFamilyProperties[i].queueFlags);
-
-        // Prioritize queues that are more focused on the current flagBit
-        if (flagSupportLevel <= 2) {  // Perfect match, this queue only supports one type of flagBit
-          queueFamilies[i].queueCount++;
-          queueType.push_back(data);
-          queueCount--;
-        }
-        else if (flagSupportLevel >= 3 && queueType.empty()) {  // Less focused but acceptable if no specialized queue is found
-          queueFamilies[i].queueCount++;
-          queueType.push_back(data);
-          queueCount--;
-        }
-      }
+      QueueData data = {VK_NULL_HANDLE, queueFamilies[bestQueueFamilyindex].queueCount - 1, bestQueueFamilyindex};
+      queueFamilies[bestQueueFamilyindex].queueCount++;
+      queueType.push_back(data);
+      queueCount--;
     }
   }
 
