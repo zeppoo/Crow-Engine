@@ -10,29 +10,38 @@ namespace crowe
     std::vector<VkQueueFamilyProperties> queueFamilyProperties(queueFamilyCount);
     vkGetPhysicalDeviceQueueFamilyProperties(physicDevice, &queueFamilyCount, queueFamilyProperties.data());
 
-    queueFamilies.resize(queueFamilyCount);
+    std::vector<QueueFamily> currentQueueFamilies;
+
+    currentQueueFamilies.resize(queueFamilyCount);
     for (uint32_t i = 0; i < queueFamilyProperties.size(); i++)
     {
-      queueFamilies[i].queueFamilyIndex = i;
+      currentQueueFamilies[i].index = i;
     }
 
-    AssignQueues(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, queueFamilyProperties, presentQueues, getQueueConfig().presentQueuesCount, true);
-    AssignQueues(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, queueFamilyProperties, graphicsQueues, getQueueConfig().graphicsQueuesCount, false);
-    AssignQueues(physicDevice, surface, VK_QUEUE_COMPUTE_BIT, queueFamilyProperties, computeQueues, getQueueConfig().computeQueuesCount, false);
-    AssignQueues(physicDevice, surface, VK_QUEUE_TRANSFER_BIT, queueFamilyProperties, transferQueues, getQueueConfig().transferQueuesCount, false);
+    AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, currentQueueFamilies, queueFamilyProperties, presentQueues, getQueueConfig().presentQueuesCount, true);
+    AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, currentQueueFamilies, queueFamilyProperties, graphicsQueues, getQueueConfig().graphicsQueuesCount, false);
+    AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_COMPUTE_BIT, currentQueueFamilies, queueFamilyProperties, computeQueues, getQueueConfig().computeQueuesCount, false);
+    AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_TRANSFER_BIT, currentQueueFamilies, queueFamilyProperties, transferQueues, getQueueConfig().transferQueuesCount, false);
+    CleanupEmptyFamilies(currentQueueFamilies);
 
-    CleanupEmptyFamilies();
+    queueFamilies = currentQueueFamilies; //Allocate to the heap without fragmentation
   }
 
-  void VulkanQueueManager::AssignQueues(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface, VkQueueFlagBits flagBit, const std::vector<VkQueueFamilyProperties>& queueFamilyProperties, std::vector<QueueData>& queueType, int queueCount, bool isPresentQueue)
+  void VulkanQueueManager::AssignQueuesToQueueFamilies(
+      VkPhysicalDevice& physicDevice,
+      VkSurfaceKHR& surface,
+      VkQueueFlagBits flagBit,
+      std::vector<QueueFamily>& currentQueueFamilies,
+      const std::vector<VkQueueFamilyProperties>& queueFamilyProperties,
+      std::vector<QueueData>& queueType,
+      int queueCount, bool isPresentQueue)
   {
     int bestQueueFamilyindex = 0;
     int bestQueueFamilySupportLevel = CheckFlagSupportNum(queueFamilyProperties[0].queueFlags);
-    //To Do: zorg dat hij checkt of er een specifieke family, en niet alleen kijkt of hij de flagbit support
     for (int i = 0; i < queueCount; i++)
     {
       for (int j = 0; j < queueFamilyProperties.size(); j++) {
-        int supportedQueueCount = queueFamilyProperties[j].queueCount - queueFamilies[j].queueCount;
+        int supportedQueueCount = queueFamilyProperties[j].queueCount - currentQueueFamilies[j].queueCount;
         if (supportedQueueCount <= 0) continue; // Skip if no queues are available
 
         if (isPresentQueue && (queueFamilyProperties[j].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
@@ -43,8 +52,7 @@ namespace crowe
             continue;
           }
         }
-
-        if (queueFamilyProperties[j].queueFlags & flagBit) {
+        else if (queueFamilyProperties[j].queueFlags & flagBit) {
           int flagSupportLevel = CheckFlagSupportNum(queueFamilyProperties[j].queueFlags);
 
           if (flagSupportLevel < bestQueueFamilySupportLevel) {
@@ -53,20 +61,32 @@ namespace crowe
           }
         }
       }
-      QueueData data = {VK_NULL_HANDLE, queueFamilies[bestQueueFamilyindex].queueCount, bestQueueFamilyindex};
-      queueFamilies[bestQueueFamilyindex].queueCount++;
+      QueueData data = CreateQueueData(bestQueueFamilyindex, currentQueueFamilies[bestQueueFamilyindex].queueCount, queueFamilyProperties[bestQueueFamilyindex].queueCount);
+      currentQueueFamilies[bestQueueFamilyindex].queueCount++;
       queueType.push_back(data);
       queueCount--;
     }
   }
 
-  void VulkanQueueManager::CleanupEmptyFamilies()
+  QueueData VulkanQueueManager::CreateQueueData(int familyIndex, int queueIndex, int maxQueueCount)
   {
-    for (int i = 0; i < queueFamilies.size(); i++)
+    QueueData data;
+    data.queueIndex = queueIndex;
+    data.familyIndex = familyIndex;
+    while (data.queueIndex > maxQueueCount)
     {
-      if (queueFamilies[i].queueCount <= 0)
+      data.queueIndex--;
+    }
+    return data;
+  }
+
+  void VulkanQueueManager::CleanupEmptyFamilies(std::vector<QueueFamily>& currentQueueFamilies)
+  {
+    for (int i = 0; i < currentQueueFamilies.size(); i++)
+    {
+      if (currentQueueFamilies[i].queueCount <= 0)
       {
-        queueFamilies.erase(queueFamilies.begin() + i);
+        currentQueueFamilies.erase(currentQueueFamilies.begin() + i);
         i--;
         WARNING("Erased QueueFamily");
       }
@@ -83,18 +103,40 @@ namespace crowe
 
   void VulkanQueueManager::CreateQueues(VkDevice &device)
   {
-    GetQueueHandles(device, presentQueues);
-    GetQueueHandles(device, graphicsQueues);
-    GetQueueHandles(device, computeQueues);
-    GetQueueHandles(device, transferQueues);
+    GetQueueHandles(device);
+    BindQueueDataToQueues(presentQueues);
+    BindQueueDataToQueues(graphicsQueues);
+    BindQueueDataToQueues(computeQueues);
+    BindQueueDataToQueues(transferQueues);
   }
 
-  void VulkanQueueManager::GetQueueHandles(VkDevice& device, std::vector<QueueData>& queueType)
+  void VulkanQueueManager::GetQueueHandles(VkDevice& device)
   {
-    for (int i = 0; i < queueType.size(); i++)
-    {
-        vkGetDeviceQueue(device, queueType[i].queueFamilyIndex, queueType[i].queueindex, &queueType[i].queue);
+    for (int i = 0; i < queueFamilies.size(); ++i) {
+      queueFamilies[i].queues.resize(queueFamilies[i].queueCount);
+      for (int j = 0; j < queueFamilies[i].queues.size(); j++)
+      {
+        vkGetDeviceQueue(device, queueFamilies[i].index, j, &queueFamilies[i].queues[j]);
+      }
     }
+  }
+
+  void VulkanQueueManager::BindQueueDataToQueues(std::vector<QueueData>& queueType)
+  {
+    for (int i = 0; i < queueFamilies[i].queues.size(); ++i) {
+      queueType[i].pQueue = &queueFamilies[queueType[i].familyIndex].queues[queueType[i].queueIndex];
+    }
+  }
+
+  VkDeviceQueueCreateInfo VulkanQueueManager::CreateQueueInfo(QueueFamily family)
+  {
+    std::vector<float> queuePriorities(family.queueCount, 1.0f);
+    VkDeviceQueueCreateInfo queueCreateInfo{};
+    queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+    queueCreateInfo.queueFamilyIndex = family.index;
+    queueCreateInfo.queueCount = family.queueCount;
+    queueCreateInfo.pQueuePriorities = queuePriorities.data();
+    return queueCreateInfo;
   }
 
   bool VulkanQueueManager::CreateCommandPools(VkDevice& device) {
@@ -102,7 +144,7 @@ namespace crowe
     {
       VkCommandPoolCreateInfo poolInfo{};
       poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-      poolInfo.queueFamilyIndex = queueFamilies[i].queueFamilyIndex;
+      poolInfo.queueFamilyIndex = queueFamilies[i].index;
       poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
       if (vkCreateCommandPool(device, &poolInfo, nullptr, &queueFamilies[i].commandPool) != VK_SUCCESS) {

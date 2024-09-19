@@ -41,7 +41,7 @@
 # *.ipr
 
 # CMake
-cmake-build-*/
+CrowEngine/cmake-build-*/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
