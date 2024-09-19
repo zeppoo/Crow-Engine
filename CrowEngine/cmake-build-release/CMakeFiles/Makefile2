@@ -180,9 +180,9 @@ external/imgui/clean: external/imgui/CMakeFiles/imgui.dir/clean
 # Target rules for target CMakeFiles/CrowEngine.dir
 
 # All Build rule for target.
+CMakeFiles/CrowEngine.dir/all: external/glfw/src/CMakeFiles/glfw.dir/all
 CMakeFiles/CrowEngine.dir/all: external/glm/glm/CMakeFiles/glm.dir/all
 CMakeFiles/CrowEngine.dir/all: external/imgui/CMakeFiles/imgui.dir/all
-CMakeFiles/CrowEngine.dir/all: external/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CrowEngine.dir\build.make CMakeFiles/CrowEngine.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\ReinV\Personal\Coding\C++\Projects\Crow-Engine\CrowEngine\cmake-build-release\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target CrowEngine"

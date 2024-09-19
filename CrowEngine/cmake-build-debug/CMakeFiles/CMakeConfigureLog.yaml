@@ -61,8 +61,13 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
+<<<<<<< HEAD
       source: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-read80"
       binary: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-read80"
+=======
+      source: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi"
+      binary: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -71,10 +76,20 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
+<<<<<<< HEAD
         Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-read80'
         
         Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_a37a3
         [1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c"
+=======
+        Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_f92f5/fast
+        C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f92f5.dir\\build.make CMakeFiles/cmTC_f92f5.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi'
+        Building C object CMakeFiles/cmTC_f92f5.dir/CMakeCCompilerABI.c.obj
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe
         Target: x86_64-w64-mingw32
@@ -82,8 +97,13 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
+<<<<<<< HEAD
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/'
          C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_a37a3.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\cleme\\AppData\\Local\\Temp\\ccdQsbMb.s
+=======
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\'
+         C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_f92f5.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccQnxI40.s
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         GNU C17 (GCC) version 13.1.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 13.1.0, GMP version 6.2.1, MPFR version 4.2.0-p4, MPC version 1.3.1, isl version none
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -101,6 +121,7 @@ events:
          C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 2aa4fcf5c9208168c5e2d38a58fc2a97
+<<<<<<< HEAD
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/'
          as -v -o CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj C:\\Users\\cleme\\AppData\\Local\\Temp\\ccdQsbMb.s
         GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
@@ -108,6 +129,19 @@ events:
         LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.'\x0d
         [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj -o cmTC_a37a3.exe -Wl,--out-implib,libcmTC_a37a3.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+=======
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\'
+         as -v -o CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccQnxI40.s
+        GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
+        COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/
+        LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.'
+        Linking C executable cmTC_f92f5.exe
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f92f5.dir\\link.txt --verbose=1
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f92f5.dir/objects.a
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_f92f5.dir/objects.a @CMakeFiles\\cmTC_f92f5.dir\\objects1.rsp
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe  -v -Wl,--whole-archive CMakeFiles\\cmTC_f92f5.dir/objects.a -Wl,--no-whole-archive -o cmTC_f92f5.exe -Wl,--out-implib,libcmTC_f92f5.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=C:/Program\\ Files/JetBrains/CLion\\ 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe
@@ -116,6 +150,7 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
+<<<<<<< HEAD
         COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
         COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a37a3.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_a37a3.'
@@ -124,6 +159,14 @@ events:
         C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\mingw\\bin/ld.exe -m i386pep -Bdynamic -o cmTC_a37a3.exe C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_a37a3.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o\x0d
         GNU ld (GNU Binutils) 2.40\x0d
         COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a37a3.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_a37a3.'\x0d
+=======
+        COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/
+        LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f92f5.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f92f5.'
+         C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_f92f5.exe C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_f92f5.dir/objects.a --no-whole-archive --out-implib libcmTC_f92f5.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f92f5.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f92f5.'
+        mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi'
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         
       exitCode: 0
   -
@@ -156,12 +199,23 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed C implicit link information:
+<<<<<<< HEAD
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
         ignore line: [Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-read80']
         ignore line: []
         ignore line: [Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_a37a3]
         ignore line: [[1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c"]
+=======
+        link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi']
+        ignore line: []
+        ignore line: [Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_f92f5/fast]
+        ignore line: [C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f92f5.dir\\build.make CMakeFiles/cmTC_f92f5.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi']
+        ignore line: [Building C object CMakeFiles/cmTC_f92f5.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -169,8 +223,13 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
+<<<<<<< HEAD
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/']
         ignore line: [ C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_a37a3.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\cleme\\AppData\\Local\\Temp\\ccdQsbMb.s]
+=======
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\']
+        ignore line: [ C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_f92f5.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccQnxI40.s]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [GNU C17 (GCC) version 13.1.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 13.1.0  GMP version 6.2.1  MPFR version 4.2.0-p4  MPC version 1.3.1  isl version none]
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -188,6 +247,7 @@ events:
         ignore line: [ C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 2aa4fcf5c9208168c5e2d38a58fc2a97]
+<<<<<<< HEAD
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/']
         ignore line: [ as -v -o CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj C:\\Users\\cleme\\AppData\\Local\\Temp\\ccdQsbMb.s]
         ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
@@ -201,6 +261,25 @@ events:
         ignore line: [C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.'\x0d]
         ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj -o cmTC_a37a3.exe -Wl --out-implib libcmTC_a37a3.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+=======
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\']
+        ignore line: [ as -v -o CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccQnxI40.s]
+        ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
+        ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f92f5.dir\\CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_f92f5.exe]
+        ignore line: ["C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f92f5.dir\\link.txt --verbose=1]
+        ignore line: ["C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f92f5.dir/objects.a]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_f92f5.dir/objects.a @CMakeFiles\\cmTC_f92f5.dir\\objects1.rsp]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe  -v -Wl --whole-archive CMakeFiles\\cmTC_f92f5.dir/objects.a -Wl --no-whole-archive -o cmTC_f92f5.exe -Wl --out-implib libcmTC_f92f5.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/Program\\ Files/JetBrains/CLion\\ 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe]
@@ -209,6 +288,7 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
+<<<<<<< HEAD
         ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
         ignore line: [C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/]
         ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
@@ -223,6 +303,20 @@ events:
         ignore line: [C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\mingw\\bin/ld.exe -m i386pep -Bdynamic -o cmTC_a37a3.exe C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v CMakeFiles/cmTC_a37a3.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_a37a3.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o\x0d]
         ignore line: [GNU ld (GNU Binutils) 2.40\x0d]
         ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a37a3.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_a37a3.'\x0d]
+=======
+        ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f92f5.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f92f5.']
+        ignore line: [ C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_f92f5.exe C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_f92f5.dir/objects.a --no-whole-archive --out-implib libcmTC_f92f5.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f92f5.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f92f5.']
+        ignore line: [mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ev92xi']
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: []
         ignore line: []
         linker tool for 'C': C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/ld.exe
@@ -251,8 +345,13 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
+<<<<<<< HEAD
       source: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-bwcede"
       binary: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-bwcede"
+=======
+      source: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5"
+      binary: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -262,10 +361,20 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
+<<<<<<< HEAD
         Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-bwcede'
         
         Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_c17f8
         [1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp"
+=======
+        Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_f042e/fast
+        C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f042e.dir\\build.make CMakeFiles/cmTC_f042e.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5'
+        Building CXX object CMakeFiles/cmTC_f042e.dir/CMakeCXXCompilerABI.cpp.obj
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE
         Target: x86_64-w64-mingw32
@@ -273,8 +382,13 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
+<<<<<<< HEAD
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/'
          C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_c17f8.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\cleme\\AppData\\Local\\Temp\\ccKool3B.s
+=======
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\'
+         C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_f042e.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccl9X3dB.s
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         GNU C++17 (GCC) version 13.1.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 13.1.0, GMP version 6.2.1, MPFR version 4.2.0-p4, MPC version 1.3.1, isl version none
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -298,6 +412,7 @@ events:
          C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: e75de627edc3c57e31324b930b15b056
+<<<<<<< HEAD
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/'
          as -v -o CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\cleme\\AppData\\Local\\Temp\\ccKool3B.s
         GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
@@ -305,6 +420,19 @@ events:
         LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.'\x0d
         [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  -v -Wl,-v CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c17f8.exe -Wl,--out-implib,libcmTC_c17f8.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+=======
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\'
+         as -v -o CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccl9X3dB.s
+        GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
+        COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/
+        LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_f042e.exe
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f042e.dir\\link.txt --verbose=1
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f042e.dir/objects.a
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_f042e.dir/objects.a @CMakeFiles\\cmTC_f042e.dir\\objects1.rsp
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  -v -Wl,--whole-archive CMakeFiles\\cmTC_f042e.dir/objects.a -Wl,--no-whole-archive -o cmTC_f042e.exe -Wl,--out-implib,libcmTC_f042e.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE
         COLLECT_LTO_WRAPPER=C:/Program\\ Files/JetBrains/CLion\\ 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe
@@ -313,6 +441,7 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
+<<<<<<< HEAD
         COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
         COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c17f8.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_c17f8.'
@@ -321,6 +450,14 @@ events:
         C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\mingw\\bin/ld.exe -m i386pep -Bdynamic -o cmTC_c17f8.exe C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_c17f8.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o\x0d
         GNU ld (GNU Binutils) 2.40\x0d
         COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c17f8.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_c17f8.'\x0d
+=======
+        COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/
+        LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f042e.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f042e.'
+         C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_f042e.exe C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_f042e.dir/objects.a --no-whole-archive --out-implib libcmTC_f042e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f042e.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f042e.'
+        mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5'
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         
       exitCode: 0
   -
@@ -359,12 +496,23 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed CXX implicit link information:
+<<<<<<< HEAD
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
         ignore line: [Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-bwcede']
         ignore line: []
         ignore line: [Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_c17f8]
         ignore line: [[1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp"]
+=======
+        link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5']
+        ignore line: []
+        ignore line: [Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_f042e/fast]
+        ignore line: [C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f042e.dir\\build.make CMakeFiles/cmTC_f042e.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5']
+        ignore line: [Building CXX object CMakeFiles/cmTC_f042e.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -372,8 +520,13 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
+<<<<<<< HEAD
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/']
         ignore line: [ C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:/Program Files/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_c17f8.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\cleme\\AppData\\Local\\Temp\\ccKool3B.s]
+=======
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\']
+        ignore line: [ C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_f042e.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccl9X3dB.s]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [GNU C++17 (GCC) version 13.1.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 13.1.0  GMP version 6.2.1  MPFR version 4.2.0-p4  MPC version 1.3.1  isl version none]
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -397,6 +550,7 @@ events:
         ignore line: [ C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: e75de627edc3c57e31324b930b15b056]
+<<<<<<< HEAD
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/']
         ignore line: [ as -v -o CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\cleme\\AppData\\Local\\Temp\\ccKool3B.s]
         ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
@@ -410,6 +564,25 @@ events:
         ignore line: [C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.'\x0d]
         ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  -v -Wl -v CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c17f8.exe -Wl --out-implib libcmTC_c17f8.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+=======
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\']
+        ignore line: [ as -v -o CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\ReinV\\AppData\\Local\\Temp\\ccl9X3dB.s]
+        ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
+        ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_f042e.dir\\CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_f042e.exe]
+        ignore line: ["C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f042e.dir\\link.txt --verbose=1]
+        ignore line: ["C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f042e.dir/objects.a]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_f042e.dir/objects.a @CMakeFiles\\cmTC_f042e.dir\\objects1.rsp]
+        ignore line: [C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  -v -Wl --whole-archive CMakeFiles\\cmTC_f042e.dir/objects.a -Wl --no-whole-archive -o cmTC_f042e.exe -Wl --out-implib libcmTC_f042e.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE]
         ignore line: [COLLECT_LTO_WRAPPER=C:/Program\\ Files/JetBrains/CLion\\ 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe]
@@ -418,6 +591,7 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
+<<<<<<< HEAD
         ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
         ignore line: [C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../libexec/gcc/]
         ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
@@ -432,6 +606,20 @@ events:
         ignore line: [C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\mingw\\bin/ld.exe -m i386pep -Bdynamic -o cmTC_c17f8.exe C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v CMakeFiles/cmTC_c17f8.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_c17f8.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o\x0d]
         ignore line: [GNU ld (GNU Binutils) 2.40\x0d]
         ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c17f8.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_c17f8.'\x0d]
+=======
+        ignore line: [COMPILER_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f042e.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f042e.']
+        ignore line: [ C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_f042e.exe C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_f042e.dir/objects.a --no-whole-archive --out-implib libcmTC_f042e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/Program Files/JetBrains/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f042e.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_f042e.']
+        ignore line: [mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-vd9bw5']
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         ignore line: []
         ignore line: []
         linker tool for 'CXX': C:/Program Files/JetBrains/CLion 2024.2.1/bin/mingw/bin/ld.exe
@@ -462,8 +650,13 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
+<<<<<<< HEAD
       source: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gvbqpn"
       binary: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gvbqpn"
+=======
+      source: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ji1fy4"
+      binary: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ji1fy4"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -473,11 +666,27 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
+<<<<<<< HEAD
         Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gvbqpn'
         
         Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_7eff3
         [1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD  -fdiagnostics-color=always -o CMakeFiles/cmTC_7eff3.dir/src.c.obj -c "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-gvbqpn/src.c"
         [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   CMakeFiles/cmTC_7eff3.dir/src.c.obj -o cmTC_7eff3.exe -Wl,--out-implib,libcmTC_7eff3.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+=======
+        Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ji1fy4'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_0baed/fast
+        C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_0baed.dir\\build.make CMakeFiles/cmTC_0baed.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ji1fy4'
+        Building C object CMakeFiles/cmTC_0baed.dir/src.c.obj
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD  -fdiagnostics-color=always -o CMakeFiles\\cmTC_0baed.dir\\src.c.obj -c C:\\Users\\ReinV\\Personal\\Coding\\C++\\Projects\\Crow-Engine\\CrowEngine\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-ji1fy4\\src.c
+        Linking C executable cmTC_0baed.exe
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_0baed.dir\\link.txt --verbose=1
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_0baed.dir/objects.a
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_0baed.dir/objects.a @CMakeFiles\\cmTC_0baed.dir\\objects1.rsp
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_0baed.dir/objects.a -Wl,--no-whole-archive -o cmTC_0baed.exe -Wl,--out-implib,libcmTC_0baed.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_0baed.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ji1fy4'
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         
       exitCode: 0
   -
@@ -488,8 +697,13 @@ events:
     checks:
       - "Looking for dinput.h"
     directories:
+<<<<<<< HEAD
       source: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-1xhlms"
       binary: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-1xhlms"
+=======
+      source: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-2yk0qh"
+      binary: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-2yk0qh"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -499,11 +713,27 @@ events:
       variable: "DINPUT_H_FOUND"
       cached: true
       stdout: |
+<<<<<<< HEAD
         Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-1xhlms'
         
         Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_0b7a9
         [1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always -o CMakeFiles/cmTC_0b7a9.dir/CheckIncludeFile.c.obj -c "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-1xhlms/CheckIncludeFile.c"
         [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   CMakeFiles/cmTC_0b7a9.dir/CheckIncludeFile.c.obj -o cmTC_0b7a9.exe -Wl,--out-implib,libcmTC_0b7a9.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+=======
+        Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-2yk0qh'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_cfc35/fast
+        C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_cfc35.dir\\build.make CMakeFiles/cmTC_cfc35.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-2yk0qh'
+        Building C object CMakeFiles/cmTC_cfc35.dir/CheckIncludeFile.c.obj
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always -o CMakeFiles\\cmTC_cfc35.dir\\CheckIncludeFile.c.obj -c C:\\Users\\ReinV\\Personal\\Coding\\C++\\Projects\\Crow-Engine\\CrowEngine\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-2yk0qh\\CheckIncludeFile.c
+        Linking C executable cmTC_cfc35.exe
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_cfc35.dir\\link.txt --verbose=1
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_cfc35.dir/objects.a
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_cfc35.dir/objects.a @CMakeFiles\\cmTC_cfc35.dir\\objects1.rsp
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_cfc35.dir/objects.a -Wl,--no-whole-archive -o cmTC_cfc35.exe -Wl,--out-implib,libcmTC_cfc35.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_cfc35.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-2yk0qh'
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         
       exitCode: 0
   -
@@ -514,8 +744,13 @@ events:
     checks:
       - "Looking for xinput.h"
     directories:
+<<<<<<< HEAD
       source: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-5b5prt"
       binary: "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-5b5prt"
+=======
+      source: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hjmpuf"
+      binary: "C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hjmpuf"
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -525,11 +760,27 @@ events:
       variable: "XINPUT_H_FOUND"
       cached: true
       stdout: |
+<<<<<<< HEAD
         Change Dir: 'C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-5b5prt'
         
         Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_324b8
         [1/2] C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always -o CMakeFiles/cmTC_324b8.dir/CheckIncludeFile.c.obj -c "C:/Users/cleme/Documents/School/Lj3/BO/Periode 1/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-5b5prt/CheckIncludeFile.c"
         [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   CMakeFiles/cmTC_324b8.dir/CheckIncludeFile.c.obj -o cmTC_324b8.exe -Wl,--out-implib,libcmTC_324b8.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+=======
+        Change Dir: 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hjmpuf'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.1.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_8a9e1/fast
+        C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_8a9e1.dir\\build.make CMakeFiles/cmTC_8a9e1.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hjmpuf'
+        Building C object CMakeFiles/cmTC_8a9e1.dir/CheckIncludeFile.c.obj
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe   -fdiagnostics-color=always -o CMakeFiles\\cmTC_8a9e1.dir\\CheckIncludeFile.c.obj -c C:\\Users\\ReinV\\Personal\\Coding\\C++\\Projects\\Crow-Engine\\CrowEngine\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-hjmpuf\\CheckIncludeFile.c
+        Linking C executable cmTC_8a9e1.exe
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_8a9e1.dir\\link.txt --verbose=1
+        "C:\\Program Files\\JetBrains\\CLion 2024.1.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_8a9e1.dir/objects.a
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_8a9e1.dir/objects.a @CMakeFiles\\cmTC_8a9e1.dir\\objects1.rsp
+        C:\\PROGRA~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_8a9e1.dir/objects.a -Wl,--no-whole-archive -o cmTC_8a9e1.exe -Wl,--out-implib,libcmTC_8a9e1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_8a9e1.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/Users/ReinV/Personal/Coding/C++/Projects/Crow-Engine/CrowEngine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hjmpuf'
+>>>>>>> 8455e11 (Cmake bestanden veranderen zodat merge werkt)
         
       exitCode: 0
 ...
