@@ -134,17 +134,12 @@ namespace crowe
     queueManager->FindQueueFamilies(physicDevice, surface);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-    float queuePriority = 1.0f;
 
     // Create queue create info structures
     for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++)
     {
-      VkDeviceQueueCreateInfo queueCreateInfo{};
-      queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-      queueCreateInfo.queueFamilyIndex = queueManager->GetQueueFamilies()[i].queueFamilyIndex;
-      queueCreateInfo.queueCount = queueManager->GetQueueFamilies()[i].queueCount;
-      queueCreateInfo.pQueuePriorities = &queuePriority;
-      queueCreateInfos.push_back(queueCreateInfo);
+      VkDeviceQueueCreateInfo info = queueManager->CreateQueueInfo(queueManager->GetQueueFamilies()[i]);
+      queueCreateInfos.push_back(info);
     }
 
     // Device features
@@ -175,6 +170,7 @@ namespace crowe
       FATAL_ERROR("Failed to Create Logical Device");
       return false;
     }
+
     queueManager->CreateQueues(device);
     return true;
   }
