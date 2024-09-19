@@ -50,7 +50,7 @@ namespace crowe
         std::vector<QueueData>& queueType,
         int indicies, bool isPresentQueue);
 
-    QueueData CreateQueueData(int familyIndex, int queueIndex, int maxQueueCount);
+    QueueData CreateQueueData(QueueFamily& family, int maxQueueCount);
     void CleanupEmptyFamilies(std::vector<QueueFamily>& currentQueueFamilies);
     int CheckFlagSupportNum(VkQueueFlags flags);
     void GetQueueHandles(VkDevice& device);

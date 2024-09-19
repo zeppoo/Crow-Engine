@@ -61,20 +61,21 @@ namespace crowe
           }
         }
       }
-      QueueData data = CreateQueueData(bestQueueFamilyindex, currentQueueFamilies[bestQueueFamilyindex].queueCount, queueFamilyProperties[bestQueueFamilyindex].queueCount);
+      QueueData data = CreateQueueData(currentQueueFamilies[bestQueueFamilyindex], queueFamilyProperties[bestQueueFamilyindex].queueCount);
       currentQueueFamilies[bestQueueFamilyindex].queueCount++;
       queueType.push_back(data);
       queueCount--;
     }
   }
 
-  QueueData VulkanQueueManager::CreateQueueData(int familyIndex, int queueIndex, int maxQueueCount)
+  QueueData VulkanQueueManager::CreateQueueData(QueueFamily& family, int maxQueueCount)
   {
     QueueData data;
-    data.queueIndex = queueIndex;
-    data.familyIndex = familyIndex;
-    while (data.queueIndex > maxQueueCount)
+    data.queueIndex = family.queueCount;
+    data.familyIndex = family.index;
+    while (data.queueIndex >= maxQueueCount)
     {
+      family.queueCount--;
       data.queueIndex--;
     }
     return data;
