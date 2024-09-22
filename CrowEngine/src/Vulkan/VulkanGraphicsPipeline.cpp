@@ -1,7 +1,7 @@
 #include "VulkanGraphicsPipeline.hpp"
 #include "VulkanShaderModule.hpp"
 
-/*namespace crowe {
+namespace crowe {
 
   VulkanGraphicsPipeline::VulkanGraphicsPipeline(VulkanDevice &device, VulkanSwapChain &swapchain) : device{device}, swapchain{swapchain}
   {
@@ -96,6 +96,9 @@
     if (vkCreateGraphicsPipelines(device.getDevice(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
       throw std::runtime_error("failed to create graphics pipeline!");
     }
+
+    vkDestroyShaderModule(device.getDevice(), shaderModule, nullptr);
+    vkDestroyShaderModule(device.getDevice(), shaderModule, nullptr);
   }
 
   void VulkanGraphicsPipeline::createPipelineLayout()
@@ -177,4 +180,4 @@
       vkUpdateDescriptorSets(device.getDevice(), 1, &descriptorWrite, 0, nullptr);
     }
   }
-}*/
+}

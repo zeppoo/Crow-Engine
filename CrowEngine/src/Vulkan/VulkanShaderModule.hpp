@@ -14,8 +14,6 @@ namespace crowe
     void createShaderStageInfo(VkShaderStageFlagBits shaderBit);
 
     const std::string filePath;
-    VkShaderModule shaderModule;
-    VkPipelineShaderStageCreateInfo shaderStageCreateInfo;
 
   private:
     void createShaderModule();

@@ -6,6 +6,8 @@
 
 namespace crowe
 {
+
+
   class VulkanGraphicsPipeline {
   public:
     VulkanGraphicsPipeline(VulkanDevice &device, VulkanSwapChain &swapchain);

@@ -9,18 +9,20 @@ namespace crowe
 class VulkanSwapChain {
 public:
 
-  VulkanSwapChain(VulkanDevice& device, VulkanQueueManager& queueManager);
+  VulkanSwapChain(std::unique_ptr<VulkanDevice>& device, std::unique_ptr<VulkanQueueManager>& queueManager);
   ~VulkanSwapChain();
-  void recreateSwapChain();
+  void SetupSwapChain();
+  void RecreateSwapChain();
 
-  VkSwapchainKHR getSwapchain() const { return swapchain; }
-  VkRenderPass getRenderPass() const { return renderPass; }
-  const std::vector<VkImage>& getSwapchainImages() const { return swapchainImages; }
-  VkFormat getSwapchainImageFormat() const { return swapchainImageFormat; }
-  VkExtent2D getSwapchainExtent() const { return swapchainExtent; }
+  VkSwapchainKHR GetSwapchain() const { return swapchain; }
+  VkRenderPass GetRenderPass() const { return renderPass; }
+  const std::vector<VkImage> GetSwapchainImages() const { return swapchainImages; }
+  std::vector<VkImageView> GetSwapchainImageViews() const {return swapchainImageViews;}
+  VkFormat GetSwapchainImageFormat() const { return swapchainImageFormat; }
+  VkExtent2D GetSwapchainExtent() const { return swapchainExtent; }
 
 private:
-  void createSwapChain();
+  void createSwapChain(VkSwapchainKHR oldSwapChain);
   void createRenderPass();
   void createImageViews();
   void createFramebuffers();
@@ -28,8 +30,8 @@ private:
   VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
   VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
-  VulkanDevice& device;
-  VulkanQueueManager& queueManager;
+  std::unique_ptr<VulkanDevice>& device;
+  std::unique_ptr<VulkanQueueManager>& queueManager;
   VkSwapchainKHR swapchain;
   VkRenderPass renderPass;
   std::vector<VkImage> swapchainImages;
