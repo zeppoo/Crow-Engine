@@ -22,6 +22,7 @@ public:
   VkExtent2D GetSwapchainExtent() const { return swapchainExtent; }
 
 private:
+  void CleanupSwapChain();
   void createSwapChain(VkSwapchainKHR oldSwapChain);
   void createRenderPass();
   void createImageViews();

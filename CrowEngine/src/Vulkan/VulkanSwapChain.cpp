@@ -24,9 +24,24 @@ namespace crowe
     createImageViews();
   }
 
+  void VulkanSwapChain::CleanupSwapChain() {
+    //for (size_t i = 0; i < swapchainFramebuffers.size(); i++) {
+    //  vkDestroyFramebuffer(device->getDevice(), swapchainFramebuffers[i], nullptr);
+    //}
+
+    for (size_t i = 0; i < swapchainImageViews.size(); i++) {
+      vkDestroyImageView(device->getDevice(), swapchainImageViews[i], nullptr);
+    }
+  }
+
   void VulkanSwapChain::RecreateSwapChain()
   {
+    vkDeviceWaitIdle(device->getDevice());
+    CleanupSwapChain();
 
+    createSwapChain(swapchain);
+    createImageViews();
+    //createFramebuffers();
   }
 
   void VulkanSwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
@@ -82,6 +97,7 @@ namespace crowe
     {
       FATAL_ERROR("Failed to create SwapChain");
     }
+    vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
 
     vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, nullptr);
     swapchainImages.resize(imageCount);
@@ -90,7 +106,7 @@ namespace crowe
     swapchainImageFormat = surfaceFormat.format;
     swapchainExtent = extent;
 
-    std::cout << "Vulkan SwapChain is Setup" << std::endl;
+    INFO("SwapChain is setup!");
   }
 
   void VulkanSwapChain::createImageViews()
