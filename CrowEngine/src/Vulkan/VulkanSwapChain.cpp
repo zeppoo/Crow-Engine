@@ -1,19 +1,16 @@
 #include "VulkanSwapChain.hpp"
+#include "../Logger.hpp"
 #include "VulkanUtilities.hpp"
-#include "VulkanDevice.hpp"
-#include "VulkanBackend.hpp"
-#include "../Core/Window.hpp"
+#include "../crow_utils.hpp"
 
 #include <limits>
 #include <algorithm>
 
 namespace crowe
 {
-  VulkanSwapChain::VulkanSwapChain(VulkanDevice &device, VulkanQueueManager& queueManager) : device{device}, queueManager{queueManager}
+  VulkanSwapChain::VulkanSwapChain(std::unique_ptr<VulkanDevice>& device, std::unique_ptr<VulkanQueueManager>& queueManager) : device{device}, queueManager{queueManager}
   {
-    std::cout << "Setting up Vulkan Device" << std::endl;
-    createSwapChain();
-    //createRenderPass();
+    SetupSwapChain();
   }
 
   VulkanSwapChain::~VulkanSwapChain()
@@ -21,14 +18,35 @@ namespace crowe
 
   }
 
-  void VulkanSwapChain::recreateSwapChain()
+  void VulkanSwapChain::SetupSwapChain()
   {
-
+    createSwapChain(VK_NULL_HANDLE);
+    createImageViews();
   }
 
-  void VulkanSwapChain::createSwapChain()
+  void VulkanSwapChain::CleanupSwapChain() {
+    //for (size_t i = 0; i < swapchainFramebuffers.size(); i++) {
+    //  vkDestroyFramebuffer(device->getDevice(), swapchainFramebuffers[i], nullptr);
+    //}
+
+    for (size_t i = 0; i < swapchainImageViews.size(); i++) {
+      vkDestroyImageView(device->getDevice(), swapchainImageViews[i], nullptr);
+    }
+  }
+
+  void VulkanSwapChain::RecreateSwapChain()
   {
-    SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device.getPhysicDevice(), device.getSurface());
+    vkDeviceWaitIdle(device->getDevice());
+    CleanupSwapChain();
+
+    createSwapChain(swapchain);
+    createImageViews();
+    //createFramebuffers();
+  }
+
+  void VulkanSwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
+  {
+    SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device->getPhysicDevice(), device->getSurface());
 
     VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
     VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
@@ -42,7 +60,7 @@ namespace crowe
 
     VkSwapchainCreateInfoKHR createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    createInfo.surface = device.getSurface();
+    createInfo.surface = device->getSurface();
 
     createInfo.minImageCount = imageCount;
     createInfo.imageFormat = surfaceFormat.format;
@@ -51,28 +69,73 @@ namespace crowe
     createInfo.imageArrayLayers = 1;
     createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-    createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    createInfo.queueFamilyIndexCount = 0;
-    createInfo.pQueueFamilyIndices = nullptr;
+    std::vector<uint32_t> queueFamilyIndices;
+
+    for (QueueData queueData : queueManager->GetPresentQueues())
+    {
+      queueFamilyIndices.push_back(queueData.familyIndex);
+    }
+    for (QueueData queueData : queueManager->GetGraphicsQueues())
+    {
+      queueFamilyIndices.push_back(queueData.familyIndex);
+    }
+
+    RemoveDuplicatesInList(queueFamilyIndices);
+
+    if (queueFamilyIndices.size() == 1) { createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE; }
+    else { createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT; }
+
+    createInfo.queueFamilyIndexCount = queueFamilyIndices.size();
+    createInfo.pQueueFamilyIndices = queueFamilyIndices.data();
     createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
     createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
     createInfo.presentMode = presentMode;
     createInfo.clipped = VK_TRUE;
-    createInfo.oldSwapchain = VK_NULL_HANDLE;
+    createInfo.oldSwapchain = oldSwapChain;
 
-    if (vkCreateSwapchainKHR(device.getDevice(), &createInfo, nullptr, &swapchain) != VK_SUCCESS)
+    if (vkCreateSwapchainKHR(device->getDevice(), &createInfo, nullptr, &swapchain) != VK_SUCCESS)
     {
-      throw std::runtime_error("failed to create swap chain!");
+      FATAL_ERROR("Failed to create SwapChain");
     }
+    vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
 
-    vkGetSwapchainImagesKHR(device.getDevice(), swapchain, &imageCount, nullptr);
+    vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, nullptr);
     swapchainImages.resize(imageCount);
-    vkGetSwapchainImagesKHR(device.getDevice(), swapchain, &imageCount, swapchainImages.data());
+    vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, swapchainImages.data());
 
     swapchainImageFormat = surfaceFormat.format;
     swapchainExtent = extent;
 
-    std::cout << "Vulkan Device is Setup" << std::endl;
+    INFO("SwapChain is setup!");
+  }
+
+  void VulkanSwapChain::createImageViews()
+  {
+    swapchainImageViews.resize(swapchainImages.size());
+    for (size_t i = 0; i < swapchainImages.size(); i++)
+    {
+      VkImageViewCreateInfo createInfo{};
+      createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+      createInfo.image = swapchainImages[i];
+      createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+      createInfo.format = swapchainImageFormat;
+      createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+      createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+      createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+      createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+      createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+      createInfo.subresourceRange.baseMipLevel = 0;
+      createInfo.subresourceRange.levelCount = 1;
+      createInfo.subresourceRange.baseArrayLayer = 0;
+      createInfo.subresourceRange.layerCount = 1;
+
+      if (vkCreateImageView(device->getDevice(), &createInfo, nullptr, &swapchainImageViews[i]) != VK_SUCCESS)
+      {
+        FATAL_ERROR("Failed to create Image Views");
+      }
+
+      INFO("Created Image View");
+    }
   }
 
   void VulkanSwapChain::createRenderPass()
@@ -115,36 +178,9 @@ namespace crowe
     renderPassInfo.dependencyCount = 1;
     renderPassInfo.pDependencies = &dependency;
 
-    if (vkCreateRenderPass(device.getDevice(), &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS)
+    if (vkCreateRenderPass(device->getDevice(), &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS)
     {
       throw std::runtime_error("failed to create render pass!");
-    }
-  }
-
-  void VulkanSwapChain::createImageViews()
-  {
-    swapchainImageViews.resize(swapchainImages.size());
-    for (size_t i = 0; i < swapchainImages.size(); i++)
-    {
-      VkImageViewCreateInfo createInfo{};
-      createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-      createInfo.image = swapchainImages[i];
-      createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-      createInfo.format = swapchainImageFormat;
-      createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-      createInfo.subresourceRange.baseMipLevel = 0;
-      createInfo.subresourceRange.levelCount = 1;
-      createInfo.subresourceRange.baseArrayLayer = 0;
-      createInfo.subresourceRange.layerCount = 1;
-
-      if (vkCreateImageView(device.getDevice(), &createInfo, nullptr, &swapchainImageViews[i]) != VK_SUCCESS)
-      {
-        throw std::runtime_error("failed to create image views!");
-      }
     }
   }
 
@@ -167,7 +203,7 @@ namespace crowe
       framebufferInfo.height = swapchainExtent.height;
       framebufferInfo.layers = 1;
 
-      if (vkCreateFramebuffer(device.getDevice(), &framebufferInfo, nullptr, &swapchainFramebuffers[i]) !=
+      if (vkCreateFramebuffer(device->getDevice(), &framebufferInfo, nullptr, &swapchainFramebuffers[i]) !=
           VK_SUCCESS)
       {
         throw std::runtime_error("failed to create framebuffer!");

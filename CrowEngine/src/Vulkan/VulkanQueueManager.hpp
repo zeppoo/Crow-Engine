@@ -6,55 +6,73 @@
 
 namespace crowe
 {
-  enum QueueType
-  {
+  enum QueueType {
     PRESENT,
     GRAPHICS,
     COMPUTE,
     TRANSFER
   };
 
-  struct QueueData{
-    VkQueue* pQueue;
+  struct QueueData {
+    VkQueue *pQueue;
     int queueIndex;
     int familyIndex;
   };
 
-  struct QueueFamily
-  {
+  struct QueueFamily {
     int index;
     int queueCount = 0;
     std::vector<VkQueue> queues;
-    VkCommandPool commandPool;
-    std::vector<VkCommandBuffer> commandBuffers;
+    VkCommandPool commandPool = VK_NULL_HANDLE;
+    std::vector<VkCommandBuffer> commandBuffers = {VK_NULL_HANDLE};
   };
 
   class VulkanQueueManager {
   public:
-    void FindQueueFamilies(VkPhysicalDevice& physicDevice, VkSurfaceKHR& surface);
-    void CreateQueues(VkDevice& device);
-    bool CreateCommandPools(VkDevice& device);
-    void AllocateCommandBuffers(VkDevice& device);
+    void FindQueueFamilies(VkPhysicalDevice &physicDevice, VkSurfaceKHR &surface);
+
+    void CreateQueues(VkDevice &device);
+
+    bool CreateCommandPools(VkDevice &device);
+
+    void AllocateCommandBuffers(VkDevice &device);
+
     VkDeviceQueueCreateInfo CreateQueueInfo(QueueFamily family);
 
-    std::vector<QueueFamily> GetQueueFamilies() {return queueFamilies;}
+    std::vector<QueueFamily> GetQueueFamilies()
+    { return queueFamilies; }
+
+    std::vector<QueueData> GetPresentQueues()
+    { return presentQueues; }
+
+    std::vector<QueueData> GetGraphicsQueues()
+    { return graphicsQueues; }
+
+    std::vector<QueueData> GetComputeQueues()
+    { return computeQueues; }
+
+    std::vector<QueueData> GetTransferQueues()
+    { return transferQueues; }
 
   private:
-    // Helper function to create a command pool
     void AssignQueuesToQueueFamilies(
-        VkPhysicalDevice& physicDevice,
-        VkSurfaceKHR& surface,
+        VkPhysicalDevice &physicDevice,
+        VkSurfaceKHR &surface,
         VkQueueFlagBits flagBit,
-        std::vector<QueueFamily>& currentQueueFamilies,
-        const std::vector<VkQueueFamilyProperties>& queueFamilyProperties,
-        std::vector<QueueData>& queueType,
+        std::vector<QueueFamily> &currentQueueFamilies,
+        const std::vector<VkQueueFamilyProperties> &queueFamilyProperties,
+        std::vector<QueueData> &queueType,
         int indicies, bool isPresentQueue);
 
-    QueueData CreateQueueData(QueueFamily& family, int maxQueueCount);
-    void CleanupEmptyFamilies(std::vector<QueueFamily>& currentQueueFamilies);
+    QueueData CreateQueueData(QueueFamily &family, int maxQueueCount);
+
+    void CleanupEmptyFamilies(std::vector<QueueFamily> &currentQueueFamilies);
+
     int CheckFlagSupportNum(VkQueueFlags flags);
-    void GetQueueHandles(VkDevice& device);
-    void BindQueueDataToQueues(std::vector<QueueData>& queueType);
+
+    void GetQueueHandles(VkDevice &device);
+
+    void BindQueueDataToQueues(std::vector<QueueData> &queueType);
 
 
     std::vector<QueueFamily> queueFamilies;

@@ -13,7 +13,8 @@ add_executable(CrowEngine ${SOURCE_FILES}
         src/Vulkan/VulkanQueueManager.hpp
         src/Logger.hpp
         src/config/SettingsManager.hpp
-        src/Vulkan/VulkanCommandBuffers.hpp)
+        src/Vulkan/VulkanCommandBuffers.hpp
+        src/crow_utils.hpp)
 
 # Find Libraries
 add_subdirectory ("external/glfw")

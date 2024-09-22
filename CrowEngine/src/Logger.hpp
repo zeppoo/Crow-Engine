@@ -28,6 +28,8 @@ namespace crowe
   {
   public:
     static Logger& GetInstance(){return instance;}
+
+    void PushToLog(Log log);
     static void StopLogging();
 
   private:
