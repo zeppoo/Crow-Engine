@@ -28,6 +28,8 @@ bool VulkanModule::VulkanStartup()
   device = std::make_unique<VulkanDevice>(window, queueManager);
   INFO("Setting Up VulkanSwapChain...");
   swapchain = std::make_unique<VulkanSwapChain>(device, queueManager);
+  INFO("Setting Up VulkanGraphicsPipeline");
+  graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, swapchain);
   return true;
 }
 

@@ -3,6 +3,7 @@
 #include "../crow_lib.hpp"
 #include "VulkanDevice.hpp"
 #include "VulkanSwapChain.hpp"
+#include "VulkanUtilities.hpp"
 
 namespace crowe
 {
@@ -10,7 +11,7 @@ namespace crowe
 
   class VulkanGraphicsPipeline {
   public:
-    VulkanGraphicsPipeline(VulkanDevice &device, VulkanSwapChain &swapchain);
+    VulkanGraphicsPipeline(std::unique_ptr<VulkanDevice>& device, std::unique_ptr<VulkanSwapChain>& swapchain);
 
     ~VulkanGraphicsPipeline();
 
@@ -18,15 +19,15 @@ namespace crowe
     VkPipeline getGraphicsPipeline() { return graphicsPipeline; }
 
   private:
-    void createGraphicsPipeline();
+    void createGraphicsPipeline(GraphicsPipelineCreateInfo graphicsPipelineCreateInfo);
     void createGraphicsPipelineInfo();
     void createPipelineLayout();
     void createDescriptorSetLayout();
     void createDescriptorPool();
     void createDescriptorSets();
 
-    VulkanDevice &device;
-    VulkanSwapChain &swapchain;
+    std::unique_ptr<VulkanDevice>& device;
+    std::unique_ptr<VulkanSwapChain>& swapchain;
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
     VkDescriptorSetLayout descriptorSetLayout;

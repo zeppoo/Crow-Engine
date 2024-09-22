@@ -29,7 +29,7 @@ namespace crowe
     return details;
   }
 
-  VkShaderModule createShaderModule(VkDevice& device, std::string filepath)
+  VkShaderModule CreateShaderModule(VkDevice device, std::string filepath)
   {
     VkShaderModule shaderModule;
     auto shaderCode = ReadFile(filepath);
@@ -47,7 +47,7 @@ namespace crowe
     return shaderModule;
   }
 
-  VkPipelineShaderStageCreateInfo createShaderStageInfo(VkShaderStageFlagBits shaderBit, VkShaderModule shaderModule)
+  VkPipelineShaderStageCreateInfo CreateShaderStageInfo(VkShaderStageFlagBits shaderBit, VkShaderModule shaderModule)
   {
     VkPipelineShaderStageCreateInfo shaderStageCreateInfo{};
     shaderStageCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -66,70 +66,103 @@ namespace crowe
     return shaderStageInfo;
   }
 
-  VkPipelineVertexInputStateCreateInfo CreateVertexInputInfo() {
-    VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+// Function to create VkPipelineVertexInputStateCreateInfo
+  VkPipelineVertexInputStateCreateInfo CreateVertexInputState(PipelineConfig& config) {
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertexInputInfo.vertexBindingDescriptionCount = 0;
-    vertexInputInfo.vertexAttributeDescriptionCount = 0;
+    vertexInputInfo.vertexBindingDescriptionCount = static_cast<uint32_t>(config.bindingDescriptions.size());
+    vertexInputInfo.pVertexBindingDescriptions = config.bindingDescriptions.data();
+    vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(config.attributeDescriptions.size());
+    vertexInputInfo.pVertexAttributeDescriptions = config.attributeDescriptions.data();
     return vertexInputInfo;
   }
 
-  VkPipelineInputAssemblyStateCreateInfo CreateInputAssemblyInfo() {
-    VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+// Function to create VkPipelineInputAssemblyStateCreateInfo
+  VkPipelineInputAssemblyStateCreateInfo CreateInputAssemblyState(PipelineConfig& config) {
+    VkPipelineInputAssemblyStateCreateInfo inputAssembly = {};
     inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-    inputAssembly.primitiveRestartEnable = VK_FALSE;
+    inputAssembly.topology = config.topology;
+    inputAssembly.primitiveRestartEnable = config.primitiveRestartEnable;
     return inputAssembly;
   }
 
-  VkPipelineViewportStateCreateInfo CreateViewportStateInfo() {
-    VkPipelineViewportStateCreateInfo viewportState{};
+// Function to create VkPipelineViewportStateCreateInfo
+  VkPipelineViewportStateCreateInfo CreateViewportState(PipelineConfig& config) {
+    VkPipelineViewportStateCreateInfo viewportState = {};
     viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
     viewportState.viewportCount = 1;
+    viewportState.pViewports = &config.viewport;
     viewportState.scissorCount = 1;
+    viewportState.pScissors = &config.scissor;
     return viewportState;
   }
 
-  VkPipelineRasterizationStateCreateInfo CreateRasterizationStateInfo() {
-    VkPipelineRasterizationStateCreateInfo rasterizer{};
+// Function to create VkPipelineRasterizationStateCreateInfo
+  VkPipelineRasterizationStateCreateInfo CreateRasterizationState(PipelineConfig& config) {
+    VkPipelineRasterizationStateCreateInfo rasterizer = {};
     rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
-    rasterizer.depthClampEnable = VK_FALSE;
-    rasterizer.rasterizerDiscardEnable = VK_FALSE;
-    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-    rasterizer.lineWidth = 1.0f;
-    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-    rasterizer.depthBiasEnable = VK_FALSE;
+    rasterizer.depthClampEnable = config.depthClampEnable;
+    rasterizer.rasterizerDiscardEnable = config.rasterizerDiscardEnable;
+    rasterizer.polygonMode = config.polygonMode;
+    rasterizer.lineWidth = config.lineWidth;
+    rasterizer.cullMode = config.cullMode;
+    rasterizer.frontFace = config.frontFace;
+    rasterizer.depthBiasEnable = config.depthBiasEnable;
     return rasterizer;
   }
 
-  VkPipelineMultisampleStateCreateInfo CreateMultisampleStateInfo() {
-    VkPipelineMultisampleStateCreateInfo multisampling{};
+// Function to create VkPipelineMultisampleStateCreateInfo
+  VkPipelineMultisampleStateCreateInfo CreateMultisampleState(PipelineConfig& config) {
+    VkPipelineMultisampleStateCreateInfo multisampling = {};
     multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
-    multisampling.sampleShadingEnable = VK_FALSE;
-    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+    multisampling.sampleShadingEnable = config.sampleShadingEnable;
+    multisampling.rasterizationSamples = config.rasterizationSamples;
     return multisampling;
   }
 
-  VkPipelineColorBlendStateCreateInfo CreateColorBlendStateInfo(const VkPipelineColorBlendAttachmentState* colorBlendAttachment) {
-    VkPipelineColorBlendStateCreateInfo colorBlending{};
+// Function to create VkPipelineColorBlendAttachmentState
+  VkPipelineColorBlendStateCreateInfo CreateColorBlendState(PipelineConfig& config) {
+    VkPipelineColorBlendStateCreateInfo colorBlending = {};
     colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
-    colorBlending.logicOpEnable = VK_FALSE;
-    colorBlending.logicOp = VK_LOGIC_OP_COPY;
+    colorBlending.logicOpEnable = config.logicOpEnable;
+    colorBlending.logicOp = config.logicOp;
     colorBlending.attachmentCount = 1;
-    colorBlending.pAttachments = colorBlendAttachment;
-    colorBlending.blendConstants[0] = 0.0f;
-    colorBlending.blendConstants[1] = 0.0f;
-    colorBlending.blendConstants[2] = 0.0f;
-    colorBlending.blendConstants[3] = 0.0f;
+    colorBlending.pAttachments = &config.colorBlendAttachment;
+    memcpy(colorBlending.blendConstants, config.blendConstants, sizeof(config.blendConstants));
     return colorBlending;
   }
 
-  VkPipelineDynamicStateCreateInfo CreateDynamicStateInfo(const std::vector<VkDynamicState>& dynamicStates) {
-    VkPipelineDynamicStateCreateInfo dynamicState{};
+// Function to create VkPipelineDepthStencilStateCreateInfo
+  VkPipelineDepthStencilStateCreateInfo CreateDepthStencilState(PipelineConfig& config) {
+    VkPipelineDepthStencilStateCreateInfo depthStencil = {};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = config.depthTestEnable;
+    depthStencil.depthWriteEnable = config.depthWriteEnable;
+    depthStencil.depthCompareOp = config.depthCompareOp;
+    depthStencil.depthBoundsTestEnable = config.depthBoundsTestEnable;
+    depthStencil.stencilTestEnable = config.stencilTestEnable;
+    return depthStencil;
+  }
+
+// Function to create VkPipelineDynamicStateCreateInfo
+  VkPipelineDynamicStateCreateInfo CreateDynamicState(PipelineConfig& config) {
+    VkPipelineDynamicStateCreateInfo dynamicState = {};
     dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
-    dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
-    dynamicState.pDynamicStates = dynamicStates.data();
+    dynamicState.dynamicStateCount = static_cast<uint32_t>(config.dynamicStates.size());
+    dynamicState.pDynamicStates = config.dynamicStates.data();
     return dynamicState;
+  }
+
+// Main function to create VkGraphicsPipelineCreateInfo
+  VkGraphicsPipelineCreateInfo CreateGraphicsPipelineInfo(GraphicsPipelineCreateInfo graphicsPipelineCreateInfo) {
+    VkGraphicsPipelineCreateInfo pipelineInfo = {};
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    pipelineInfo.stageCount = 2; // Adjust this as necessary to match shader stages
+    pipelineInfo.pStages = nullptr; // Set this to an actual array of shader stages
+
+    pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
+    pipelineInfo.basePipelineIndex = -1;
+
+    return pipelineInfo;
   }
 }

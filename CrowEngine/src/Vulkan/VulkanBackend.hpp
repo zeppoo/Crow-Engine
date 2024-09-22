@@ -27,5 +27,6 @@ namespace crowe{
     std::unique_ptr<VulkanQueueManager> queueManager;
     std::unique_ptr<VulkanDevice> device;
     std::unique_ptr<VulkanSwapChain> swapchain;
+    std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
   };
 }
