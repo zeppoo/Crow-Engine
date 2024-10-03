@@ -13,11 +13,23 @@ namespace FileOpener
     system(FULL_COMMAND);
   }
 
-  void CompileShaders()
+  void CompileShaders(std::string NAME)
   {
-    std::string VERT_PATH = R"("C:\Users\cleme\Documents\School\Lj3\BO\Periode 1\Crow-Engine\CrowEngine\src\gfx\Crow.frag")";
-    std::string FRAG_PATH = R"("C:\Users\cleme\Documents\School\Lj3\BO\Periode 1\Crow-Engine\CrowEngine\src\gfx\Crow.frag")";
+    const char* shaderTypeFlag;
+    if (NAME.find("vert")) {
+      shaderTypeFlag = "-V";
+    } else if (NAME.find("frag")) {
+      shaderTypeFlag = "-F";
+    } else {
+      throw std::runtime_error("Unsupported shader type: " + NAME);
+    }
 
+    // Command to invoke glslangValidator
+
+    char FULL_COMMAND[100];
+    std::sprintf(FULL_COMMAND, "glslangValidator -%s %s -o CompiledShaders/%s.spv", shaderTypeFlag, NAME.c_str(), NAME.c_str());
+
+    system(FULL_COMMAND);
   }
 
   const char* GetChosenEditor()
