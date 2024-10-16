@@ -1,8 +1,8 @@
-#include "VulkanDevice.hpp"
-#include "VulkanUtilities.hpp"
-#include "VulkanDebugger.hpp"
-#include "../config/SettingsManager.hpp"
-#include "../Logger.hpp"
+#include "../../include/Vulkan/VulkanDevice.hpp"
+#include "../../include/Vulkan/VulkanUtilities.hpp"
+#include "../../include/Vulkan/VulkanDebugger.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "../../include/General/Logger.hpp"
 
 #include <set>
 #include <cstring>

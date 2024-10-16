@@ -1,6 +1,6 @@
-#include "VulkanUtilities.hpp"
-#include "../crow_utils.hpp"
-#include "../Logger.hpp"
+#include "../../include/Vulkan/VulkanUtilities.hpp"
+#include "../../include/General/crow_utils.hpp"
+#include "../../include/General/Logger.hpp"
 
 namespace crowe
 {

@@ -1,6 +1,6 @@
-#include "VulkanQueueManager.hpp"
-#include "../config/SettingsManager.hpp"
-#include "../Logger.hpp"
+#include "../../include/Vulkan/VulkanQueueManager.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "../../include/General/Logger.hpp"
 
 namespace crowe
 {

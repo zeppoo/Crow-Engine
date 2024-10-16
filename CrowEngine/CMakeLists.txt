@@ -8,13 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Set Source Files
 file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
 # Add scripts
-add_executable(CrowEngine ${SOURCE_FILES}
-        src/Vulkan/VulkanQueueManager.hpp
-        src/Logger.hpp
-        src/config/SettingsManager.hpp
-        src/Vulkan/VulkanCommandBuffers.hpp
-        src/crow_utils.hpp)
+add_executable(CrowEngine ${SOURCE_FILES})
 
 # Find Libraries
 add_subdirectory ("external/glfw")

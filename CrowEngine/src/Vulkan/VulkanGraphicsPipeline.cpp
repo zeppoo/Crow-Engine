@@ -1,5 +1,5 @@
-#include "VulkanGraphicsPipeline.hpp"
-#include "VulkanUtilities.hpp"
+#include "../../include/Vulkan/VulkanGraphicsPipeline.hpp"
+#include "../../include/Vulkan/VulkanUtilities.hpp"
 
 namespace crowe {
 

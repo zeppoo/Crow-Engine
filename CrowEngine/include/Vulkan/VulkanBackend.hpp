@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../crow_lib.hpp"
+#include "../General/crow_lib.hpp"
 #include "../Core/Window.hpp"
 #include "VulkanQueueManager.hpp"
 #include "VulkanDevice.hpp"
 #include "VulkanSwapChain.hpp"
 #include "VulkanGraphicsPipeline.hpp"
 #include "VulkanDebugger.hpp"
+#include "VulkanUtilities.hpp"
+
 
 namespace crowe{
 

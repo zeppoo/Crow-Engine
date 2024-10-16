@@ -1,10 +1,17 @@
 #pragma once
-
-#include "../crow_lib.hpp"
+#include "../General/crow_lib.hpp"
+#include "../Utils/runtimeReflector.hpp"
 
 
 namespace crowe
 {
+  struct Info
+  {
+    int key;
+    std::string name;
+    std::vector<double> infos;
+  };
+
   struct SwapChainSupportDetails {
     VkSurfaceCapabilitiesKHR capabilities;
     std::vector<VkSurfaceFormatKHR> formats;

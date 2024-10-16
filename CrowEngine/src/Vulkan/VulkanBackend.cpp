@@ -1,6 +1,6 @@
-#include "VulkanBackend.hpp"
-#include "../Config/SettingsManager.hpp"
-#include "../Logger.hpp"
+#include "../../include/Vulkan/VulkanBackend.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "../../include/General/Logger.hpp"
 #include <memory>
 
 namespace crowe
@@ -8,6 +8,8 @@ namespace crowe
 
 VulkanModule::VulkanModule(std::unique_ptr<Window>& window) : window{window}
 {
+  Info info{0, "Peter", {0, 0, 0}};
+
   INFO("Setting up VulkanModule");
   if (VulkanStartup() == true)
   {

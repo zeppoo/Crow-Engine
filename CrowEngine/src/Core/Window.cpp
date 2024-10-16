@@ -1,6 +1,6 @@
-#include "Window.hpp"
-#include "../config/SettingsManager.hpp"
-#include "../Logger.hpp"
+#include "../../include/Core/Window.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "../../include/General/Logger.hpp"
 
 namespace crowe
 {

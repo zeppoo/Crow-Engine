@@ -1,7 +1,7 @@
-#include "App.hpp"
-#include "../Logger.hpp"
-#include "../Config/SettingsManager.hpp"
-#include "Window.hpp"
+#include "../../include/Core/App.hpp"
+#include "../../include/General/Logger.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "../../include/Core/Window.hpp"
 
 namespace crowe
 {
