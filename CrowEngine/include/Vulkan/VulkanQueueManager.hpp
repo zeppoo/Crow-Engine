@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../General/crow_lib.hpp"
+#include "crow_lib.hpp"
 
 #include <optional>
 

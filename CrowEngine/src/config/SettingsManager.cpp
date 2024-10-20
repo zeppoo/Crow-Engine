@@ -1,4 +1,4 @@
-#include "../../include/Config/SettingsManager.hpp"
+#include "Config/SettingsManager.hpp"
 
 namespace crowe
 {

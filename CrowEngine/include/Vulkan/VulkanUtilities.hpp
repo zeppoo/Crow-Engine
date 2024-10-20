@@ -1,12 +1,11 @@
 #pragma once
-#include "../General/crow_lib.hpp"
-#include "../Utils/runtimeReflector.hpp"
 
+#include "crow_lib.hpp"
+#include "../Config/PipelineSettings.hpp"
 
 namespace crowe
 {
-  struct Info
-  {
+  struct Info {
     int key;
     std::string name;
     std::vector<double> infos;
@@ -18,41 +17,50 @@ namespace crowe
     std::vector<VkPresentModeKHR> presentModes;
   };
 
-  struct PipelineCreateInfo {
+  struct PipelineInfo {
+    VkViewport viewport;
+    VkRect2D scissor;
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
     VkPipelineTessellationStateCreateInfo tessellationInfo;
-    VkPipelineVertexInputStateCreateInfo vertexInputInfo;
     VkPipelineViewportStateCreateInfo viewportInfo;
-    VkPipelineShaderStageCreateInfo shaderStagesInfo;
     VkPipelineRasterizationStateCreateInfo rasterizationInfo;
     VkPipelineMultisampleStateCreateInfo multisampleInfo;
     VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+    VkPipelineColorBlendAttachmentState colorBlendAttachmentState;
     VkPipelineColorBlendStateCreateInfo colorBlendInfo;
-    VkPipelineDynamicStateCreateInfo dynamicInfo;
+    VkPipelineDynamicStateCreateInfo dynamicStatesInfo;
   };
 
-  SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
+  PipelineInfo CreatePipelineInfo(PipelineSettings settings, VkExtent2D extent);
 
-  VkShaderModule createShaderModule(VkDevice& device, std::string filepath);
+  SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 
-  VkPipelineShaderStageCreateInfo createShaderStageInfo(VkShaderStageFlagBits shaderBit, VkShaderModule shaderModule);
+  VkShaderModule CreateShaderModule(VkDevice device, const std::string &filepath);
 
-  VkPipelineShaderStageCreateInfo CreateShaderStageInfo(VkShaderModule shaderModule, VkShaderStageFlagBits stage);
+  VkPipelineShaderStageCreateInfo CreateShaderStageInfo(VkShaderStageFlagBits shaderBit, VkShaderModule shaderModule);
 
-  VkPipelineVertexInputStateCreateInfo CreateVertexInputInfo();
+  VkPipelineVertexInputStateCreateInfo CreateVertexInputStateInfo(PipelineSettings& settings);
 
-  VkPipelineInputAssemblyStateCreateInfo CreateInputAssemblyInfo();
+  VkPipelineInputAssemblyStateCreateInfo CreateInputAssemblyStateInfo(PipelineSettings& settings);
 
-  VkPipelineViewportStateCreateInfo CreateViewportStateInfo();
+  VkPipelineTessellationStateCreateInfo CreateTessellationStateInfo(PipelineSettings& settings);
 
-  VkPipelineRasterizationStateCreateInfo CreateRasterizationStateInfo();
+  VkViewport CreateViewPort(VkExtent2D extent);
 
-  VkPipelineMultisampleStateCreateInfo CreateMultisampleStateInfo();
+  VkRect2D CreateScissor(VkExtent2D extent);
 
-  VkPipelineColorBlendAttachmentState CreateColorBlendAttachmentState();
+  VkPipelineViewportStateCreateInfo CreateViewportStateInfo(PipelineSettings& settings, VkViewport* viewport, VkRect2D* scissor);
 
-  VkPipelineColorBlendStateCreateInfo
-  CreateColorBlendStateInfo(const VkPipelineColorBlendAttachmentState *colorBlendAttachment);
+  VkPipelineRasterizationStateCreateInfo CreateRasterizationStateInfo(PipelineSettings& settings);
 
-  VkPipelineDynamicStateCreateInfo CreateDynamicStateInfo(const std::vector<VkDynamicState> &dynamicStates);
+  VkPipelineMultisampleStateCreateInfo CreateMultisampleStateInfo(PipelineSettings& settings);
+
+  VkPipelineDepthStencilStateCreateInfo CreateDepthStencilStateInfo(PipelineSettings& settings);
+
+  VkPipelineColorBlendAttachmentState CreateColorBlendAttachmentState(PipelineSettings& settings);
+
+  VkPipelineColorBlendStateCreateInfo CreateColorBlendStateInfo(PipelineSettings& settings, const VkPipelineColorBlendAttachmentState *colorBlendAttachment);
+
+  VkPipelineDynamicStateCreateInfo CreateDynamicStateInfo(PipelineSettings& settings);
 }

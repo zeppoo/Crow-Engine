@@ -1,15 +1,16 @@
-#include "../../include/Vulkan/VulkanDevice.hpp"
-#include "../../include/Vulkan/VulkanUtilities.hpp"
-#include "../../include/Vulkan/VulkanDebugger.hpp"
-#include "../../include/Config/SettingsManager.hpp"
-#include "../../include/General/Logger.hpp"
+#include "Vulkan/VulkanDevice.hpp"
+#include "Vulkan/VulkanUtilities.hpp"
+#include "Vulkan/VulkanDebugger.hpp"
+#include "Config/SettingsManager.hpp"
+#include "Logger.hpp"
 
 #include <set>
 #include <cstring>
 
 namespace crowe
 {
-  VulkanDevice::VulkanDevice(std::unique_ptr<Window>& window, std::unique_ptr<VulkanQueueManager>& queueManager) : queueManager{queueManager}
+  VulkanDevice::VulkanDevice(std::unique_ptr<Window> &window, std::unique_ptr<VulkanQueueManager> &queueManager)
+      : queueManager{queueManager}
   {
     InitVulkan();
     INFO("Succesfully Created Vulkan Instance");
@@ -36,8 +37,8 @@ namespace crowe
     createInfo.pApplicationInfo = &appInfo;
 
     uint32_t glfwExtensionCount = 0;
-    const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-    std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+    const char **glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+    std::vector<const char *> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
     extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     if (!checkExtensionSupport(extensions)) {
       throw std::runtime_error("Required extensions not supported!");
@@ -53,14 +54,12 @@ namespace crowe
     }
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
-    if (getEnableValidationLayers())
-    {
+    if (getEnableValidationLayers()) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
       createInfo.ppEnabledLayerNames = validationLayers.data();
       populateDebugMessengerCreateInfo(debugCreateInfo);
       createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
-    } else
-    {
+    } else {
       createInfo.enabledLayerCount = 0;
       createInfo.pNext = nullptr;
     }
@@ -69,8 +68,8 @@ namespace crowe
       FATAL_ERROR("Failed to create Vulkan instance!");
     }
 
-    if (getEnableValidationLayers() && CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS)
-    {
+    if (getEnableValidationLayers() &&
+        CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
       FATAL_ERROR("failed to set up debug messenger!");
       return false;
     }
@@ -80,16 +79,13 @@ namespace crowe
 
   void VulkanDevice::SetupDevice()
   {
-    if (FindPhysicalDevice())
-    {
+    if (FindPhysicalDevice()) {
       INFO("Found Physical Device!");
     }
-    if (CreateLogicalDevice())
-    {
+    if (CreateLogicalDevice()) {
       INFO("Created Logical Device!");
     }
-    if (queueManager->CreateCommandPools(device))
-    {
+    if (queueManager->CreateCommandPools(device)) {
       INFO("Created Command Pools!");
     }
   }
@@ -99,8 +95,7 @@ namespace crowe
     uint32_t deviceCount = 0;
 
     vkEnumeratePhysicalDevices(vkInstance, &deviceCount, nullptr);
-    if (deviceCount == 0)
-    {
+    if (deviceCount == 0) {
       throw std::runtime_error("failed to find GPUs with Vulkan support!");
     }
 
@@ -108,18 +103,15 @@ namespace crowe
     vkEnumeratePhysicalDevices(vkInstance, &deviceCount, devices.data());
 
     int bestScore = 0;
-    for (const auto &device: devices)
-    {
+    for (const auto &device: devices) {
       int currentScore = RateDevice(device);
-      if (currentScore > bestScore)
-      {
+      if (currentScore > bestScore) {
         bestScore = currentScore;
         physicDevice = device;
       }
     }
 
-    if (physicDevice == VK_NULL_HANDLE)
-    {
+    if (physicDevice == VK_NULL_HANDLE) {
       FATAL_ERROR("failed to find a suitable GPU!");
       return false;
     } else {
@@ -136,8 +128,7 @@ namespace crowe
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
 
     // Create queue create info structures
-    for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++)
-    {
+    for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++) {
       VkDeviceQueueCreateInfo info = queueManager->CreateQueueInfo(queueManager->GetQueueFamilies()[i]);
       queueCreateInfos.push_back(info);
     }
@@ -155,18 +146,15 @@ namespace crowe
     createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
 
     // Validation layers
-    if (getEnableValidationLayers())
-    {
+    if (getEnableValidationLayers()) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
       createInfo.ppEnabledLayerNames = getValidationLayers().data();
-    } else
-    {
+    } else {
       createInfo.enabledLayerCount = 0;
     }
 
     // Create the logical device
-    if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS)
-    {
+    if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
       FATAL_ERROR("Failed to Create Logical Device");
       return false;
     }
@@ -177,7 +165,7 @@ namespace crowe
 
   bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
   {
-    std::vector<const char*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+    std::vector<const char *> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
     uint32_t extensionCount;
     vkEnumerateDeviceExtensionProperties(physicDevice, nullptr, &extensionCount, nullptr);
 
@@ -186,8 +174,7 @@ namespace crowe
 
     std::set<std::string> requiredExtensions((deviceExtensions).begin(), (deviceExtensions).end());
 
-    for (const auto &extension: availableExtensions)
-    {
+    for (const auto &extension: availableExtensions) {
       requiredExtensions.erase(extension.extensionName);
     }
 
@@ -199,9 +186,8 @@ namespace crowe
     bool extensionsSupported = checkDeviceExtensionSupport(device);
 
     bool swapChainAdequate = false;
-    if (extensionsSupported)
-    {
-      SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device, getSurface());
+    if (extensionsSupported) {
+      SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(device, getSurface());
       swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
     }
 
@@ -243,21 +229,17 @@ namespace crowe
     std::vector<VkLayerProperties> availableLayers(layerCount);
     vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
-    for (const char *layerName: validationLayers)
-    {
+    for (const char *layerName: validationLayers) {
       bool layerFound = false;
 
-      for (const auto &layerProperties: availableLayers)
-      {
-        if (strcmp(layerName, layerProperties.layerName) == 0)
-        {
+      for (const auto &layerProperties: availableLayers) {
+        if (strcmp(layerName, layerProperties.layerName) == 0) {
           layerFound = true;
           break;
         }
       }
 
-      if (!layerFound)
-      {
+      if (!layerFound) {
         return false;
       }
     }
@@ -265,17 +247,18 @@ namespace crowe
     return true;
   }
 
-  bool VulkanDevice::checkExtensionSupport(const std::vector<const char*>& requiredExtensions) {
+  bool VulkanDevice::checkExtensionSupport(const std::vector<const char *> &requiredExtensions)
+  {
     uint32_t extensionCount;
     vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
     vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, availableExtensions.data());
 
-    for (const char* requiredExtension : requiredExtensions) {
+    for (const char *requiredExtension: requiredExtensions) {
       bool extensionFound = false;
 
-      for (const auto& extensionProperties : availableExtensions) {
+      for (const auto &extensionProperties: availableExtensions) {
         if (strcmp(requiredExtension, extensionProperties.extensionName) == 0) {
           extensionFound = true;
           break;

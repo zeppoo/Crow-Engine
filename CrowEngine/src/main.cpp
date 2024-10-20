@@ -1,8 +1,12 @@
 #include <iostream>
-#include "../include/Core/App.hpp"
+#include "Core/App.hpp"
+#include "Utils/GenerateDefaults.hpp"
 
 int main()
 {
+  GenerateDefaultPipelineConfig();
+  GenerateDefaultRenderPassConfig();
+
   crowe::App& app = crowe::App::GetInstance();
 
   app.StartApplication();
@@ -14,5 +18,5 @@ int main()
     return EXIT_SUCCESS;
   }
 
-  return EXIT_FAILURE;
+  return EXIT_SUCCESS;
 }

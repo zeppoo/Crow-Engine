@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Title:   GLBoing
  * Desc:    Tribute to Amiga Boing.
- * Author:  Jim Brooks  <gfx@jimbrooks.org>
+ * Author:  Jim Brooks  <Shaders@jimbrooks.org>
  *          Original Amiga authors were R.J. Mical and Dale Luck.
  *          GLFW conversion by Marcus Geelnard
  * Notes:   - 360' = 2*PI [radian]

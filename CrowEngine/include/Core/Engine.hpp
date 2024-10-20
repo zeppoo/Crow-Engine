@@ -2,21 +2,21 @@
 
 namespace crowe
 {
-class Engine {
-public:
-  Engine();
+  class Engine {
+  public:
+    Engine();
 
-  ~Engine();
+    ~Engine();
 
-private:
-  static void InitializeEngine();
+  private:
+    static void InitializeEngine();
 
-  static void HandleInput();
+    static void HandleInput();
 
-  static void Update();
+    static void Update();
 
-  static void Render();
+    static void Render();
 
-  static void Cleanup();
-};
+    static void Cleanup();
+  };
 }

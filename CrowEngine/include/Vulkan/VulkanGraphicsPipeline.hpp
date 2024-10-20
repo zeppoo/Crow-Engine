@@ -1,32 +1,38 @@
 #pragma once
 
-#include "../General/crow_lib.hpp"
+#include "crow_lib.hpp"
 #include "VulkanDevice.hpp"
 #include "VulkanSwapChain.hpp"
+#include "Vulkan/VulkanUtilities.hpp"
 
 namespace crowe
 {
-
-
   class VulkanGraphicsPipeline {
   public:
-    VulkanGraphicsPipeline(VulkanDevice &device, VulkanSwapChain &swapchain);
+    VulkanGraphicsPipeline(std::unique_ptr<VulkanDevice> &device, std::unique_ptr<VulkanSwapChain> &swapChain);
 
     ~VulkanGraphicsPipeline();
 
-    VkPipelineLayout getPipelineLayout() { return pipelineLayout; }
-    VkPipeline getGraphicsPipeline() { return graphicsPipeline; }
+    void CreateGraphicsPipeline(PipelineInfo pipelineInfo);
+
+    VkPipelineLayout getPipelineLayout()
+    { return pipelineLayout; }
+
+    VkPipeline getGraphicsPipeline()
+    { return graphicsPipeline; }
 
   private:
-    void createGraphicsPipeline();
-    void createGraphicsPipelineInfo();
-    void createPipelineLayout();
+
+    void CreatePipelineLayout();
+
     void createDescriptorSetLayout();
+
     void createDescriptorPool();
+
     void createDescriptorSets();
 
-    VulkanDevice &device;
-    VulkanSwapChain &swapchain;
+    std::unique_ptr<VulkanDevice> &device;
+    std::unique_ptr<VulkanSwapChain> &swapchain;
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
     VkDescriptorSetLayout descriptorSetLayout;

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,11 +9,12 @@
 namespace crowe
 {
   template<typename T>
-  void RemoveDuplicatesInList(std::vector<T>& list) {
+  void RemoveDuplicatesInList(std::vector<T> &list)
+  {
     std::unordered_set<T> seen;
     size_t index = 0;
 
-    for (const T& num : list) {
+    for (const T &num: list) {
       if (seen.insert(num).second) {  // insert() returns a pair, .second is true if the element was inserted
         list[index++] = num;
       }
@@ -24,8 +26,7 @@ namespace crowe
   std::vector<char> ReadFile(const std::string &filepath)
   {
     std::ifstream file{filepath, std::ios::ate | std::ios::binary};
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
       throw std::runtime_error("failed to open file: " + filepath);
     }
     size_t fileSize = static_cast<size_t>(file.tellg());
