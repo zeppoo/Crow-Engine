@@ -1,19 +1,27 @@
 #pragma once
-#include "../crow_lib.hpp"
+
+#include "crow_lib.hpp"
 
 namespace crowe
 {
-  class Window
-  {
+  class Window {
   public:
     Window();
+
     void DestroyWindow();
-    GLFWwindow* GetWindow() { return window; }
+
+    GLFWwindow *GetWindow()
+    { return window; }
+
     void InitializeGLFW();
+
     void InitializeWindow();
+
     VkSurfaceKHR CreateVulkanSurface(VkInstance instance);
+
     void windowLoop();
+
   private:
-    GLFWwindow* window;
+    GLFWwindow *window;
   };
 }

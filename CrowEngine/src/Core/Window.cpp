@@ -1,6 +1,6 @@
-#include "Window.hpp"
-#include "../config/SettingsManager.hpp"
-#include "../Logger.hpp"
+#include "../../include/Core/Window.hpp"
+#include "../../include/Config/SettingsManager.hpp"
+#include "Logger.hpp"
 
 namespace crowe
 {
@@ -50,6 +50,5 @@ namespace crowe
     {
       glfwPollEvents();
     }
-    SHUTDOWN_APP("Window Closed");
   }
 }

@@ -1,5 +1,5 @@
 #include "Logger.hpp"
-#include "config/SettingsManager.hpp"
+#include "Config/SettingsManager.hpp"
 #include <ctime>
 #include <chrono>
 #include <thread>

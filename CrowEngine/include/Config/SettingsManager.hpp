@@ -1,27 +1,25 @@
 #pragma once
+
 #include <iostream>
 #include <unordered_map>
 
 namespace GeneralSettings
 {
-  struct EngineConfig
-  {
+  struct EngineConfig {
     std::string engineName = "Crow Engine";
     std::string version = "0.0.1";
     std::string credit = "Rein Verhaag, Clement Malaka";
     bool isRunning = false;
   };
 
-  struct WindowConfig
-  {
+  struct WindowConfig {
     int width = 800;
     int height = 600;
     bool fullscreen = false;
     bool resizable = true;
   };
 
-  struct QueueConfig
-  {
+  struct QueueConfig {
     int presentQueuesCount = 1;
     int graphicsQueuesCount = 1;
     int computeQueuesCount = 1;
@@ -64,14 +62,12 @@ namespace RenderingSettings
 
 namespace ShaderSettings
 {
-  struct ShaderConfig
-  {
+  struct ShaderConfig {
     std::string vertexShader = "path/to/vertexShader.vert";
     std::string fragmentShader = "path/to/fragmentShader.frag";
   };
 
-  struct ShaderSettingsConfig
-  {
+  struct ShaderSettingsConfig {
     int timeMultiplier = 1;
     int hueMultiplier = 1;
   };
@@ -79,13 +75,12 @@ namespace ShaderSettings
 
 namespace DebugSettings
 {
-  struct LogConfig
-  {
+  struct LogConfig {
     std::unordered_map<int, bool> loggingLevelSettings =
-        { {0, true},
-          {1, true},
-          {2, true},
-          {3, true}};
+        {{0, true},
+         {1, true},
+         {2, true},
+         {3, true}};
 
     std::string logFile = "path/to/log.txt";
   };
@@ -93,26 +88,39 @@ namespace DebugSettings
 
 namespace crowe
 {
-  GeneralSettings::EngineConfig& getEngineConfig();
-  GeneralSettings::WindowConfig& getWindowConfig();
-  GeneralSettings::QueueConfig& getQueueConfig();
-  RenderingSettings::MultiSampling& getMultiSamplingConfig();
-  RenderingSettings::Shadows& getShadowsConfig();
-  RenderingSettings::Textures& getTexturesConfig();
-  RenderingSettings::Lighting& getLightingConfig();
-  RenderingSettings::PostProcessing& getPostProcessingConfig();
-  ShaderSettings::ShaderConfig& getShaderConfig();
-  ShaderSettings::ShaderSettingsConfig& getShaderSettingsConfig();
-  DebugSettings::LogConfig& getLogConfig();
+  GeneralSettings::EngineConfig &getEngineConfig();
+
+  GeneralSettings::WindowConfig &getWindowConfig();
+
+  GeneralSettings::QueueConfig &getQueueConfig();
+
+  RenderingSettings::MultiSampling &getMultiSamplingConfig();
+
+  RenderingSettings::Shadows &getShadowsConfig();
+
+  RenderingSettings::Textures &getTexturesConfig();
+
+  RenderingSettings::Lighting &getLightingConfig();
+
+  RenderingSettings::PostProcessing &getPostProcessingConfig();
+
+  ShaderSettings::ShaderConfig &getShaderConfig();
+
+  ShaderSettings::ShaderSettingsConfig &getShaderSettingsConfig();
+
+  DebugSettings::LogConfig &getLogConfig();
+
   const bool getEnableValidationLayers();
+
   void StartRunning();
+
   void StopRunning();
 
 
-  class SettingsManager
-  {
+  class SettingsManager {
   public:
-    static SettingsManager& getInstance(){return instance;};
+    static SettingsManager &getInstance()
+    { return instance; };
 
     // General Settings
     GeneralSettings::EngineConfig engineConfig;
@@ -129,16 +137,18 @@ namespace crowe
     ShaderSettings::ShaderSettingsConfig shaderSettingsConfig;
     // Debug Settings
     DebugSettings::LogConfig logConfig;
-    #ifdef NDEBUG // NDEBUG = No Debug
-        const bool enableValidationLayers = false;
-    #else
-        const bool enableValidationLayers = true;
-    #endif
+#ifdef NDEBUG // NDEBUG = No Debug
+    const bool enableValidationLayers = false;
+#else
+    const bool enableValidationLayers = true;
+#endif
 
   private:
     SettingsManager();
-    SettingsManager(const SettingsManager&) = delete;
-    SettingsManager& operator=(const SettingsManager&) = delete;
+
+    SettingsManager(const SettingsManager &) = delete;
+
+    SettingsManager &operator=(const SettingsManager &) = delete;
 
     static SettingsManager instance;
   };
