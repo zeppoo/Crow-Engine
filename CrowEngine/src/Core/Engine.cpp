@@ -1,7 +1,7 @@
 #include "Core/Engine.hpp"
-#include "Vulkan/VulkanBackend.hpp"
+#include "Vulkan/BackendInterface.hpp"
 
-namespace crowe
+namespace core
 {
 Engine::Engine() {}
 

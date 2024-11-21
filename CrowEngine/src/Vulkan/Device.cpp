@@ -1,15 +1,15 @@
-#include "Vulkan/VulkanDevice.hpp"
+#include "Vulkan/Device.hpp"
 #include "Vulkan/VulkanUtilities.hpp"
-#include "Vulkan/VulkanDebugger.hpp"
+#include "Vulkan/Debugger.hpp"
 #include "Config/SettingsManager.hpp"
 #include "Logger.hpp"
 
 #include <set>
 #include <cstring>
 
-namespace crowe
+namespace vulkan
 {
-  VulkanDevice::VulkanDevice(std::unique_ptr<Window> &window, std::unique_ptr<VulkanQueueManager> &queueManager)
+  Device::Device(std::unique_ptr<Window> &window, std::unique_ptr<QueueManager> &queueManager)
       : queueManager{queueManager}
   {
     InitVulkan();
@@ -18,7 +18,7 @@ namespace crowe
     SetupDevice();
   }
 
-  bool VulkanDevice::InitVulkan()
+  bool Device::InitVulkan()
   {
     if (!checkValidationLayerSupport()) {
       FATAL_ERROR("Validation layers requested, but not available!");
@@ -77,7 +77,7 @@ namespace crowe
     return true;
   }
 
-  void VulkanDevice::SetupDevice()
+  void Device::SetupDevice()
   {
     if (FindPhysicalDevice()) {
       INFO("Found Physical Device!");
@@ -90,7 +90,7 @@ namespace crowe
     }
   }
 
-  bool VulkanDevice::FindPhysicalDevice()
+  bool Device::FindPhysicalDevice()
   {
     uint32_t deviceCount = 0;
 
@@ -121,7 +121,7 @@ namespace crowe
     }
   }
 
-  bool VulkanDevice::CreateLogicalDevice()
+  bool Device::CreateLogicalDevice()
   {
     queueManager->FindQueueFamilies(physicDevice, surface);
 
@@ -163,7 +163,7 @@ namespace crowe
     return true;
   }
 
-  bool VulkanDevice::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
+  bool Device::checkDeviceExtensionSupport(VkPhysicalDevice physicDevice)
   {
     std::vector<const char *> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
     uint32_t extensionCount;
@@ -181,7 +181,7 @@ namespace crowe
     return requiredExtensions.empty();
   }
 
-  bool VulkanDevice::CheckDeviceSuitability(VkPhysicalDevice device)
+  bool Device::CheckDeviceSuitability(VkPhysicalDevice device)
   {
     bool extensionsSupported = checkDeviceExtensionSupport(device);
 
@@ -194,7 +194,7 @@ namespace crowe
     return extensionsSupported && swapChainAdequate;
   }
 
-  int VulkanDevice::RateDevice(VkPhysicalDevice device)
+  int Device::RateDevice(VkPhysicalDevice device)
   {
     int score = 0;
 
@@ -221,7 +221,7 @@ namespace crowe
     return score;
   }
 
-  bool VulkanDevice::checkValidationLayerSupport()
+  bool Device::checkValidationLayerSupport()
   {
     uint32_t layerCount;
     vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
@@ -247,7 +247,7 @@ namespace crowe
     return true;
   }
 
-  bool VulkanDevice::checkExtensionSupport(const std::vector<const char *> &requiredExtensions)
+  bool Device::checkExtensionSupport(const std::vector<const char *> &requiredExtensions)
   {
     uint32_t extensionCount;
     vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);

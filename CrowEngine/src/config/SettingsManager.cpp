@@ -1,6 +1,6 @@
 #include "Config/SettingsManager.hpp"
 
-namespace crowe
+namespace settings
 {
   SettingsManager SettingsManager::instance;
   SettingsManager& settings = SettingsManager::getInstance();

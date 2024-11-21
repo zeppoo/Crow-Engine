@@ -2,7 +2,7 @@
 #include "../../include/Config/SettingsManager.hpp"
 #include "Logger.hpp"
 
-namespace crowe
+namespace core
 {
   Window::Window()
   {

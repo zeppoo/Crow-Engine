@@ -1,18 +1,15 @@
 #pragma once
 
 #include "crow_lib.hpp"
-#include "../Core/Window.hpp"
+#include "Core/Window.hpp"
+#include "QueueManager.hpp"
 
-#include "VulkanQueueManager.hpp"
-#include <memory>
-
-namespace crowe
+namespace vulkan
 {
-  class VulkanDevice {
+  class Device {
   public:
-    VulkanDevice(std::unique_ptr<Window> &window, std::unique_ptr<VulkanQueueManager> &queueManager);
+    Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager);
 
-    // Getters
     VkInstance getVkInstance()
     { return vkInstance; }
 
@@ -54,7 +51,7 @@ namespace crowe
     bool checkExtensionSupport(const std::vector<const char *> &requiredExtensions);
 
     //References
-    std::unique_ptr<VulkanQueueManager> &queueManager;
+    std::unique_ptr<QueueManager> &queueManager;
     // Members
     VkInstance vkInstance;
     VkSurfaceKHR surface;

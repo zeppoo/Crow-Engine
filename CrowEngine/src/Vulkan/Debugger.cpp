@@ -1,6 +1,6 @@
-#include "../../include/Vulkan/VulkanDebugger.hpp"
+#include "../../include/Vulkan/Debugger.hpp"
 
-namespace crowe
+namespace vulkan
 {
   VkResult CreateDebugUtilsMessengerEXT(
       VkInstance instance,

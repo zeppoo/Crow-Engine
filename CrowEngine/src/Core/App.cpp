@@ -3,7 +3,7 @@
 #include "Config/SettingsManager.hpp"
 #include "Core/Window.hpp"
 
-namespace crowe
+namespace core
 {
   App App::instance;
 

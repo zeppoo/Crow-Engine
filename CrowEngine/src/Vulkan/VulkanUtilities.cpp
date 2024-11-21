@@ -2,7 +2,7 @@
 #include "crow_utils.hpp"
 #include "Logger.hpp"
 
-namespace crowe
+namespace vulkan
 {
   SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface)
   {

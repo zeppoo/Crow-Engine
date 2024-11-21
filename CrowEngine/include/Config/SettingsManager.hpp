@@ -86,7 +86,7 @@ namespace DebugSettings
   };
 }
 
-namespace crowe
+namespace settings
 {
   GeneralSettings::EngineConfig &getEngineConfig();
 

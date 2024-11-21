@@ -6,6 +6,5 @@
 #include "vulkan/vulkan.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 #include <string>
-
-const int MAX_FRAMES_IN_FLIGHT = 2;

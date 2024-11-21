@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Window.hpp"
-#include "../Vulkan/VulkanBackend.hpp"
+#include "../Vulkan/BackendInterface.hpp"
 #include <memory>
 
-namespace crowe
+namespace core
 {
   class App {
   public:

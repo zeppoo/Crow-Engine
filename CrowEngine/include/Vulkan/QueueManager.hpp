@@ -1,10 +1,9 @@
 #pragma once
 
 #include "crow_lib.hpp"
-
 #include <optional>
 
-namespace crowe
+namespace vulkan
 {
   enum QueueType {
     PRESENT,
@@ -27,7 +26,7 @@ namespace crowe
     std::vector<VkCommandBuffer> commandBuffers = {VK_NULL_HANDLE};
   };
 
-  class VulkanQueueManager {
+  class QueueManager {
   public:
     void FindQueueFamilies(VkPhysicalDevice &physicDevice, VkSurfaceKHR &surface);
 

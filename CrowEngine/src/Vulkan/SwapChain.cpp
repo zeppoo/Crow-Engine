@@ -1,4 +1,4 @@
-#include "Vulkan/VulkanSwapChain.hpp"
+#include "Vulkan/SwapChain.hpp"
 #include "Logger.hpp"
 #include "Vulkan/VulkanUtilities.hpp"
 #include "Utils/FileUtilities.hpp"
@@ -8,19 +8,19 @@
 #include <limits>
 #include <algorithm>
 
-namespace crowe
+namespace vulkan
 {
-  VulkanSwapChain::VulkanSwapChain(std::unique_ptr<VulkanDevice> &device, std::unique_ptr<VulkanQueueManager> &queueManager) : device{device}, queueManager{queueManager}
+  SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) : device{device}, queueManager{queueManager}
   {
     SetupSwapChain();
   }
 
-  VulkanSwapChain::~VulkanSwapChain()
+  SwapChain::~SwapChain()
   {
 
   }
 
-  void VulkanSwapChain::SetupSwapChain()
+  void SwapChain::SetupSwapChain()
   {
     createSwapChain(VK_NULL_HANDLE);
     createImageViews();
@@ -29,7 +29,7 @@ namespace crowe
     CreateRenderPass(renderPassConfig);
   }
 
-  void VulkanSwapChain::CleanupSwapChain()
+  void SwapChain::CleanupSwapChain()
   {
     //for (size_t i = 0; i < swapchainFramebuffers.size(); i++) {
     //  vkDestroyFramebuffer(device->getDevice(), swapchainFramebuffers[i], nullptr);
@@ -40,7 +40,7 @@ namespace crowe
     }
   }
 
-  void VulkanSwapChain::RecreateSwapChain()
+  void SwapChain::RecreateSwapChain()
   {
     vkDeviceWaitIdle(device->getDevice());
     CleanupSwapChain();
@@ -50,7 +50,7 @@ namespace crowe
     //createFramebuffers();
   }
 
-  void VulkanSwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
+  void SwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
   {
     SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(device->getPhysicDevice(), device->getSurface());
 
@@ -99,6 +99,7 @@ namespace crowe
     if (vkCreateSwapchainKHR(device->getDevice(), &createInfo, nullptr, &swapchain) != VK_SUCCESS) {
       FATAL_ERROR("Failed to create SwapChain");
     }
+
     vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
 
     vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, nullptr);
@@ -111,7 +112,7 @@ namespace crowe
     INFO("SwapChain is setup!");
   }
 
-  void VulkanSwapChain::createImageViews()
+  void SwapChain::createImageViews()
   {
     swapchainImageViews.resize(swapchainImages.size());
     for (size_t i = 0; i < swapchainImages.size(); i++) {
@@ -138,7 +139,7 @@ namespace crowe
     }
   }
 
-  void VulkanSwapChain::CreateRenderPass(RenderPassConfig& renderPassConfig)
+  void SwapChain::CreateRenderPass(RenderPassConfig& renderPassConfig)
   {
     RenderPassInfo renderPassInfo{};
 
@@ -206,7 +207,7 @@ namespace crowe
     INFO("Successfully Created RenderPass!");
   }
 
-  void VulkanSwapChain::createFramebuffers()
+  void SwapChain::createFramebuffers()
   {
     swapchainFramebuffers.resize(swapchainImageViews.size());
 
@@ -231,7 +232,7 @@ namespace crowe
     }
   }
 
-  VkSurfaceFormatKHR VulkanSwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats)
+  VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats)
   {
     for (const auto &availableFormat: availableFormats) {
       if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB &&
@@ -242,7 +243,7 @@ namespace crowe
     return availableFormats[0];
   }
 
-  VkPresentModeKHR VulkanSwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes)
+  VkPresentModeKHR SwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes)
   {
     for (const auto &availablePresentMode: availablePresentModes) {
       if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
@@ -253,7 +254,7 @@ namespace crowe
     return VK_PRESENT_MODE_FIFO_KHR;
   }
 
-  VkExtent2D VulkanSwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities)
+  VkExtent2D SwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities)
   {
     if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
       return capabilities.currentExtent;

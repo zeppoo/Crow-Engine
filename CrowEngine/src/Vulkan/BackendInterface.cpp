@@ -1,18 +1,18 @@
-#include "Vulkan/VulkanBackend.hpp"
+#include "Vulkan/BackendInterface.hpp"
 #include "Config/SettingsManager.hpp"
 #include "Logger.hpp"
 #include <memory>
 
-namespace crowe
+namespace vulkan
 {
 
-  VulkanModule::VulkanModule(std::unique_ptr<Window> &window) : window{window}
+  VulkanModule::VulkanModule(std::unique_ptr<core::Window> &window) : window{window}
   {
     Info info{0, "Peter", {0, 0, 0}};
 
-    INFO("Setting up VulkanModule");
-    if (VulkanStartup() == true) {
-      INFO("Vulkan Module Succesfully Created!");
+    log::Info("Setting up VulkanModule");
+    if (Startup() == true) {
+      log::Info("Vulkan Module Succesfully Created!");
     }
   }
 
@@ -21,23 +21,26 @@ namespace crowe
 
   }
 
-  bool VulkanModule::VulkanStartup()
+  bool VulkanModule::Startup()
   {
-    INFO("Setting Up VulkanQueueManager...");
-    queueManager = std::make_unique<VulkanQueueManager>();
-    INFO("Setting Up VulkanDevice...");
-    device = std::make_unique<VulkanDevice>(window, queueManager);
-    INFO("Setting Up VulkanSwapChain...");
-    swapchain = std::make_unique<VulkanSwapChain>(device, queueManager);
+    log::Info("Setting Up QueueManager...");
+    queueManager = std::make_unique<QueueManager>();
+
+    log::Info("Setting Up Device...");
+    device = std::make_unique<Device>(window, queueManager);
+
+    log::Info("Setting Up SwapChain...");
+    swapchain = std::make_unique<SwapChain>(device, queueManager);
+
     CreateNewGraphicsPipeline();
     return true;
   }
 
-  void VulkanModule::VulkanShutDown()
+  void VulkanModule::ShutDown()
   {
-    WARNING("Waiting for Vulkan Device to Idle...");
+    log::Warning("Waiting for Vulkan Device to Idle...");
     vkDeviceWaitIdle(device->getDevice());
-    INFO("Destroying Vulkan Objects");
+    log::Info("Destroying Vulkan Objects");
 
     for (VkImageView imageView: swapchain->GetSwapchainImageViews()) {
       vkDestroyImageView(device->getDevice(), imageView, nullptr);
@@ -51,14 +54,19 @@ namespace crowe
 
     vkDestroyDevice(device->getDevice(), nullptr);
 
-    if (getEnableValidationLayers()) {
+    if (settings::getEnableValidationLayers()) {
       DestroyDebugUtilsMessengerEXT(device->getVkInstance(), device->getDebugMessenger(), nullptr);
     }
 
     vkDestroySurfaceKHR(device->getVkInstance(), device->getSurface(), nullptr);
     vkDestroyInstance(device->getVkInstance(), nullptr);
 
-    INFO("All Vulkan Objects Destroyed!");
+    log::Info("All Vulkan Objects Destroyed!");
+  }
+
+  void VulkanModule::RenderFrame()
+  {
+
   }
 
   void VulkanModule::CreateNewGraphicsPipeline()
@@ -66,11 +74,11 @@ namespace crowe
     PipelineSettings pipelineSettings{};
     PipelineInfo pipelineInfo;
     pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
-    INFO("Creating New VulkanGraphicsPipeline...");
-    std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, swapchain);
+    log::Info("Creating New GraphicsPipeline...");
+    std::unique_ptr<GraphicsPipeline> graphicsPipeline = std::make_unique<GraphicsPipeline>(device, swapchain);
     graphicsPipeline->CreateGraphicsPipeline(pipelineInfo);
     graphicsPipelines.push_back(std::move(graphicsPipeline));
-    INFO("Successfully created new pipeline");
+    log::Info("Successfully created new pipeline");
   }
 
   void VulkanModule::CreateNewGraphicsPipeline(const char* pipelineConfigFile)
@@ -79,21 +87,21 @@ namespace crowe
     pipelineSettings.structDesc.From_Json(pipelineConfigFile, &pipelineSettings);
     PipelineInfo pipelineInfo;
     pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
-    INFO("Creating New VulkanGraphicsPipeline...");
-    std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, swapchain);
+    log::Info("Creating New GraphicsPipeline...");
+    std::unique_ptr<GraphicsPipeline> graphicsPipeline = std::make_unique<GraphicsPipeline>(device, swapchain);
     graphicsPipeline->CreateGraphicsPipeline(pipelineInfo);
     graphicsPipelines.push_back(std::move(graphicsPipeline));
-    INFO("Successfully created new pipeline");
+    log::Info("Successfully created new pipeline");
   }
 
   void VulkanModule::RecreateSwapchain()
   {
-    WARNING("Recreating SwapChain");
+    log::Warning("Recreating SwapChain");
     swapchain->RecreateSwapChain();
-    INFO("Swapchain Recreated");
+    log::Info("Swapchain Recreated");
   }
 
-  void VulkanModule::RecreateGraphicsPipeline(std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline)
+  void VulkanModule::RecreateGraphicsPipeline(std::unique_ptr<GraphicsPipeline> graphicsPipeline)
   {
 
   }

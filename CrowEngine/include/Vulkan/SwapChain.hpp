@@ -1,18 +1,18 @@
 #pragma once
 
 #include "crow_lib.hpp"
-#include "VulkanDevice.hpp"
-#include "VulkanQueueManager.hpp"
+#include "Device.hpp"
+#include "QueueManager.hpp"
 #include "Config/RenderPassSettings.hpp"
 
-namespace crowe
+namespace vulkan
 {
-  class VulkanSwapChain {
+  class SwapChain {
   public:
 
-    VulkanSwapChain(std::unique_ptr<VulkanDevice> &device, std::unique_ptr<VulkanQueueManager> &queueManager);
+    SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
 
-    ~VulkanSwapChain();
+    ~SwapChain();
 
     void SetupSwapChain();
 
@@ -50,11 +50,10 @@ namespace crowe
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
 
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
-
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
-    std::unique_ptr<VulkanDevice> &device;
-    std::unique_ptr<VulkanQueueManager> &queueManager;
+    std::unique_ptr<Device> &device;
+    std::unique_ptr<QueueManager> &queueManager;
     VkSwapchainKHR swapchain;
     VkRenderPass renderPass;
     std::vector<VkImage> swapchainImages;

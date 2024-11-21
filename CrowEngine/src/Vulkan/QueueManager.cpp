@@ -1,10 +1,10 @@
-#include "../../include/Vulkan/VulkanQueueManager.hpp"
+#include "../../include/Vulkan/QueueManager.hpp"
 #include "../../include/Config/SettingsManager.hpp"
 #include "Logger.hpp"
 
-namespace crowe
+namespace vulkan
 {
-  void VulkanQueueManager::FindQueueFamilies(VkPhysicalDevice &physicDevice, VkSurfaceKHR &surface)
+  void QueueManager::FindQueueFamilies(VkPhysicalDevice &physicDevice, VkSurfaceKHR &surface)
   {
     uint32_t queueFamilyCount = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(physicDevice, &queueFamilyCount, nullptr);
@@ -31,7 +31,7 @@ namespace crowe
     queueFamilies = currentQueueFamilies; //Allocate to the heap without fragmentation
   }
 
-  void VulkanQueueManager::AssignQueuesToQueueFamilies(
+  void QueueManager::AssignQueuesToQueueFamilies(
       VkPhysicalDevice &physicDevice,
       VkSurfaceKHR &surface,
       VkQueueFlagBits flagBit,
@@ -71,7 +71,7 @@ namespace crowe
     }
   }
 
-  QueueData VulkanQueueManager::CreateQueueData(QueueFamily &family, int maxQueueCount)
+  QueueData QueueManager::CreateQueueData(QueueFamily &family, int maxQueueCount)
   {
     QueueData data;
     data.queueIndex = family.queueCount;
@@ -83,7 +83,7 @@ namespace crowe
     return data;
   }
 
-  void VulkanQueueManager::CleanupEmptyFamilies(std::vector<QueueFamily> &currentQueueFamilies)
+  void QueueManager::CleanupEmptyFamilies(std::vector<QueueFamily> &currentQueueFamilies)
   {
     for (int i = 0; i < currentQueueFamilies.size(); i++) {
       if (currentQueueFamilies[i].queueCount <= 0) {
@@ -94,7 +94,7 @@ namespace crowe
     }
   };
 
-  int VulkanQueueManager::CheckFlagSupportNum(VkQueueFlags flags)
+  int QueueManager::CheckFlagSupportNum(VkQueueFlags flags)
   {
     return ((flags & VK_QUEUE_GRAPHICS_BIT) ? 1 : 0) +
            ((flags & VK_QUEUE_COMPUTE_BIT) ? 1 : 0) +
@@ -102,7 +102,7 @@ namespace crowe
            ((flags & VK_QUEUE_SPARSE_BINDING_BIT) ? 1 : 0);
   }
 
-  void VulkanQueueManager::CreateQueues(VkDevice &device)
+  void QueueManager::CreateQueues(VkDevice &device)
   {
     GetQueueHandles(device);
     BindQueueDataToQueues(presentQueues);
@@ -111,7 +111,7 @@ namespace crowe
     BindQueueDataToQueues(transferQueues);
   }
 
-  void VulkanQueueManager::GetQueueHandles(VkDevice &device)
+  void QueueManager::GetQueueHandles(VkDevice &device)
   {
     for (int i = 0; i < queueFamilies.size(); ++i) {
       queueFamilies[i].queues.resize(queueFamilies[i].queueCount);
@@ -121,14 +121,14 @@ namespace crowe
     }
   }
 
-  void VulkanQueueManager::BindQueueDataToQueues(std::vector<QueueData> &queueType)
+  void QueueManager::BindQueueDataToQueues(std::vector<QueueData> &queueType)
   {
     for (int i = 0; i < queueFamilies[i].queues.size(); ++i) {
       queueType[i].pQueue = &queueFamilies[queueType[i].familyIndex].queues[queueType[i].queueIndex];
     }
   }
 
-  VkDeviceQueueCreateInfo VulkanQueueManager::CreateQueueInfo(QueueFamily family)
+  VkDeviceQueueCreateInfo QueueManager::CreateQueueInfo(QueueFamily family)
   {
     std::vector<float> queuePriorities(family.queueCount, 1.0f);
     VkDeviceQueueCreateInfo queueCreateInfo{};
@@ -139,7 +139,7 @@ namespace crowe
     return queueCreateInfo;
   }
 
-  bool VulkanQueueManager::CreateCommandPools(VkDevice &device)
+  bool QueueManager::CreateCommandPools(VkDevice &device)
   {
     for (int i = 0; i < queueFamilies.size(); i++) {
       VkCommandPoolCreateInfo poolInfo{};
@@ -155,7 +155,7 @@ namespace crowe
     return true;
   }
 
-  void VulkanQueueManager::AllocateCommandBuffers(VkDevice &device)
+  void QueueManager::AllocateCommandBuffers(VkDevice &device)
   {
     for (int i = 0; i < queueFamilies.size(); i++) {
       queueFamilies[i].commandBuffers.resize(MAX_FRAMES_IN_FLIGHT + 3);

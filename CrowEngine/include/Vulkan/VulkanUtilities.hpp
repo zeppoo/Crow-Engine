@@ -3,7 +3,7 @@
 #include "crow_lib.hpp"
 #include "../Config/PipelineSettings.hpp"
 
-namespace crowe
+namespace vulkan
 {
   struct Info {
     int key;

@@ -1,17 +1,17 @@
-#include "Vulkan/VulkanGraphicsPipeline.hpp"
+#include "Vulkan/GraphicsPipeline.hpp"
 #include "Logger.hpp"
 #include "ConfigPaths.hpp"
 
-namespace crowe
+namespace vulkan
 {
-  VulkanGraphicsPipeline::VulkanGraphicsPipeline(std::unique_ptr<VulkanDevice> &device, std::unique_ptr<VulkanSwapChain> &swapchain) : device{device}, swapchain{swapchain} {}
+  GraphicsPipeline::GraphicsPipeline(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapchain) : device{device}, swapchain{swapchain} {}
 
-  VulkanGraphicsPipeline::~VulkanGraphicsPipeline() {
+  GraphicsPipeline::~GraphicsPipeline() {
     vkDestroyPipeline(device->getDevice(), graphicsPipeline, nullptr);
     vkDestroyPipelineLayout(device->getDevice(), pipelineLayout, nullptr);
   }
 
-  void VulkanGraphicsPipeline::CreateGraphicsPipeline(PipelineInfo pipelineInfo)
+  void GraphicsPipeline::CreateGraphicsPipeline(PipelineInfo pipelineInfo)
   {
     VkShaderModule vertShader = CreateShaderModule(device->getDevice(), default_vert_spv);
     VkShaderModule fragShader = CreateShaderModule(device->getDevice(), default_frag_spv);
@@ -48,7 +48,7 @@ namespace crowe
     vkDestroyShaderModule(device->getDevice(), fragShader, nullptr);
   }
 
-  void VulkanGraphicsPipeline::CreatePipelineLayout()
+  void GraphicsPipeline::CreatePipelineLayout()
   {
     VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
     pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -63,7 +63,7 @@ namespace crowe
     }
   };
 
-  void VulkanGraphicsPipeline::createDescriptorSetLayout()
+  void GraphicsPipeline::createDescriptorSetLayout()
   {
     VkDescriptorSetLayoutBinding uboLayoutBinding{};
     uboLayoutBinding.binding = 0;
@@ -82,7 +82,7 @@ namespace crowe
     }
   }
 
-  void VulkanGraphicsPipeline::createDescriptorPool()
+  void GraphicsPipeline::createDescriptorPool()
   {
     VkDescriptorPoolSize poolSize{};
     poolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -100,7 +100,7 @@ namespace crowe
     }
   }
 
-  /*void VulkanGraphicsPipeline::createDescriptorSets()
+  /*void GraphicsPipeline::createDescriptorSets()
   {
     std::vector<VkDescriptorSetLayout> layouts(MAX_FRAMES_IN_FLIGHT, descriptorSetLayout);
     VkDescriptorSetAllocateInfo allocInfo{};
