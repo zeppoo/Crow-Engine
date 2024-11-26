@@ -9,11 +9,11 @@
 
 namespace vulkan
 {
-  Device::Device(std::unique_ptr<Window> &window, std::unique_ptr<QueueManager> &queueManager)
+  Device::Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager)
       : queueManager{queueManager}
   {
     InitVulkan();
-    INFO("Succesfully Created Vulkan Instance");
+    log::Info("Succesfully Created Vulkan Instance");
     surface = window->CreateVulkanSurface(vkInstance);
     SetupDevice();
   }
@@ -21,7 +21,7 @@ namespace vulkan
   bool Device::InitVulkan()
   {
     if (!checkValidationLayerSupport()) {
-      FATAL_ERROR("Validation layers requested, but not available!");
+      log::FatalError("Validation layers requested, but not available!");
     }
 
     VkApplicationInfo appInfo{};
@@ -54,7 +54,7 @@ namespace vulkan
     }
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
-    if (getEnableValidationLayers()) {
+    if (settings::getEnableValidationLayers()) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
       createInfo.ppEnabledLayerNames = validationLayers.data();
       populateDebugMessengerCreateInfo(debugCreateInfo);
@@ -65,12 +65,12 @@ namespace vulkan
     }
 
     if (vkCreateInstance(&createInfo, nullptr, &vkInstance) != VK_SUCCESS) {
-      FATAL_ERROR("Failed to create Vulkan instance!");
+      log::FatalError("Failed to create Vulkan instance!");
     }
 
-    if (getEnableValidationLayers() &&
+    if (settings::getEnableValidationLayers() &&
         CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-      FATAL_ERROR("failed to set up debug messenger!");
+      log::Error("failed to set up debug messenger!");
       return false;
     }
 
@@ -80,13 +80,13 @@ namespace vulkan
   void Device::SetupDevice()
   {
     if (FindPhysicalDevice()) {
-      INFO("Found Physical Device!");
+      log::Info("Found Physical Device!");
     }
     if (CreateLogicalDevice()) {
-      INFO("Created Logical Device!");
+      log::Info("Created Logical Device!");
     }
     if (queueManager->CreateCommandPools(device)) {
-      INFO("Created Command Pools!");
+      log::Info("Created Command Pools!");
     }
   }
 
@@ -112,7 +112,7 @@ namespace vulkan
     }
 
     if (physicDevice == VK_NULL_HANDLE) {
-      FATAL_ERROR("failed to find a suitable GPU!");
+      log::FatalError("failed to find a suitable GPU!");
       return false;
     } else {
       VkPhysicalDeviceProperties properties;
@@ -146,7 +146,7 @@ namespace vulkan
     createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
 
     // Validation layers
-    if (getEnableValidationLayers()) {
+    if (settings::getEnableValidationLayers()) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
       createInfo.ppEnabledLayerNames = getValidationLayers().data();
     } else {
@@ -155,7 +155,7 @@ namespace vulkan
 
     // Create the logical device
     if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
-      FATAL_ERROR("Failed to Create Logical Device");
+      log::FatalError("Failed to Create Logical Device");
       return false;
     }
 

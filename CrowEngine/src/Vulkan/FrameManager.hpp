@@ -1,6 +1,7 @@
 #pragma once
 
 #include "crow_lib.hpp"
+#include "Vulkan/Device.hpp"
 
 namespace vulkan
 {
@@ -18,11 +19,16 @@ namespace vulkan
   class FrameManager
   {
   public:
-    FrameManager();
+    FrameManager(std::unique_ptr<Device> &device);
 
   private:
-    VkDescriptorPool descriptorPool;
 
+    void CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat);
+    void CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass);
+
+    std::unique_ptr<Device> &device;
+
+    VkDescriptorPool descriptorPool;
     std::vector<Frame> frames;
   };
 }

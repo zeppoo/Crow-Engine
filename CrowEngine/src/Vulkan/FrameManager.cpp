@@ -3,7 +3,9 @@
 
 namespace vulkan
 {
-  void CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat)
+  FrameManager::FrameManager(std::unique_ptr<Device> &device) : device{device} {}
+
+  void FrameManager::CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat)
   {
     VkImageViewCreateInfo createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
@@ -27,7 +29,7 @@ namespace vulkan
     log::Info("Created Image View");
   }
 
-  void CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass)
+  void FrameManager::CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass)
   {
     VkImageView attachments[] = {imageView };
 

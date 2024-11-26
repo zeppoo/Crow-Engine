@@ -9,21 +9,21 @@ namespace core
 
   App::App()
   {
-    INFO("Application Started");
+    log::Info("Application Started");
   }
 
   void App::StartApplication()
   {
-      StartRunning();
-      INFO("Creating Window...");
+      settings::StartRunning();
+      log::Info("Creating Window...");
       window = std::make_unique<Window>();
-      INFO("Window created succesfully!");
-      vulkanModule = std::make_unique<VulkanModule>(window);
+      log::Info("Window created succesfully!");
+      vulkanModule = std::make_unique<vulkan::VulkanModule>(window);
   }
 
   void App::RunApplication()
   {
-    while (getEngineConfig().isRunning)
+    while (settings::getEngineConfig().isRunning)
     {
       window->windowLoop();
       break;
@@ -32,9 +32,9 @@ namespace core
 
   bool App::ShutdownApplication()
   {
-    vulkanModule->VulkanShutDown();
+    vulkanModule->ShutDown();
     window->DestroyWindow();
-    SHUTDOWN_APP("All Objects Succesfully Destroyed!");
+    log::CallShutdown("All Objects Succesfully Destroyed!");
     return true;
   }
 }

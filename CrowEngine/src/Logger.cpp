@@ -11,7 +11,7 @@ namespace log
   Logger Logger::instance;
   Logger& logger = Logger::GetInstance();
   bool Logger::loggingDone;
-  std::queue<Log> logQueue;
+  std::queue<LogInfo> logQueue;
   std::mutex mtx;
 
   void Info(std::string msg)
@@ -53,7 +53,7 @@ namespace log
     logThread.detach();
   }
 
-  void Logger::PushToLog(Log log)
+  void Logger::PushToLog(LogInfo log)
   {
     logQueue.push(log);
   }

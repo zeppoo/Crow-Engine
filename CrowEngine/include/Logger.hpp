@@ -11,7 +11,7 @@ namespace log
     error
   };
 
-  struct Log {
+  struct LogInfo {
     std::string message;
     LoggingLevel lvl;
   };
@@ -31,7 +31,7 @@ namespace log
     static Logger &GetInstance()
     { return instance; }
 
-    void PushToLog(Log log);
+    void PushToLog(LogInfo log);
 
     static void StopLogging();
 

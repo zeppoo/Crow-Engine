@@ -97,7 +97,7 @@ namespace vulkan
     createInfo.oldSwapchain = oldSwapChain;
 
     if (vkCreateSwapchainKHR(device->getDevice(), &createInfo, nullptr, &swapchain) != VK_SUCCESS) {
-      FATAL_ERROR("Failed to create SwapChain");
+      log::FatalError("Failed to create SwapChain");
     }
 
     vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
@@ -109,7 +109,7 @@ namespace vulkan
     swapchainImageFormat = surfaceFormat.format;
     swapchainExtent = extent;
 
-    INFO("SwapChain is setup!");
+    log::Info("SwapChain is setup!");
   }
 
   void SwapChain::createImageViews()
@@ -132,10 +132,10 @@ namespace vulkan
       createInfo.subresourceRange.layerCount = 1;
 
       if (vkCreateImageView(device->getDevice(), &createInfo, nullptr, &swapchainImageViews[i]) != VK_SUCCESS) {
-        FATAL_ERROR("Failed to create Image Views");
+        log::FatalError("Failed to create Image Views");
       }
 
-      INFO("Created Image View");
+      log::Info("Created Image View");
     }
   }
 
@@ -143,7 +143,7 @@ namespace vulkan
   {
     RenderPassInfo renderPassInfo{};
 
-    INFO("Creating RenderPass...");
+    log::Info("Creating RenderPass...");
 
     for(RenderPassAttachmentInfo info : renderPassConfig.attachments)
     {
@@ -204,7 +204,7 @@ namespace vulkan
       throw std::runtime_error("failed to create render pass!");
     }
 
-    INFO("Successfully Created RenderPass!");
+    log::Info("Successfully Created RenderPass!");
   }
 
   void SwapChain::createFramebuffers()

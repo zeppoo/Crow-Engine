@@ -18,8 +18,7 @@ namespace vulkan
 
     void createDescriptorSetLayout();
 
-
-
-
+    std::unique_ptr<Device> &device;
+    std::unique_ptr<SwapChain> &swapchain;
   };
 }

@@ -13,8 +13,8 @@ namespace vulkan{
     VkPipelineLayout pipelineLayout;
     VkDescriptorSetLayout descriptorSetLayout;
 
-    void InitializePipelineLayout(VkDevice& device);
-    void InitializePipeline(VkDevice& device, VkRenderPass& renderPass, PipelineInfo pipelineInfo);
+    void InitializePipelineLayout(const VkDevice &device);
+    void InitializePipeline(const VkDevice& device, const VkRenderPass& renderPass, const PipelineInfo pipelineInfo);
   };
 
   class PipelineManager

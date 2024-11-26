@@ -24,7 +24,7 @@ namespace core
 
   void Window::InitializeWindow()
   {
-    window = glfwCreateWindow(getWindowConfig().width, getWindowConfig().height, getEngineConfig().engineName.c_str(), nullptr, nullptr);
+    window = glfwCreateWindow(settings::getWindowConfig().width, settings::getWindowConfig().height, settings::getEngineConfig().engineName.c_str(), nullptr, nullptr);
     if (!window)
     {
       std::cout << "Failed to create GLFW window\n";

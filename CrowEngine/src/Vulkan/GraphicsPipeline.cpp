@@ -4,7 +4,7 @@
 
 namespace vulkan
 {
-  GraphicsPipeline::GraphicsPipeline(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapchain) : device{device}, swapchain{swapchain} {}
+  /*GraphicsPipeline::GraphicsPipeline(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapchain) : device{device}, swapchain{swapchain} {}
 
   GraphicsPipeline::~GraphicsPipeline() {
     vkDestroyPipeline(device->getDevice(), graphicsPipeline, nullptr);
@@ -100,7 +100,7 @@ namespace vulkan
     }
   }
 
-  /*void GraphicsPipeline::createDescriptorSets()
+  void GraphicsPipeline::createDescriptorSets()
   {
     std::vector<VkDescriptorSetLayout> layouts(MAX_FRAMES_IN_FLIGHT, descriptorSetLayout);
     VkDescriptorSetAllocateInfo allocInfo{};

@@ -4,7 +4,7 @@
 
 namespace vulkan
 {
-  void GraphicsPipeline::InitializePipelineLayout(VkDevice& device)
+  void GraphicsPipeline::InitializePipelineLayout(const VkDevice &device)
   {
     VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
     pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -19,7 +19,7 @@ namespace vulkan
     }
   }
 
-  void GraphicsPipeline::InitializePipeline(VkDevice& device, VkRenderPass& renderPass, PipelineInfo pipelineInfo)
+  void GraphicsPipeline::InitializePipeline(const VkDevice& device, const VkRenderPass& renderPass, const PipelineInfo pipelineInfo)
   {
     VkShaderModule vertShader = CreateShaderModule(device, default_vert_spv);
     VkShaderModule fragShader = CreateShaderModule(device, default_frag_spv);
@@ -54,9 +54,12 @@ namespace vulkan
     vkDestroyShaderModule(device, fragShader, nullptr);
   }
 
-  void PipelineManager::CreateGraphicsPipeline(vulkan::PipelineInfo pipelineInfo)
+  void PipelineManager::CreateGraphicsPipeline(PipelineInfo pipelineInfo)
   {
-    
+    GraphicsPipeline newPipeline{};
+    newPipeline.InitializePipelineLayout(device->getDevice());
+    newPipeline.InitializePipeline(device->getDevice(), swapchain->GetRenderPass(), pipelineInfo);
+    graphicsPipelines.push_back(newPipeline);
   }
 
 }

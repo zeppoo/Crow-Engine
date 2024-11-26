@@ -5,6 +5,7 @@
 #include "QueueManager.hpp"
 #include "Device.hpp"
 #include "SwapChain.hpp"
+#include "PipelineManager.hpp"
 #include "GraphicsPipeline.hpp"
 #include "Debugger.hpp"
 #include "VulkanUtilities.hpp"
@@ -38,6 +39,6 @@ namespace vulkan
     std::unique_ptr<QueueManager> queueManager;
     std::unique_ptr<Device> device;
     std::unique_ptr<SwapChain> swapchain;
-    std::vector<std::unique_ptr<GraphicsPipeline>> graphicsPipelines;
+    std::unique_ptr<PipelineManager> pipelineManager;
   };
 }

@@ -1,5 +1,6 @@
-#include "../../include/Vulkan/QueueManager.hpp"
-#include "../../include/Config/SettingsManager.hpp"
+#include "Vulkan/QueueManager.hpp"
+#include "FrameManager.hpp"
+#include "Config/SettingsManager.hpp"
 #include "Logger.hpp"
 
 namespace vulkan
@@ -19,13 +20,13 @@ namespace vulkan
     }
 
     AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, currentQueueFamilies,
-                                queueFamilyProperties, presentQueues, getQueueConfig().presentQueuesCount, true);
+                                queueFamilyProperties, presentQueues, settings::getQueueConfig().presentQueuesCount, true);
     AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_GRAPHICS_BIT, currentQueueFamilies,
-                                queueFamilyProperties, graphicsQueues, getQueueConfig().graphicsQueuesCount, false);
+                                queueFamilyProperties, graphicsQueues, settings::getQueueConfig().graphicsQueuesCount, false);
     AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_COMPUTE_BIT, currentQueueFamilies,
-                                queueFamilyProperties, computeQueues, getQueueConfig().computeQueuesCount, false);
+                                queueFamilyProperties, computeQueues, settings::getQueueConfig().computeQueuesCount, false);
     AssignQueuesToQueueFamilies(physicDevice, surface, VK_QUEUE_TRANSFER_BIT, currentQueueFamilies,
-                                queueFamilyProperties, transferQueues, getQueueConfig().transferQueuesCount, false);
+                                queueFamilyProperties, transferQueues, settings::getQueueConfig().transferQueuesCount, false);
     CleanupEmptyFamilies(currentQueueFamilies);
 
     queueFamilies = currentQueueFamilies; //Allocate to the heap without fragmentation
@@ -89,7 +90,7 @@ namespace vulkan
       if (currentQueueFamilies[i].queueCount <= 0) {
         currentQueueFamilies.erase(currentQueueFamilies.begin() + i);
         i--;
-        WARNING("Erased QueueFamily");
+        log::Warning("Erased QueueFamily");
       }
     }
   };
@@ -148,7 +149,7 @@ namespace vulkan
       poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
       if (vkCreateCommandPool(device, &poolInfo, nullptr, &queueFamilies[i].commandPool) != VK_SUCCESS) {
-        FATAL_ERROR("Failed to create command pool!");
+        log::FatalError("Failed to create command pool!");
         return false;
       }
     }
@@ -158,7 +159,7 @@ namespace vulkan
   void QueueManager::AllocateCommandBuffers(VkDevice &device)
   {
     for (int i = 0; i < queueFamilies.size(); i++) {
-      queueFamilies[i].commandBuffers.resize(MAX_FRAMES_IN_FLIGHT + 3);
+      queueFamilies[i].commandBuffers.resize(FRAMES_IN_FLIGHT + 3);
       VkCommandBufferAllocateInfo allocInfo{};
       allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
       allocInfo.commandPool = queueFamilies[i].commandPool;
@@ -166,7 +167,7 @@ namespace vulkan
       allocInfo.commandBufferCount = (uint32_t) queueFamilies[i].commandBuffers.size();  // Allocate 'count' number of command buffers
 
       if (vkAllocateCommandBuffers(device, &allocInfo, queueFamilies[i].commandBuffers.data()) != VK_SUCCESS) {
-        throw std::runtime_error("Failed to allocate command buffers.");
+        log::FatalError("Failed to allocate command buffers.");
       }
     }
   }

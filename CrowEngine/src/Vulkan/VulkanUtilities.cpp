@@ -1,4 +1,5 @@
 #include "../../include/Vulkan/VulkanUtilities.hpp"
+#include "Utils/FileUtilities.hpp"
 #include "crow_utils.hpp"
 #include "Logger.hpp"
 
@@ -57,7 +58,7 @@ namespace vulkan
     createInfo.pCode = reinterpret_cast<const uint32_t *>(shaderCode.data());
 
     if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
-      ERROR("Failed To Create Shader Module");
+      log::Error("Failed To Create Shader Module");
     }
 
     return shaderModule;
