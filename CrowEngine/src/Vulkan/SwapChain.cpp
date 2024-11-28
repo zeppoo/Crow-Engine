@@ -97,7 +97,7 @@ namespace vulkan
     createInfo.oldSwapchain = oldSwapChain;
 
     if (vkCreateSwapchainKHR(device->getDevice(), &createInfo, nullptr, &swapchain) != VK_SUCCESS) {
-      log::FatalError("Failed to create SwapChain");
+      logger::FatalError("Failed to create SwapChain");
     }
 
     vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
@@ -109,7 +109,7 @@ namespace vulkan
     swapchainImageFormat = surfaceFormat.format;
     swapchainExtent = extent;
 
-    log::Info("SwapChain is setup!");
+    logger::Info("SwapChain is setup!");
   }
 
   void SwapChain::createImageViews()
@@ -132,10 +132,10 @@ namespace vulkan
       createInfo.subresourceRange.layerCount = 1;
 
       if (vkCreateImageView(device->getDevice(), &createInfo, nullptr, &swapchainImageViews[i]) != VK_SUCCESS) {
-        log::FatalError("Failed to create Image Views");
+        logger::FatalError("Failed to create Image Views");
       }
 
-      log::Info("Created Image View");
+      logger::Info("Created Image View");
     }
   }
 
@@ -143,7 +143,7 @@ namespace vulkan
   {
     RenderPassInfo renderPassInfo{};
 
-    log::Info("Creating RenderPass...");
+    logger::Info("Creating RenderPass...");
 
     for(RenderPassAttachmentInfo info : renderPassConfig.attachments)
     {
@@ -185,10 +185,10 @@ namespace vulkan
       dependency.srcAccessMask = info.srcAccessMask;
       dependency.dstStageMask = info.dstStageMask;
       dependency.dstAccessMask = info.dstAccessMask;
-      dependency.dependencyFlags = info.dependencyFlags;
+      dependency.dependencyFlags = info.dependencyFlags;*/
 
       renderPassInfo.subpasses.push_back(subpass);
-      renderPassInfo.dependencies.push_back(dependency);*/
+      //renderPassInfo.dependencies.push_back(dependency);
     }
 
     VkRenderPassCreateInfo renderPassCreateInfo{};
@@ -204,7 +204,7 @@ namespace vulkan
       throw std::runtime_error("failed to create render pass!");
     }
 
-    log::Info("Successfully Created RenderPass!");
+    logger::Info("Successfully Created RenderPass!");
   }
 
   void SwapChain::createFramebuffers()

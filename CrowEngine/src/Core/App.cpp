@@ -9,15 +9,15 @@ namespace core
 
   App::App()
   {
-    log::Info("Application Started");
+    logger::Info("Application Started");
   }
 
   void App::StartApplication()
   {
       settings::StartRunning();
-      log::Info("Creating Window...");
+      logger::Info("Creating Window...");
       window = std::make_unique<Window>();
-      log::Info("Window created succesfully!");
+      logger::Info("Window created succesfully!");
       vulkanModule = std::make_unique<vulkan::VulkanModule>(window);
   }
 
@@ -34,7 +34,7 @@ namespace core
   {
     vulkanModule->ShutDown();
     window->DestroyWindow();
-    log::CallShutdown("All Objects Succesfully Destroyed!");
+    logger::CallShutdown("All Objects Succesfully Destroyed!");
     return true;
   }
 }

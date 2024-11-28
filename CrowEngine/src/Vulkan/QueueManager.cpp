@@ -90,7 +90,7 @@ namespace vulkan
       if (currentQueueFamilies[i].queueCount <= 0) {
         currentQueueFamilies.erase(currentQueueFamilies.begin() + i);
         i--;
-        log::Warning("Erased QueueFamily");
+        logger::Warning("Erased QueueFamily");
       }
     }
   };
@@ -149,7 +149,7 @@ namespace vulkan
       poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
       if (vkCreateCommandPool(device, &poolInfo, nullptr, &queueFamilies[i].commandPool) != VK_SUCCESS) {
-        log::FatalError("Failed to create command pool!");
+        logger::FatalError("Failed to create command pool!");
         return false;
       }
     }
@@ -167,7 +167,7 @@ namespace vulkan
       allocInfo.commandBufferCount = (uint32_t) queueFamilies[i].commandBuffers.size();  // Allocate 'count' number of command buffers
 
       if (vkAllocateCommandBuffers(device, &allocInfo, queueFamilies[i].commandBuffers.data()) != VK_SUCCESS) {
-        log::FatalError("Failed to allocate command buffers.");
+        logger::FatalError("Failed to allocate command buffers.");
       }
     }
   }

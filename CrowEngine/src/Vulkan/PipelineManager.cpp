@@ -48,14 +48,28 @@ namespace vulkan
       throw std::runtime_error("failed to create graphics pipeline!");
     }
 
-    log::Info("Successfully Created Graphics Pipeline");
+    logger::Info("Successfully Created GraphicsPipeline");
 
     vkDestroyShaderModule(device, vertShader, nullptr);
     vkDestroyShaderModule(device, fragShader, nullptr);
   }
 
+  PipelineManager::PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain) : device{device}, swapchain{swapChain} {
+    SetupPipelineManager();
+  }
+
+  void PipelineManager::SetupPipelineManager()
+  {
+    PipelineSettings pipelineSettings{};
+    PipelineInfo* pipelineInfo;
+    pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
+    CreateGraphicsPipeline(*pipelineInfo);
+  }
+
+
   void PipelineManager::CreateGraphicsPipeline(PipelineInfo pipelineInfo)
   {
+    logger::Info("Creating new Pipeline...");
     GraphicsPipeline newPipeline{};
     newPipeline.InitializePipelineLayout(device->getDevice());
     newPipeline.InitializePipeline(device->getDevice(), swapchain->GetRenderPass(), pipelineInfo);

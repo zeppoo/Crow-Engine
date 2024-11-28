@@ -23,10 +23,10 @@ namespace vulkan
     createInfo.subresourceRange.layerCount = 1;
 
     if (vkCreateImageView(device->getDevice(), &createInfo, nullptr, &imageView) != VK_SUCCESS) {
-      log::FatalError("Failed to create Image Views");
+      logger::FatalError("Failed to create Image Views");
     }
 
-    log::Info("Created Image View");
+    logger::Info("Created Image View");
   }
 
   void FrameManager::CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass)

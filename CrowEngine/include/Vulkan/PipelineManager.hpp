@@ -3,7 +3,7 @@
 #include "crow_lib.hpp"
 #include "Device.hpp"
 #include "SwapChain.hpp"
-#include "VulkanUtilities.hpp"
+#include "PipelineInfo.hpp"
 
 namespace vulkan{
 
@@ -21,6 +21,8 @@ namespace vulkan{
   {
   public:
     PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain);
+
+    void SetupPipelineManager();
 
     void CreateGraphicsPipeline(PipelineInfo pipelineInfo);
 

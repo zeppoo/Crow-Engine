@@ -13,7 +13,7 @@ namespace vulkan
       : queueManager{queueManager}
   {
     InitVulkan();
-    log::Info("Succesfully Created Vulkan Instance");
+    logger::Info("Succesfully Created Vulkan Instance");
     surface = window->CreateVulkanSurface(vkInstance);
     SetupDevice();
   }
@@ -21,7 +21,7 @@ namespace vulkan
   bool Device::InitVulkan()
   {
     if (!checkValidationLayerSupport()) {
-      log::FatalError("Validation layers requested, but not available!");
+      logger::FatalError("Validation layers requested, but not available!");
     }
 
     VkApplicationInfo appInfo{};
@@ -65,12 +65,12 @@ namespace vulkan
     }
 
     if (vkCreateInstance(&createInfo, nullptr, &vkInstance) != VK_SUCCESS) {
-      log::FatalError("Failed to create Vulkan instance!");
+      logger::FatalError("Failed to create Vulkan instance!");
     }
 
     if (settings::getEnableValidationLayers() &&
         CreateDebugUtilsMessengerEXT(vkInstance, &debugCreateInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-      log::Error("failed to set up debug messenger!");
+      logger::Error("failed to set up debug messenger!");
       return false;
     }
 
@@ -80,13 +80,13 @@ namespace vulkan
   void Device::SetupDevice()
   {
     if (FindPhysicalDevice()) {
-      log::Info("Found Physical Device!");
+      logger::Info("Found Physical Device!");
     }
     if (CreateLogicalDevice()) {
-      log::Info("Created Logical Device!");
+      logger::Info("Created Logical Device!");
     }
     if (queueManager->CreateCommandPools(device)) {
-      log::Info("Created Command Pools!");
+      logger::Info("Created Command Pools!");
     }
   }
 
@@ -112,7 +112,7 @@ namespace vulkan
     }
 
     if (physicDevice == VK_NULL_HANDLE) {
-      log::FatalError("failed to find a suitable GPU!");
+      logger::FatalError("failed to find a suitable GPU!");
       return false;
     } else {
       VkPhysicalDeviceProperties properties;
@@ -155,7 +155,7 @@ namespace vulkan
 
     // Create the logical device
     if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
-      log::FatalError("Failed to Create Logical Device");
+      logger::FatalError("Failed to Create Logical Device");
       return false;
     }
 
@@ -194,14 +194,18 @@ namespace vulkan
     return extensionsSupported && swapChainAdequate;
   }
 
+  void printPhysicalDeviceLimits(const VkPhysicalDeviceLimits& limits);
+
   int Device::RateDevice(VkPhysicalDevice device)
   {
     int score = 0;
-
     VkPhysicalDeviceProperties deviceProperties;
     VkPhysicalDeviceFeatures deviceFeatures;
     vkGetPhysicalDeviceProperties(device, &deviceProperties);
     vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+    printPhysicalDeviceLimits(deviceProperties.limits);
+
 
     if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
       score += 1000; // Discrete GPUs have the highest performance
@@ -271,5 +275,17 @@ namespace vulkan
     }
 
     return true;
+  }
+
+  void printPhysicalDeviceLimits(const VkPhysicalDeviceLimits& limits) {
+    // Print some of the physical device limits as an example
+    std::cout << "Max Image Dimension 2D: " << limits.maxImageDimension2D << std::endl;
+    std::cout << "Max Image Dimension 3D: " << limits.maxImageDimension3D << std::endl;
+    std::cout << "Max Uniform Buffer Range: " << limits.maxUniformBufferRange << std::endl;
+    std::cout << "Max Vertex Input Attributes: " << limits.maxVertexInputAttributes << std::endl;
+    std::cout << "Max Viewports: " << limits.maxViewports << std::endl;
+    std::cout << "Max Framebuffer Width: " << limits.maxFramebufferWidth << std::endl;
+    std::cout << "Max Framebuffer Height: " << limits.maxFramebufferHeight << std::endl;
+    // Add more fields as needed...
   }
 }

@@ -2,7 +2,7 @@
 
 #include "crow_lib.hpp"
 
-namespace log
+namespace logger
 {
   enum LoggingLevel {
     none,

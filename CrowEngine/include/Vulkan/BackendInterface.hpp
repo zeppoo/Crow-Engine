@@ -6,7 +6,7 @@
 #include "Device.hpp"
 #include "SwapChain.hpp"
 #include "PipelineManager.hpp"
-#include "GraphicsPipeline.hpp"
+#include "PipelineInfo.hpp"
 #include "Debugger.hpp"
 #include "VulkanUtilities.hpp"
 
@@ -30,7 +30,7 @@ namespace vulkan
 
     void RecreateSwapchain();
 
-    void RecreateGraphicsPipeline(std::unique_ptr<GraphicsPipeline> graphicsPipeline);
+    void RecreateGraphicsPipeline();
 
   private:
     // References

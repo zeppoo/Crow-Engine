@@ -10,9 +10,9 @@ namespace vulkan
   {
     Info info{0, "Peter", {0, 0, 0}};
 
-    log::Info("Setting up VulkanModule");
+    logger::Info("Setting up VulkanModule");
     if (Startup() == true) {
-      log::Info("Vulkan Module Succesfully Created!");
+      logger::Info("Vulkan Module Succesfully Created!");
     }
   }
 
@@ -23,14 +23,17 @@ namespace vulkan
 
   bool VulkanModule::Startup()
   {
-    log::Info("Setting Up QueueManager...");
+    logger::Info("Setting Up QueueManager...");
     queueManager = std::make_unique<QueueManager>();
 
-    log::Info("Setting Up Device...");
+    logger::Info("Setting Up Device...");
     device = std::make_unique<Device>(window, queueManager);
 
-    log::Info("Setting Up SwapChain...");
+    logger::Info("Setting Up SwapChain...");
     swapchain = std::make_unique<SwapChain>(device, queueManager);
+
+    logger::Info("Setting Up PipelineManager");
+    pipelineManager = std::make_unique<PipelineManager>(device, swapchain);
 
     CreateNewGraphicsPipeline();
     return true;
@@ -38,9 +41,12 @@ namespace vulkan
 
   void VulkanModule::ShutDown()
   {
-    log::Warning("Waiting for Vulkan Device to Idle...");
+    logger::Warning("Waiting for Vulkan Device to Idle...");
     vkDeviceWaitIdle(device->getDevice());
-    log::Info("Destroying Vulkan Objects");
+    logger::Info("Destroying Vulkan Objects");
+
+    // Destroy the render pass
+    vkDestroyRenderPass(device->getDevice(), swapchain->GetRenderPass(), nullptr);
 
     for (VkImageView imageView: swapchain->GetSwapchainImageViews()) {
       vkDestroyImageView(device->getDevice(), imageView, nullptr);
@@ -61,7 +67,7 @@ namespace vulkan
     vkDestroySurfaceKHR(device->getVkInstance(), device->getSurface(), nullptr);
     vkDestroyInstance(device->getVkInstance(), nullptr);
 
-    log::Info("All Vulkan Objects Destroyed!");
+    logger::Info("All Vulkan Objects Destroyed!");
   }
 
   void VulkanModule::RenderFrame()
@@ -71,37 +77,23 @@ namespace vulkan
 
   void VulkanModule::CreateNewGraphicsPipeline()
   {
-    PipelineSettings pipelineSettings{};
-    PipelineInfo pipelineInfo;
-    pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
-    log::Info("Creating New GraphicsPipeline...");
-    std::unique_ptr<GraphicsPipeline> graphicsPipeline = std::make_unique<GraphicsPipeline>(device, swapchain);
-    graphicsPipeline->CreateGraphicsPipeline(pipelineInfo);
-    graphicsPipelines.push_back(std::move(graphicsPipeline));
-    log::Info("Successfully created new pipeline");
+
   }
 
   void VulkanModule::CreateNewGraphicsPipeline(const char* pipelineConfigFile)
   {
-    PipelineSettings pipelineSettings{};
-    pipelineSettings.structDesc.From_Json(pipelineConfigFile, &pipelineSettings);
-    PipelineInfo pipelineInfo;
-    pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
-    log::Info("Creating New GraphicsPipeline...");
-    std::unique_ptr<GraphicsPipeline> graphicsPipeline = std::make_unique<GraphicsPipeline>(device, swapchain);
-    graphicsPipeline->CreateGraphicsPipeline(pipelineInfo);
-    graphicsPipelines.push_back(std::move(graphicsPipeline));
-    log::Info("Successfully created new pipeline");
+    logger::Info("Creating New GraphicsPipeline...");
+    logger::Info("Successfully created new pipeline");
   }
 
   void VulkanModule::RecreateSwapchain()
   {
-    log::Warning("Recreating SwapChain");
+    logger::Warning("Recreating SwapChain");
     swapchain->RecreateSwapChain();
-    log::Info("Swapchain Recreated");
+    logger::Info("Swapchain Recreated");
   }
 
-  void VulkanModule::RecreateGraphicsPipeline(std::unique_ptr<GraphicsPipeline> graphicsPipeline)
+  void VulkanModule::RecreateGraphicsPipeline()
   {
 
   }

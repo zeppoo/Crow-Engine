@@ -6,7 +6,7 @@
 #include <queue>
 #include <mutex>
 
-namespace log
+namespace logger
 {
   Logger Logger::instance;
   Logger& logger = Logger::GetInstance();
