@@ -125,13 +125,7 @@ namespace vulkan
   {
     queueManager->FindQueueFamilies(physicDevice, surface);
 
-    std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-
-    // Create queue create info structures
-    for (int i = 0; i < queueManager->GetQueueFamilies().size(); i++) {
-      VkDeviceQueueCreateInfo info = queueManager->CreateQueueInfo(queueManager->GetQueueFamilies()[i]);
-      queueCreateInfos.push_back(info);
-    }
+    std::vector<VkDeviceQueueCreateInfo> queueCreateInfos = queueManager->CreateQueueInfos();
 
     // Device features
     VkPhysicalDeviceFeatures deviceFeatures{};

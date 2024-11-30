@@ -7,9 +7,17 @@
 
 namespace vulkan
 {
+  struct Vertex {
+    glm::vec2 pos;
+    glm::vec3 color;
+  };
+
   struct PipelineInfo {
+    Vertex vertex;
     VkViewport viewport;
     VkRect2D scissor;
+    VkVertexInputBindingDescription bindingDescription;
+    std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions;
     VkPipelineVertexInputStateCreateInfo vertexInputInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
     VkPipelineTessellationStateCreateInfo tessellationInfo;
@@ -22,45 +30,17 @@ namespace vulkan
     VkPipelineDynamicStateCreateInfo dynamicStatesInfo;
   };
 
-  struct Vertex {
-    glm::vec2 pos;
-    glm::vec3 color;
-
-    static VkVertexInputBindingDescription getBindingDescription() {
-      VkVertexInputBindingDescription bindingDescription{};
-
-      bindingDescription.binding = 0; // Binding index in the shader
-      bindingDescription.stride = sizeof(Vertex); // Total size of a vertex (position + color)
-      bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX; // Per-vertex data
-
-      return bindingDescription;
-    }
-
-    static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions() {
-      std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions{};
-      // Position: Location = 0
-      attributeDescriptions[0].location = 0; // Matches layout(location = 0) in the shader
-      attributeDescriptions[0].binding = 0; // Matches binding index in the binding description
-      attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3 -> 3 floats
-      attributeDescriptions[0].offset = offsetof(Vertex, pos); // Offset in the vertex struct
-
-      // Color: Location = 1
-      attributeDescriptions[1].location = 1; // Matches layout(location = 1) in the shader
-      attributeDescriptions[1].binding = 0; // Same binding index
-      attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3 -> 3 floats
-      attributeDescriptions[1].offset = offsetof(Vertex, color); // Offset in the vertex struct
-
-      return attributeDescriptions;
-    }
-  };
-
-  PipelineInfo* CreatePipelineInfo(PipelineSettings settings, VkExtent2D extent);
+  PipelineInfo CreatePipelineInfo(PipelineSettings &settings, VkExtent2D extent);
 
   VkShaderModule CreateShaderModule(VkDevice device, const std::string &filepath);
 
   VkPipelineShaderStageCreateInfo CreateShaderStageInfo(VkShaderStageFlagBits shaderBit, VkShaderModule shaderModule);
 
-  VkPipelineVertexInputStateCreateInfo CreateVertexInputStateInfo(PipelineSettings& settings);
+  VkVertexInputBindingDescription CreateBindingDescription();
+
+  std::array<VkVertexInputAttributeDescription, 2> CreateAttributeDescriptions();
+
+  VkPipelineVertexInputStateCreateInfo CreateVertexInputStateInfo(PipelineSettings& settings, VkVertexInputBindingDescription &bindingDescription, std::array<VkVertexInputAttributeDescription, 2> &attributeDescriptions);
 
   VkPipelineInputAssemblyStateCreateInfo CreateInputAssemblyStateInfo(PipelineSettings& settings);
 

@@ -6,21 +6,23 @@
 
 namespace vulkan
 {
-  PipelineInfo* CreatePipelineInfo(PipelineSettings settings, VkExtent2D extent)
+  PipelineInfo CreatePipelineInfo(PipelineSettings &settings, VkExtent2D extent)
   {
-    PipelineInfo* pipelineInfo = new PipelineInfo;
-    pipelineInfo->viewport = CreateViewPort(extent);
-    pipelineInfo->scissor = CreateScissor(extent);
-    pipelineInfo->vertexInputInfo = CreateVertexInputStateInfo(settings);
-    pipelineInfo->inputAssemblyInfo = CreateInputAssemblyStateInfo(settings);
-    pipelineInfo->tessellationInfo = CreateTessellationStateInfo(settings);
-    pipelineInfo->viewportInfo = CreateViewportStateInfo(settings, &pipelineInfo->viewport,&pipelineInfo->scissor);
-    pipelineInfo->rasterizationInfo = CreateRasterizationStateInfo(settings);
-    pipelineInfo->multisampleInfo = CreateMultisampleStateInfo(settings);
-    pipelineInfo->depthStencilInfo = CreateDepthStencilStateInfo(settings);
-    pipelineInfo->colorBlendAttachmentState = CreateColorBlendAttachmentState(settings);
-    pipelineInfo->colorBlendInfo = CreateColorBlendStateInfo(settings,&pipelineInfo->colorBlendAttachmentState);
-    pipelineInfo->dynamicStatesInfo = CreateDynamicStateInfo(settings);
+    PipelineInfo pipelineInfo{};
+    pipelineInfo.viewport = CreateViewPort(extent);
+    pipelineInfo.scissor = CreateScissor(extent);
+    pipelineInfo.bindingDescription = CreateBindingDescription();
+    pipelineInfo.attributeDescriptions = CreateAttributeDescriptions();
+    pipelineInfo.vertexInputInfo = CreateVertexInputStateInfo(settings, pipelineInfo.bindingDescription, pipelineInfo.attributeDescriptions);
+    pipelineInfo.inputAssemblyInfo = CreateInputAssemblyStateInfo(settings);
+    pipelineInfo.tessellationInfo = CreateTessellationStateInfo(settings);
+    pipelineInfo.viewportInfo = CreateViewportStateInfo(settings, &pipelineInfo.viewport, &pipelineInfo.scissor);
+    pipelineInfo.rasterizationInfo = CreateRasterizationStateInfo(settings);
+    pipelineInfo.multisampleInfo = CreateMultisampleStateInfo(settings);
+    pipelineInfo.depthStencilInfo = CreateDepthStencilStateInfo(settings);
+    pipelineInfo.colorBlendAttachmentState = CreateColorBlendAttachmentState(settings);
+    pipelineInfo.colorBlendInfo = CreateColorBlendStateInfo(settings,&pipelineInfo.colorBlendAttachmentState);
+    pipelineInfo.dynamicStatesInfo = CreateDynamicStateInfo(settings);
     return pipelineInfo;
   }
 
@@ -51,12 +53,36 @@ namespace vulkan
     return shaderStageCreateInfo;
   }
 
-  VkPipelineVertexInputStateCreateInfo CreateVertexInputStateInfo(PipelineSettings &settings)
+  VkVertexInputBindingDescription CreateBindingDescription() {
+      VkVertexInputBindingDescription bindingDescription{};
+
+      bindingDescription.binding = 0;
+      bindingDescription.stride = sizeof(Vertex);
+      bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+
+      return bindingDescription;
+  }
+
+  std::array<VkVertexInputAttributeDescription, 2> CreateAttributeDescriptions() {
+      std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions{};
+
+      attributeDescriptions[0].location = 0;
+      attributeDescriptions[0].binding = 0;
+      attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
+      attributeDescriptions[0].offset = offsetof(Vertex, pos);
+
+      attributeDescriptions[1].location = 1;
+      attributeDescriptions[1].binding = 0;
+      attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+      attributeDescriptions[1].offset = offsetof(Vertex, color);
+
+      return attributeDescriptions;
+  }
+
+  VkPipelineVertexInputStateCreateInfo CreateVertexInputStateInfo(PipelineSettings &settings, VkVertexInputBindingDescription &bindingDescription, std::array<VkVertexInputAttributeDescription, 2> &attributeDescriptions)
   {
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
-    auto bindingDescription = Vertex::getBindingDescription();
-    auto attributeDescriptions = Vertex::getAttributeDescriptions();
-
+    vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
     vertexInputInfo.vertexBindingDescriptionCount = 1;
     vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
     vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;

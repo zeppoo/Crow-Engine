@@ -61,9 +61,9 @@ namespace vulkan
   void PipelineManager::SetupPipelineManager()
   {
     PipelineSettings pipelineSettings{};
-    PipelineInfo* pipelineInfo;
+    PipelineInfo pipelineInfo;
     pipelineInfo = CreatePipelineInfo(pipelineSettings, swapchain->GetSwapchainExtent());
-    CreateGraphicsPipeline(*pipelineInfo);
+    CreateGraphicsPipeline(pipelineInfo);
   }
 
 

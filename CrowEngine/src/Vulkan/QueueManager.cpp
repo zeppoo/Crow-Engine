@@ -67,6 +67,7 @@ namespace vulkan
       QueueData data = CreateQueueData(currentQueueFamilies[bestQueueFamilyindex],
                                        queueFamilyProperties[bestQueueFamilyindex].queueCount);
       currentQueueFamilies[bestQueueFamilyindex].queueCount++;
+      currentQueueFamilies[bestQueueFamilyindex].queuePriorities.push_back(1.0f);
       queueType.push_back(data);
       queueCount--;
     }
@@ -129,15 +130,19 @@ namespace vulkan
     }
   }
 
-  VkDeviceQueueCreateInfo QueueManager::CreateQueueInfo(QueueFamily family)
+  std::vector<VkDeviceQueueCreateInfo> QueueManager::CreateQueueInfos()
   {
-    std::vector<float> queuePriorities(family.queueCount, 1.0f);
-    VkDeviceQueueCreateInfo queueCreateInfo{};
-    queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-    queueCreateInfo.queueFamilyIndex = family.index;
-    queueCreateInfo.queueCount = family.queueCount;
-    queueCreateInfo.pQueuePriorities = queuePriorities.data();
-    return queueCreateInfo;
+    std::vector<VkDeviceQueueCreateInfo> queue_create_infos;
+
+    for (auto & queueFamilie : queueFamilies) {
+      VkDeviceQueueCreateInfo queueCreateInfo{};
+      queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+      queueCreateInfo.queueFamilyIndex = queueFamilie.index;
+      queueCreateInfo.queueCount = queueFamilie.queueCount;
+      queueCreateInfo.pQueuePriorities = queueFamilie.queuePriorities.data();
+      queue_create_infos.push_back(queueCreateInfo);
+    }
+    return queue_create_infos;
   }
 
   bool QueueManager::CreateCommandPools(VkDevice &device)

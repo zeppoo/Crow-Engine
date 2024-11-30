@@ -10,10 +10,20 @@ struct RenderPassInfo
   //std::vector<VkSubpassDependency> dependencies;
 };
 
+enum AttachmentType {
+  None = 0,
+  Input,
+  Color,
+  Depth,
+  Resolve,
+  Reserve
+};
+
 struct RenderPassAttachmentInfo
 {
   REFLECT()
 
+  AttachmentType type = None;
   VkFormat format = VK_FORMAT_UNDEFINED;                             // Undefined by default, should be set based on the target
   VkSampleCountFlagBits samples = VK_SAMPLE_COUNT_1_BIT;             // Default to no multisampling (1 sample per pixel)
   VkAttachmentLoadOp loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;           // Clear the attachment at the start of the render pass
@@ -28,6 +38,7 @@ struct RenderPassAttachmentInfo
 };
 
 REFLECT_STRUCT_BEGIN(RenderPassAttachmentInfo)
+  REFLECT_STRUCT_MEMBER(type)
   REFLECT_STRUCT_MEMBER(format)
   REFLECT_STRUCT_MEMBER(samples)
   REFLECT_STRUCT_MEMBER(loadOp)
@@ -44,6 +55,8 @@ struct SubpassInfo
 {
   REFLECT()
 
+  std::vector<RenderPassAttachmentInfo> attachments;
+
   VkPipelineBindPoint pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
   uint32_t inputAttachmentCount = 0;
   const VkAttachmentReference* pInputAttachments = nullptr;
@@ -53,6 +66,19 @@ struct SubpassInfo
   const VkAttachmentReference* pResolveAttachments = nullptr;
   uint32_t preserveAttachmentCount = 0;
   const uint32_t* pPreserveAttachments = nullptr;
+
+  void AddAttachment(AttachmentType type)
+  {
+    RenderPassAttachmentInfo attachment_info{};
+    attachment_info.type = type;
+    attachments.push_back(attachment_info);
+  }
+
+  void AddAttachment(AttachmentType type, RenderPassAttachmentInfo attachment_info)
+  {
+    attachment_info.type = type;
+    attachments.push_back(attachment_info);
+  }
 
   /*// Subpass Dependencies
   uint32_t srcSubpass = 0; // Source subpass index (use VK_SUBPASS_EXTERNAL for external)
@@ -88,12 +114,22 @@ struct RenderPassConfig
   REFLECT()
   std::string name = "default";
 
-  std::vector<RenderPassAttachmentInfo> attachments;
+
   std::vector<SubpassInfo> subpasses;
 
   RenderPassConfig(std::string name , const uint8_t attachmentCount, const uint8_t subpassCount) : name{name} {
-    attachments.resize(attachmentCount);
     subpasses.resize(subpassCount);
+  }
+
+  void AddSubpass()
+  {
+    SubpassInfo subpass_info{};
+    subpasses.push_back(subpass_info);
+  }
+
+  void AddSubpass(SubpassInfo subpass_info)
+  {
+    subpasses.push_back(subpass_info);
   }
 };
 

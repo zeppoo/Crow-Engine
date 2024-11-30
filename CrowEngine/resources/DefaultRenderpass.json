@@ -2,6 +2,7 @@
 "RenderPassConfig": {
 "name": "default",
 "RenderPassAttachmentInfo": {
+"type": 0,
 "format": 0,
 "samples": 1,
 "loadOp": 1,

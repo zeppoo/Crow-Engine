@@ -22,6 +22,7 @@ namespace vulkan
     int index;
     int queueCount = 0;
     std::vector<VkQueue> queues;
+    std::vector<float> queuePriorities;
     VkCommandPool commandPool = VK_NULL_HANDLE;
     std::vector<VkCommandBuffer> commandBuffers = {VK_NULL_HANDLE};
   };
@@ -36,7 +37,7 @@ namespace vulkan
 
     void AllocateCommandBuffers(VkDevice &device);
 
-    VkDeviceQueueCreateInfo CreateQueueInfo(QueueFamily family);
+    std::vector<VkDeviceQueueCreateInfo> CreateQueueInfos();
 
     std::vector<QueueFamily> GetQueueFamilies()
     { return queueFamilies; }
