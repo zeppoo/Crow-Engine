@@ -1,23 +1,25 @@
 #pragma once
 #include "crow_lib.hpp"
+#include "Logger.hpp"
 #include "cppr.hpp"
-
-struct RenderPassInfo
-{
-  std::vector<VkAttachmentDescription> attachments;
-  std::vector<VkSubpassDescription> subpasses;
-  std::vector<VkAttachmentReference> attachmentRefs;
-  //std::vector<VkSubpassDependency> dependencies;
-};
+#include <unordered_map>
 
 enum AttachmentType {
   None = 0,
   Input,
   Color,
   Depth,
-  Resolve,
-  Reserve
+  Resolve
 };
+
+struct RenderPassInfo
+{
+  std::vector<VkAttachmentDescription> attachments;
+  std::vector<VkAttachmentReference> attachmentRefs;
+  std::vector<VkSubpassDescription> subpasses;
+  //std::vector<VkSubpassDependency> dependencies;
+};
+
 
 struct RenderPassAttachmentInfo
 {
@@ -33,8 +35,10 @@ struct RenderPassAttachmentInfo
   VkImageLayout initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;           // Undefined initial layout; Vulkan will handle transitions
   VkImageLayout finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;       // For color attachments, default to presenting to the screen
 
-  uint32_t attachment = 0; // Index of the attachment in the render pass
+  uint32_t attachment = 0;
   VkImageLayout layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL; // Layout of the attachment during the subpass
+
+  VkAttachmentReference reference;
 };
 
 REFLECT_STRUCT_BEGIN(RenderPassAttachmentInfo)
@@ -47,7 +51,6 @@ REFLECT_STRUCT_BEGIN(RenderPassAttachmentInfo)
   REFLECT_STRUCT_MEMBER(stencilStoreOp)
   REFLECT_STRUCT_MEMBER(initialLayout)
   REFLECT_STRUCT_MEMBER(finalLayout)
-  REFLECT_STRUCT_MEMBER(attachment)
   REFLECT_STRUCT_MEMBER(layout)
 REFLECT_STRUCT_END()
 
@@ -55,29 +58,41 @@ struct SubpassInfo
 {
   REFLECT()
 
-  std::vector<RenderPassAttachmentInfo> attachments;
-
   VkPipelineBindPoint pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
   uint32_t inputAttachmentCount = 0;
-  const VkAttachmentReference* pInputAttachments = nullptr;
+  std::vector<VkAttachmentReference> InputAttachments;
   uint32_t colorAttachmentCount = 0;
-  const VkAttachmentReference* pColorAttachments = nullptr;
-  const VkAttachmentReference* pDepthStencilAttachment = nullptr;
-  const VkAttachmentReference* pResolveAttachments = nullptr;
+  std::vector<VkAttachmentReference> ColorAttachments;
+  std::vector<VkAttachmentReference> DepthStencilAttachment;
+  std::vector<VkAttachmentReference> ResolveAttachments;
   uint32_t preserveAttachmentCount = 0;
-  const uint32_t* pPreserveAttachments = nullptr;
+  uint32_t* pPreserveAttachments = nullptr;
 
-  void AddAttachment(AttachmentType type)
+  void BindAttachment(RenderPassAttachmentInfo &attachmentInfo)
   {
-    RenderPassAttachmentInfo attachment_info{};
-    attachment_info.type = type;
-    attachments.push_back(attachment_info);
-  }
-
-  void AddAttachment(AttachmentType type, RenderPassAttachmentInfo attachment_info)
-  {
-    attachment_info.type = type;
-    attachments.push_back(attachment_info);
+    AttachmentType type = attachmentInfo.type;
+    switch (type) {
+      case None:
+        logger::Error("Attachment Type is None");
+        break;
+      case Input:
+        inputAttachmentCount++;
+        InputAttachments.push_back(attachmentInfo.reference);
+        break;
+      case Color:
+        colorAttachmentCount++;
+        ColorAttachments.push_back(attachmentInfo.reference);
+        break;
+      case Depth:
+        DepthStencilAttachment.push_back(attachmentInfo.reference);
+        break;
+      case Resolve:
+        ResolveAttachments.push_back(attachmentInfo.reference);
+        break;
+      default:
+        logger::Error("No Attachment Type");
+        break;
+    }
   }
 
   /*// Subpass Dependencies
@@ -92,14 +107,6 @@ struct SubpassInfo
 
 REFLECT_STRUCT_BEGIN(SubpassInfo)
   REFLECT_STRUCT_MEMBER(pipelineBindPoint)
-  REFLECT_STRUCT_MEMBER(inputAttachmentCount)
-  REFLECT_STRUCT_MEMBER(pInputAttachments)
-  REFLECT_STRUCT_MEMBER(colorAttachmentCount)
-  REFLECT_STRUCT_MEMBER(pColorAttachments)
-  REFLECT_STRUCT_MEMBER(pDepthStencilAttachment)
-  REFLECT_STRUCT_MEMBER(pResolveAttachments)
-  REFLECT_STRUCT_MEMBER(preserveAttachmentCount)
-  REFLECT_STRUCT_MEMBER(pPreserveAttachments)
   /*REFLECT_STRUCT_MEMBER(srcSubpass)
   REFLECT_STRUCT_MEMBER(dstSubpass)
   REFLECT_STRUCT_MEMBER(srcStageMask)
@@ -114,8 +121,8 @@ struct RenderPassConfig
   REFLECT()
   std::string name = "default";
 
-
-  std::vector<SubpassInfo> subpasses;
+  std::vector<RenderPassAttachmentInfo> attachments = {};
+  std::vector<SubpassInfo> subpasses = {};
 
   RenderPassConfig(std::string name) : name{name} {}
 
@@ -125,9 +132,24 @@ struct RenderPassConfig
     subpasses.push_back(subpass_info);
   }
 
-  void AddSubpass(SubpassInfo subpass_info)
+  void AddSubpass(SubpassInfo subpassInfo)
   {
-    subpasses.push_back(subpass_info);
+    subpasses.push_back(subpassInfo);
+  }
+
+  void AddAttachment(AttachmentType type)
+  {
+    RenderPassAttachmentInfo attachment_info{};
+    attachment_info.type = type;
+    attachment_info.attachment = attachments.size();
+    attachments.push_back(attachment_info);
+  }
+
+  void AddAttachment(AttachmentType type, RenderPassAttachmentInfo attachment_info)
+  {
+    attachment_info.type = type;
+    attachment_info.attachment = attachments.size();
+    attachments.push_back(attachment_info);
   }
 };
 

@@ -145,38 +145,39 @@ namespace vulkan
 
     logger::Info("Creating RenderPass...");
 
-
-
-    for(SubpassInfo subpassInfo : renderPassConfig.subpasses)
+    for(RenderPassAttachmentInfo & attachmentInfo : renderPassConfig.attachments)
     {
-      for(RenderPassAttachmentInfo attachmentInfo : subpassInfo.attachments)
-      {
-        VkAttachmentDescription attachment{};
-        attachment.format = swapchainImageFormat;
-        attachment.samples = attachmentInfo.samples;
-        attachment.loadOp = attachmentInfo.loadOp;
-        attachment.storeOp = attachmentInfo.storeOp;
-        attachment.stencilLoadOp = attachmentInfo.stencilLoadOp;
-        attachment.stencilStoreOp = attachmentInfo.stencilStoreOp;
-        attachment.initialLayout = attachmentInfo.initialLayout;
-        attachment.finalLayout = attachmentInfo.finalLayout;
+      VkAttachmentDescription attachment{};
+      attachment.format = swapchainImageFormat;
+      attachment.samples = attachmentInfo.samples;
+      attachment.loadOp = attachmentInfo.loadOp;
+      attachment.storeOp = attachmentInfo.storeOp;
+      attachment.stencilLoadOp = attachmentInfo.stencilLoadOp;
+      attachment.stencilStoreOp = attachmentInfo.stencilStoreOp;
+      attachment.initialLayout = attachmentInfo.initialLayout;
+      attachment.finalLayout = attachmentInfo.finalLayout;
 
-        VkAttachmentReference attachmentRef{};
-        attachmentRef.attachment = attachmentInfo.attachment;
-        attachmentRef.layout = attachmentInfo.layout;
+      VkAttachmentReference attachmentRef{};
+      attachmentRef.attachment = attachmentInfo.attachment;
+      attachmentRef.layout = attachmentInfo.layout;
 
-        renderPassInfo.attachments.push_back(attachment);
-        renderPassInfo.attachmentRefs.push_back(attachmentRef);
-      }
+      renderPassInfo.attachments.push_back(attachment);
+      renderPassInfo.attachmentRefs.push_back(attachmentRef);
+      attachmentInfo.reference = attachmentRef;
+      attachmentRef.layout = attachmentInfo.layout;
 
+    }
+
+    for(SubpassInfo & subpassInfo : renderPassConfig.subpasses)
+    {
       VkSubpassDescription subpass{};
       subpass.pipelineBindPoint = subpassInfo.pipelineBindPoint;
       subpass.inputAttachmentCount = subpassInfo.inputAttachmentCount;
-      subpass.pInputAttachments = subpassInfo.pInputAttachments;
+      subpass.pInputAttachments = subpassInfo.InputAttachments.data();
       subpass.colorAttachmentCount = subpassInfo.colorAttachmentCount;
-      subpass.pColorAttachments = subpassInfo.pColorAttachments;
-      subpass.pResolveAttachments = subpassInfo.pResolveAttachments;
-      subpass.pDepthStencilAttachment = subpassInfo.pDepthStencilAttachment;
+      subpass.pColorAttachments = subpassInfo.ColorAttachments.data();
+      subpass.pResolveAttachments = subpassInfo.ResolveAttachments.data();
+      subpass.pDepthStencilAttachment = subpassInfo.DepthStencilAttachment.data();
       subpass.preserveAttachmentCount = subpassInfo.preserveAttachmentCount;
       subpass.pPreserveAttachments = subpassInfo.pPreserveAttachments;
 

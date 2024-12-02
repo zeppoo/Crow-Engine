@@ -1,8 +1,11 @@
 {
 "RenderPassConfig": {
 "name": "default",
+"SubpassInfo": {
+"pipelineBindPoint": 0
+},
 "RenderPassAttachmentInfo": {
-"type": 0,
+"type": 2,
 "format": 0,
 "samples": 1,
 "loadOp": 1,
@@ -11,19 +14,7 @@
 "stencilStoreOp": 1,
 "initialLayout": 0,
 "finalLayout": 1000001002,
-"attachment": 0,
 "layout": 2
-},
-"SubpassInfo": {
-"pipelineBindPoint": 0,
-"inputAttachmentCount": 0,
-"pInputAttachments": "0",
-"colorAttachmentCount": 0,
-"pColorAttachments": "0",
-"pDepthStencilAttachment": "0",
-"pResolveAttachments": "0",
-"preserveAttachmentCount": 0,
-"pPreserveAttachments": "0"
 }
 }
 }
