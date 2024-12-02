@@ -145,38 +145,40 @@ namespace vulkan
 
     logger::Info("Creating RenderPass...");
 
-    for(RenderPassAttachmentInfo info : renderPassConfig.attachments)
+
+
+    for(SubpassInfo subpassInfo : renderPassConfig.subpasses)
     {
-      VkAttachmentDescription attachment{};
-      attachment.format = swapchainImageFormat;
-      attachment.samples = info.samples;
-      attachment.loadOp = info.loadOp;
-      attachment.storeOp = info.storeOp;
-      attachment.stencilLoadOp = info.stencilLoadOp;
-      attachment.stencilStoreOp = info.stencilStoreOp;
-      attachment.initialLayout = info.initialLayout;
-      attachment.finalLayout = info.finalLayout;
+      for(RenderPassAttachmentInfo attachmentInfo : subpassInfo.attachments)
+      {
+        VkAttachmentDescription attachment{};
+        attachment.format = swapchainImageFormat;
+        attachment.samples = attachmentInfo.samples;
+        attachment.loadOp = attachmentInfo.loadOp;
+        attachment.storeOp = attachmentInfo.storeOp;
+        attachment.stencilLoadOp = attachmentInfo.stencilLoadOp;
+        attachment.stencilStoreOp = attachmentInfo.stencilStoreOp;
+        attachment.initialLayout = attachmentInfo.initialLayout;
+        attachment.finalLayout = attachmentInfo.finalLayout;
 
-      VkAttachmentReference attachmentRef{};
-      attachmentRef.attachment = info.attachment;
-      attachmentRef.layout = info.layout;
+        VkAttachmentReference attachmentRef{};
+        attachmentRef.attachment = attachmentInfo.attachment;
+        attachmentRef.layout = attachmentInfo.layout;
 
-      renderPassInfo.attachments.push_back(attachment);
-      renderPassInfo.attachmentRefs.push_back(attachmentRef);
-    }
+        renderPassInfo.attachments.push_back(attachment);
+        renderPassInfo.attachmentRefs.push_back(attachmentRef);
+      }
 
-    for(SubpassInfo info : renderPassConfig.subpasses)
-    {
       VkSubpassDescription subpass{};
-      subpass.pipelineBindPoint = info.pipelineBindPoint;
-      subpass.inputAttachmentCount = info.inputAttachmentCount;
-      subpass.pInputAttachments = info.pInputAttachments;
-      subpass.colorAttachmentCount = info.colorAttachmentCount;
-      subpass.pColorAttachments = info.pColorAttachments;
-      subpass.pResolveAttachments = info.pResolveAttachments;
-      subpass.pDepthStencilAttachment = info.pDepthStencilAttachment;
-      subpass.preserveAttachmentCount = info.preserveAttachmentCount;
-      subpass.pPreserveAttachments = info.pPreserveAttachments;
+      subpass.pipelineBindPoint = subpassInfo.pipelineBindPoint;
+      subpass.inputAttachmentCount = subpassInfo.inputAttachmentCount;
+      subpass.pInputAttachments = subpassInfo.pInputAttachments;
+      subpass.colorAttachmentCount = subpassInfo.colorAttachmentCount;
+      subpass.pColorAttachments = subpassInfo.pColorAttachments;
+      subpass.pResolveAttachments = subpassInfo.pResolveAttachments;
+      subpass.pDepthStencilAttachment = subpassInfo.pDepthStencilAttachment;
+      subpass.preserveAttachmentCount = subpassInfo.preserveAttachmentCount;
+      subpass.pPreserveAttachments = subpassInfo.pPreserveAttachments;
 
       /*VkSubpassDependency dependency{};
       dependency.srcSubpass = info.srcSubpass;

@@ -117,9 +117,7 @@ struct RenderPassConfig
 
   std::vector<SubpassInfo> subpasses;
 
-  RenderPassConfig(std::string name , const uint8_t attachmentCount, const uint8_t subpassCount) : name{name} {
-    subpasses.resize(subpassCount);
-  }
+  RenderPassConfig(std::string name) : name{name} {}
 
   void AddSubpass()
   {

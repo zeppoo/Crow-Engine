@@ -6,11 +6,13 @@
 
 inline RenderPassConfig GenerateDefaultRenderPassConfig()
 {
-  RenderPassConfig renderPassConfig{"default", 1, 1};
+  RenderPassConfig renderPassConfig{"default"};
+  renderPassConfig.AddSubpass();
+  renderPassConfig.subpasses[0].AddAttachment(Color);
+
 
   SerializeInternalStructsToFile(DefaultRenderpass_json,
                                  &renderPassConfig,
-                                 renderPassConfig.attachments.data(),
                                  renderPassConfig.subpasses.data());
 
   return renderPassConfig;
