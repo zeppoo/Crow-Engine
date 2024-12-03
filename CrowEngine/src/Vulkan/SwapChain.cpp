@@ -164,12 +164,12 @@ namespace vulkan
       renderPassInfo.attachments.push_back(attachment);
       renderPassInfo.attachmentRefs.push_back(attachmentRef);
       attachmentInfo.reference = attachmentRef;
-      attachmentRef.layout = attachmentInfo.layout;
-
     }
 
     for(SubpassInfo & subpassInfo : renderPassConfig.subpasses)
     {
+      for (RenderPassAttachmentInfo* attachmentInfo : subpassInfo.attachments) subpassInfo.BindAttachment(attachmentInfo);
+
       VkSubpassDescription subpass{};
       subpass.pipelineBindPoint = subpassInfo.pipelineBindPoint;
       subpass.inputAttachmentCount = subpassInfo.inputAttachmentCount;

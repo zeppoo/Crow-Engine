@@ -58,6 +58,8 @@ struct SubpassInfo
 {
   REFLECT()
 
+  std::vector<RenderPassAttachmentInfo*> attachments = {};
+
   VkPipelineBindPoint pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
   uint32_t inputAttachmentCount = 0;
   std::vector<VkAttachmentReference> InputAttachments;
@@ -68,26 +70,26 @@ struct SubpassInfo
   uint32_t preserveAttachmentCount = 0;
   uint32_t* pPreserveAttachments = nullptr;
 
-  void BindAttachment(RenderPassAttachmentInfo &attachmentInfo)
+  void BindAttachment(RenderPassAttachmentInfo* attachmentInfo)
   {
-    AttachmentType type = attachmentInfo.type;
+    AttachmentType type = attachmentInfo->type;
     switch (type) {
       case None:
         logger::Error("Attachment Type is None");
         break;
       case Input:
         inputAttachmentCount++;
-        InputAttachments.push_back(attachmentInfo.reference);
+        InputAttachments.push_back(attachmentInfo->reference);
         break;
       case Color:
         colorAttachmentCount++;
-        ColorAttachments.push_back(attachmentInfo.reference);
+        ColorAttachments.push_back(attachmentInfo->reference);
         break;
       case Depth:
-        DepthStencilAttachment.push_back(attachmentInfo.reference);
+        DepthStencilAttachment.push_back(attachmentInfo->reference);
         break;
       case Resolve:
-        ResolveAttachments.push_back(attachmentInfo.reference);
+        ResolveAttachments.push_back(attachmentInfo->reference);
         break;
       default:
         logger::Error("No Attachment Type");

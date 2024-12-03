@@ -5,6 +5,14 @@ namespace vulkan
 {
   FrameManager::FrameManager(std::unique_ptr<Device> &device) : device{device} {}
 
+  void FrameManager::FrameManagerInitialization()
+  {
+    for (int i = 0; i < FRAMES_IN_FLIGHT; i++) {
+      Frame newFrame{};
+
+    }
+  }
+
   void FrameManager::CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat)
   {
     VkImageViewCreateInfo createInfo{};
@@ -29,9 +37,9 @@ namespace vulkan
     logger::Info("Created Image View");
   }
 
-  void FrameManager::CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass)
+  void FrameManager::CreateFrameBuffer(VkFramebuffer& framebuffer, VkImageView& imageView,  VkExtent2D swapchainExtent, VkRenderPass renderPass)
   {
-    VkImageView attachments[] = {imageView };
+    VkImageView attachments[] = {imageView};
 
     VkFramebufferCreateInfo framebufferInfo{};
     framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;

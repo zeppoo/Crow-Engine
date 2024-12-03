@@ -22,9 +22,9 @@ namespace vulkan
     FrameManager(std::unique_ptr<Device> &device);
 
   private:
-
+    void FrameManagerInitialization();
     void CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat);
-    void CreateFrameBuffer(VkImageView& imageView, VkFramebuffer& framebuffer, VkExtent2D swapchainExtent, VkRenderPass renderPass);
+    void CreateFrameBuffer(VkFramebuffer& framebuffer, VkImageView& imageView, VkExtent2D swapchainExtent, VkRenderPass renderPass);
 
     std::unique_ptr<Device> &device;
 
