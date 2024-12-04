@@ -23,10 +23,11 @@ namespace vulkan
   void SwapChain::SetupSwapChain()
   {
     createSwapChain(VK_NULL_HANDLE);
-    createImageViews();
+    frameManager->CreateImageViews(swapchainImageFormat);
     RenderPassConfig renderPassConfig = GenerateDefaultRenderPassConfig();
     DeserializeStructsFromFile(DefaultRenderpass_json, &renderPassConfig);
     CreateRenderPass(renderPassConfig);
+    frameManager->CreateFrameBuffers(swapchainExtent, renderPass);
   }
 
   void SwapChain::CleanupSwapChain()
@@ -39,8 +40,8 @@ namespace vulkan
     CleanupSwapChain();
 
     createSwapChain(swapchain);
-    createImageViews();
-    //createFramebuffers();
+    frameManager->CreateImageViews(swapchainImageFormat);
+    frameManager->CreateFrameBuffers(swapchainExtent, renderPass);
   }
 
   void SwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
@@ -95,41 +96,12 @@ namespace vulkan
 
     vkDestroySwapchainKHR(device->getDevice(), oldSwapChain, nullptr);
 
-    vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, nullptr);
-    swapchainImages.resize(imageCount);
-    vkGetSwapchainImagesKHR(device->getDevice(), swapchain, &imageCount, swapchainImages.data());
+    frameManager->CreateSwapchainImages(swapchain, imageCount);
 
     swapchainImageFormat = surfaceFormat.format;
     swapchainExtent = extent;
 
     logger::Info("SwapChain is setup!");
-  }
-
-  void SwapChain::createImageViews()
-  {
-    swapchainImageViews.resize(swapchainImages.size());
-    for (size_t i = 0; i < swapchainImages.size(); i++) {
-      VkImageViewCreateInfo createInfo{};
-      createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-      createInfo.image = swapchainImages[i];
-      createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-      createInfo.format = swapchainImageFormat;
-      createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
-      createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-      createInfo.subresourceRange.baseMipLevel = 0;
-      createInfo.subresourceRange.levelCount = 1;
-      createInfo.subresourceRange.baseArrayLayer = 0;
-      createInfo.subresourceRange.layerCount = 1;
-
-      if (vkCreateImageView(device->getDevice(), &createInfo, nullptr, &swapchainImageViews[i]) != VK_SUCCESS) {
-        logger::FatalError("Failed to create Image Views");
-      }
-
-      logger::Info("Created Image View");
-    }
   }
 
   void SwapChain::CreateRenderPass(RenderPassConfig& renderPassConfig)
@@ -174,17 +146,16 @@ namespace vulkan
       subpass.preserveAttachmentCount = subpassInfo.preserveAttachmentCount;
       subpass.pPreserveAttachments = subpassInfo.pPreserveAttachments;
 
-      /*VkSubpassDependency dependency{};
-      dependency.srcSubpass = info.srcSubpass;
-      dependency.dstSubpass = info.dstSubpass;
-      dependency.srcStageMask = info.srcStageMask;
-      dependency.srcAccessMask = info.srcAccessMask;
-      dependency.dstStageMask = info.dstStageMask;
-      dependency.dstAccessMask = info.dstAccessMask;
-      dependency.dependencyFlags = info.dependencyFlags;*/
+      VkSubpassDependency dependency{};
+      dependency.srcSubpass = subpassInfo.srcSubpass;
+      dependency.dstSubpass = subpassInfo.dstSubpass;
+      dependency.srcStageMask = subpassInfo.srcStageMask;
+      dependency.srcAccessMask = subpassInfo.srcAccessMask;
+      dependency.dstStageMask = subpassInfo.dstStageMask;
+      dependency.dstAccessMask = subpassInfo.dstAccessMask;
 
       renderPassInfo.subpasses.push_back(subpass);
-      //renderPassInfo.dependencies.push_back(dependency);
+      renderPassInfo.dependencies.push_back(dependency);
     }
 
     VkRenderPassCreateInfo renderPassCreateInfo{};
@@ -193,8 +164,8 @@ namespace vulkan
     renderPassCreateInfo.pAttachments = renderPassInfo.attachments.data();
     renderPassCreateInfo.subpassCount = renderPassInfo.subpasses.size();
     renderPassCreateInfo.pSubpasses = renderPassInfo.subpasses.data();
-    //renderPassCreateInfo.dependencyCount = renderPassInfo.dependencies.size();
-    //renderPassCreateInfo.pDependencies = renderPassInfo.dependencies.data();
+    renderPassCreateInfo.dependencyCount = renderPassInfo.dependencies.size();
+    renderPassCreateInfo.pDependencies = renderPassInfo.dependencies.data();
 
     if (vkCreateRenderPass(device->getDevice(), &renderPassCreateInfo, nullptr, &renderPass) != VK_SUCCESS) {
       throw std::runtime_error("failed to create render pass!");
@@ -202,6 +173,27 @@ namespace vulkan
 
     logger::Info("Successfully Created RenderPass!");
   }
+
+  void SwapChain::BeginRenderPass(VkCommandBuffer* pCommandBuffer)
+  {
+    VkRenderPassBeginInfo renderPassInfo{};
+    renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+    renderPassInfo.renderPass = renderPass;
+    renderPassInfo.framebuffer = frameManager->GetFrames()[frameManager->GetCurrentFrame()].buffer;
+    renderPassInfo.renderArea.offset = {0, 0};
+    renderPassInfo.renderArea.extent = swapchainExtent;
+    VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
+    renderPassInfo.clearValueCount = 1;
+    renderPassInfo.pClearValues = &clearColor;
+    vkCmdBeginRenderPass(*pCommandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+  }
+
+  void SwapChain::EndRenderPass(VkCommandBuffer *pCommandBuffer)
+  {
+    vkCmdEndRenderPass(*pCommandBuffer);
+  }
+
+
 
   VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats)
   {

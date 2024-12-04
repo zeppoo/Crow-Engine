@@ -1,5 +1,5 @@
 #include "Vulkan/QueueManager.hpp"
-#include "FrameManager.hpp"
+#include "Vulkan/FrameManager.hpp"
 #include "Config/SettingsManager.hpp"
 #include "Logger.hpp"
 

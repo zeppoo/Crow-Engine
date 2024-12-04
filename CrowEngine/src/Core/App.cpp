@@ -25,7 +25,11 @@ namespace core
   {
     while (settings::getEngineConfig().isRunning)
     {
-      window->windowLoop();
+      while (!glfwWindowShouldClose(window->GetWindow()))
+      {
+        glfwPollEvents();
+        vulkanModule->RenderFrame();
+      }
       break;
     }
   }

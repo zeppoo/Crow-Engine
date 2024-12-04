@@ -30,13 +30,13 @@ namespace vulkan
     device = std::make_unique<Device>(window, queueManager);
 
     logger::Info("Setting Up Frame Manager...");
-    frameManager = std::make_unique<FrameManager>(device);
+    frameManager = std::make_unique<FrameManager>(device, queueManager);
 
     logger::Info("Setting Up SwapChain...");
-    swapchain = std::make_unique<SwapChain>(device, queueManager);
+    swapchain = std::make_unique<SwapChain>(device, queueManager, frameManager);
 
     logger::Info("Setting Up PipelineManager");
-    pipelineManager = std::make_unique<PipelineManager>(device, swapchain);
+    pipelineManager = std::make_unique<PipelineManager>(device, swapchain, frameManager);
 
     CreateNewGraphicsPipeline();
     return true;
@@ -48,6 +48,8 @@ namespace vulkan
     vkDeviceWaitIdle(device->getDevice());
     logger::Info("Destroying Vulkan Objects");
 
+    frameManager->DestroyFrames();
+
     for (GraphicsPipeline & pipeline : pipelineManager->GetGraphicsPipelines())
     {
       vkDestroyPipeline(device->getDevice(), pipeline.pipeline, nullptr);
@@ -55,10 +57,6 @@ namespace vulkan
     }
     // Destroy the render pass
     vkDestroyRenderPass(device->getDevice(), swapchain->GetRenderPass(), nullptr);
-
-    for (VkImageView imageView: swapchain->GetSwapchainImageViews()) {
-      vkDestroyImageView(device->getDevice(), imageView, nullptr);
-    }
 
     vkDestroySwapchainKHR(device->getDevice(), swapchain->GetSwapchain(), nullptr);
 
@@ -80,7 +78,11 @@ namespace vulkan
 
   void VulkanModule::RenderFrame()
   {
-
+    VkCommandBuffer* pCommandBuffer = frameManager->BeginCommandBuffer(swapchain->GetSwapchain());
+    swapchain->BeginRenderPass(pCommandBuffer);
+    pipelineManager->BindPipeline(pCommandBuffer, pipelineManager->GetGraphicsPipelines()[0]);
+    swapchain->EndRenderPass(pCommandBuffer);
+    frameManager->EndCommandBuffer(swapchain->GetSwapchain());
   }
 
   void VulkanModule::CreateNewGraphicsPipeline()

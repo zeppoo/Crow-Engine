@@ -1,5 +1,5 @@
-#include "../../include/Core/Window.hpp"
-#include "../../include/Config/SettingsManager.hpp"
+#include "Core/Window.hpp"
+#include "Config/SettingsManager.hpp"
 #include "Logger.hpp"
 
 namespace core
@@ -42,13 +42,5 @@ namespace core
       throw std::runtime_error("Failed to create window surface");
     }
     return surface;
-  }
-
-  void Window::windowLoop()
-  {
-    while (!glfwWindowShouldClose(window))
-    {
-      glfwPollEvents();
-    }
   }
 }

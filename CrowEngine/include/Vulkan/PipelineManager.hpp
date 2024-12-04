@@ -4,6 +4,7 @@
 #include "Device.hpp"
 #include "SwapChain.hpp"
 #include "PipelineInfo.hpp"
+#include "FrameManager.hpp"
 
 namespace vulkan{
 
@@ -20,13 +21,15 @@ namespace vulkan{
   class PipelineManager
   {
   public:
-    PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain);
+    PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain, std::unique_ptr<FrameManager> &frameManager);
 
     std::vector<GraphicsPipeline> GetGraphicsPipelines() {return graphicsPipelines;}
 
     void SetupPipelineManager();
 
     void CreateGraphicsPipeline(PipelineInfo pipelineInfo);
+
+    void BindPipeline(VkCommandBuffer* pCommandBuffer, GraphicsPipeline& graphicsPipeline);
 
   private:
 
@@ -37,6 +40,7 @@ namespace vulkan{
 
     std::unique_ptr<Device> &device;
     std::unique_ptr<SwapChain> &swapchain;
+    std::unique_ptr<FrameManager> &frameManager;
     std::vector<GraphicsPipeline> graphicsPipelines;
     VkDescriptorPool descriptorPool;
     std::vector<VkDescriptorSet> descriptorSets;

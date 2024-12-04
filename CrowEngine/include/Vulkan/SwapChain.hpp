@@ -18,6 +18,9 @@ namespace vulkan
 
     void RecreateSwapChain();
 
+    void BeginRenderPass(VkCommandBuffer* pCommandBuffer);
+    void EndRenderPass(VkCommandBuffer* pCommandBuffer);
+
     VkSwapchainKHR GetSwapchain()
     { return swapchain; }
 
@@ -36,10 +39,6 @@ namespace vulkan
     void createSwapChain(VkSwapchainKHR oldSwapChain);
 
     void CreateRenderPass(RenderPassConfig& RenderPassConfig);
-
-    void createImageViews();
-
-    void createFramebuffers();
 
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);

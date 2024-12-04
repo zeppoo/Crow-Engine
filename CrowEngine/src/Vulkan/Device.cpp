@@ -188,8 +188,6 @@ namespace vulkan
     return extensionsSupported && swapChainAdequate;
   }
 
-  void printPhysicalDeviceLimits(const VkPhysicalDeviceLimits& limits);
-
   int Device::RateDevice(VkPhysicalDevice device)
   {
     int score = 0;
@@ -197,8 +195,6 @@ namespace vulkan
     VkPhysicalDeviceFeatures deviceFeatures;
     vkGetPhysicalDeviceProperties(device, &deviceProperties);
     vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
-
-    printPhysicalDeviceLimits(deviceProperties.limits);
 
 
     if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
@@ -269,17 +265,5 @@ namespace vulkan
     }
 
     return true;
-  }
-
-  void printPhysicalDeviceLimits(const VkPhysicalDeviceLimits& limits) {
-    // Print some of the physical device limits as an example
-    std::cout << "Max Image Dimension 2D: " << limits.maxImageDimension2D << std::endl;
-    std::cout << "Max Image Dimension 3D: " << limits.maxImageDimension3D << std::endl;
-    std::cout << "Max Uniform Buffer Range: " << limits.maxUniformBufferRange << std::endl;
-    std::cout << "Max Vertex Input Attributes: " << limits.maxVertexInputAttributes << std::endl;
-    std::cout << "Max Viewports: " << limits.maxViewports << std::endl;
-    std::cout << "Max Framebuffer Width: " << limits.maxFramebufferWidth << std::endl;
-    std::cout << "Max Framebuffer Height: " << limits.maxFramebufferHeight << std::endl;
-    // Add more fields as needed...
   }
 }

@@ -54,7 +54,7 @@ namespace vulkan
     vkDestroyShaderModule(device, fragShader, nullptr);
   }
 
-  PipelineManager::PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain) : device{device}, swapchain{swapChain} {
+  PipelineManager::PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain, std::unique_ptr<FrameManager> &frameManager) : device{device}, swapchain{swapChain}, frameManager{frameManager} {
     SetupPipelineManager();
   }
 
@@ -66,7 +66,6 @@ namespace vulkan
     CreateGraphicsPipeline(pipelineInfo);
   }
 
-
   void PipelineManager::CreateGraphicsPipeline(PipelineInfo pipelineInfo)
   {
     logger::Info("Creating new Pipeline...");
@@ -75,5 +74,27 @@ namespace vulkan
     newPipeline.InitializePipeline(device->getDevice(), swapchain->GetRenderPass(), pipelineInfo);
     graphicsPipelines.push_back(newPipeline);
   }
+
+  void PipelineManager::BindPipeline(VkCommandBuffer* pCommandBuffer, GraphicsPipeline &graphicsPipeline)
+  {
+    vkCmdBindPipeline(*pCommandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline.pipeline);
+
+    VkViewport viewport{};
+    viewport.x = 0.0f;
+    viewport.y = 0.0f;
+    viewport.width = static_cast<float>(swapchain->GetSwapchainExtent().width);
+    viewport.height = static_cast<float>(swapchain->GetSwapchainExtent().height);
+    viewport.minDepth = 0.0f;
+    viewport.maxDepth = 1.0f;
+    vkCmdSetViewport(*pCommandBuffer, 0, 1, &viewport);
+
+    VkRect2D scissor{};
+    scissor.offset = {0, 0};
+    scissor.extent = swapchain->GetSwapchainExtent();
+    vkCmdSetScissor(*pCommandBuffer, 0, 1, &scissor);
+
+    vkCmdDraw(*pCommandBuffer, 3, 1, 0, 0);
+  }
+
 
 }

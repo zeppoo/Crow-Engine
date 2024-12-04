@@ -2,7 +2,13 @@
 "RenderPassConfig": {
 "name": "default",
 "SubpassInfo": {
-"pipelineBindPoint": 0
+"pipelineBindPoint": 0,
+"srcSubpass": 4294967295,
+"dstSubpass": 0,
+"srcStageMask": 1024,
+"dstStageMask": 1024,
+"srcAccessMask": 256,
+"dstAccessMask": 256
 },
 "RenderPassAttachmentInfo": {
 "type": 2,

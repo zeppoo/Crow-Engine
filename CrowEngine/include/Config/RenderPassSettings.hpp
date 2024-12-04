@@ -17,7 +17,7 @@ struct RenderPassInfo
   std::vector<VkAttachmentDescription> attachments;
   std::vector<VkAttachmentReference> attachmentRefs;
   std::vector<VkSubpassDescription> subpasses;
-  //std::vector<VkSubpassDependency> dependencies;
+  std::vector<VkSubpassDependency> dependencies;
 };
 
 
@@ -70,6 +70,14 @@ struct SubpassInfo
   uint32_t preserveAttachmentCount = 0;
   uint32_t* pPreserveAttachments = nullptr;
 
+  // Subpass Dependencies
+  uint32_t srcSubpass = VK_SUBPASS_EXTERNAL; // Source subpass index (use VK_SUBPASS_EXTERNAL for external)
+  uint32_t dstSubpass = 0; // Destination subpass index
+  VkPipelineStageFlags srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT; // Source pipeline stage mask
+  VkPipelineStageFlags dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT; // Destination pipeline stage mask
+  VkAccessFlags srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT; // Source access mask
+  VkAccessFlags dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT; // Destination access mask
+
   void BindAttachment(RenderPassAttachmentInfo* attachmentInfo)
   {
     AttachmentType type = attachmentInfo->type;
@@ -96,26 +104,16 @@ struct SubpassInfo
         break;
     }
   }
-
-  /*// Subpass Dependencies
-  uint32_t srcSubpass = 0; // Source subpass index (use VK_SUBPASS_EXTERNAL for external)
-  uint32_t dstSubpass = 0; // Destination subpass index
-  VkPipelineStageFlags srcStageMask = 0; // Source pipeline stage mask
-  VkPipelineStageFlags dstStageMask = 0; // Destination pipeline stage mask
-  VkAccessFlags srcAccessMask = 0; // Source access mask
-  VkAccessFlags dstAccessMask = 0; // Destination access mask
-  VkDependencyFlags dependencyFlags = 0; // Dependency flags (e.g., VK_DEPENDENCY_BY_REGION_BIT)*/
 };
 
 REFLECT_STRUCT_BEGIN(SubpassInfo)
   REFLECT_STRUCT_MEMBER(pipelineBindPoint)
-  /*REFLECT_STRUCT_MEMBER(srcSubpass)
+  REFLECT_STRUCT_MEMBER(srcSubpass)
   REFLECT_STRUCT_MEMBER(dstSubpass)
   REFLECT_STRUCT_MEMBER(srcStageMask)
   REFLECT_STRUCT_MEMBER(dstStageMask)
   REFLECT_STRUCT_MEMBER(srcAccessMask)
   REFLECT_STRUCT_MEMBER(dstAccessMask)
-  REFLECT_STRUCT_MEMBER(dependencyFlags)*/
 REFLECT_STRUCT_END()
 
 struct RenderPassConfig
