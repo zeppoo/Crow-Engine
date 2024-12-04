@@ -22,6 +22,8 @@ namespace vulkan{
   public:
     PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain);
 
+    std::vector<GraphicsPipeline> GetGraphicsPipelines() {return graphicsPipelines;}
+
     void SetupPipelineManager();
 
     void CreateGraphicsPipeline(PipelineInfo pipelineInfo);

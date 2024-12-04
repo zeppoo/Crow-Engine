@@ -3,14 +3,14 @@
 #include "crow_lib.hpp"
 #include "Device.hpp"
 #include "QueueManager.hpp"
+#include "FrameManager.hpp"
 #include "Config/RenderPassSettings.hpp"
 
 namespace vulkan
 {
   class SwapChain {
   public:
-
-    SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
+    SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<FrameManager> &frameManager);
 
     ~SwapChain();
 
@@ -23,12 +23,6 @@ namespace vulkan
 
     VkRenderPass GetRenderPass()
     { return renderPass; }
-
-    const std::vector<VkImage> GetSwapchainImages()
-    { return swapchainImages; }
-
-    std::vector<VkImageView> GetSwapchainImageViews()
-    { return swapchainImageViews; }
 
     VkFormat GetSwapchainImageFormat()
     { return swapchainImageFormat; }
@@ -48,17 +42,14 @@ namespace vulkan
     void createFramebuffers();
 
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
-
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
     std::unique_ptr<Device> &device;
     std::unique_ptr<QueueManager> &queueManager;
+    std::unique_ptr<FrameManager> &frameManager;
     VkSwapchainKHR swapchain;
     VkRenderPass renderPass;
-    std::vector<VkImage> swapchainImages;
-    std::vector<VkImageView> swapchainImageViews;
-    std::vector<VkFramebuffer> swapchainFramebuffers;
     VkFormat swapchainImageFormat;
     VkExtent2D swapchainExtent;
   };

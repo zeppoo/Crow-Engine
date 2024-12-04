@@ -23,11 +23,14 @@ namespace vulkan
 
   bool VulkanModule::Startup()
   {
-    logger::Info("Setting Up QueueManager...");
+    logger::Info("Setting Up Queue Manager...");
     queueManager = std::make_unique<QueueManager>();
 
     logger::Info("Setting Up Device...");
     device = std::make_unique<Device>(window, queueManager);
+
+    logger::Info("Setting Up Frame Manager...");
+    frameManager = std::make_unique<FrameManager>(device);
 
     logger::Info("Setting Up SwapChain...");
     swapchain = std::make_unique<SwapChain>(device, queueManager);
@@ -45,6 +48,11 @@ namespace vulkan
     vkDeviceWaitIdle(device->getDevice());
     logger::Info("Destroying Vulkan Objects");
 
+    for (GraphicsPipeline & pipeline : pipelineManager->GetGraphicsPipelines())
+    {
+      vkDestroyPipeline(device->getDevice(), pipeline.pipeline, nullptr);
+      vkDestroyPipelineLayout(device->getDevice(), pipeline.pipelineLayout, nullptr);
+    }
     // Destroy the render pass
     vkDestroyRenderPass(device->getDevice(), swapchain->GetRenderPass(), nullptr);
 

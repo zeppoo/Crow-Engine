@@ -9,6 +9,7 @@
 #include "PipelineInfo.hpp"
 #include "Debugger.hpp"
 #include "VulkanUtilities.hpp"
+#include "FrameManager.hpp"
 
 namespace vulkan
 {
@@ -38,6 +39,7 @@ namespace vulkan
     // Memebers
     std::unique_ptr<QueueManager> queueManager;
     std::unique_ptr<Device> device;
+    std::unique_ptr<FrameManager> frameManager;
     std::unique_ptr<SwapChain> swapchain;
     std::unique_ptr<PipelineManager> pipelineManager;
   };

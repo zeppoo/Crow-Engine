@@ -10,8 +10,9 @@ namespace vulkan
   struct Frame
   {
     VkImage image;
-    VkImageView ImageView;
+    VkImageView imageView;
     VkFramebuffer buffer;
+    VkCommandBuffer commandBuffer;
     VkSemaphore semaphore;
     VkFence fence;
   };
@@ -21,10 +22,14 @@ namespace vulkan
   public:
     FrameManager(std::unique_ptr<Device> &device);
 
+    void CreateImageViews(VkFormat swapchainImageFormat);
+    void CreateFrameBuffers(VkExtent2D swapchainExtent, VkRenderPass renderPass);
+    void AllocateCommandBuffers();
+    void RecordCommandBuffer();
+
   private:
     void FrameManagerInitialization();
-    void CreateImageView(VkImage& image, VkImageView& imageView, VkFormat swapchainImageFormat);
-    void CreateFrameBuffer(VkFramebuffer& framebuffer, VkImageView& imageView, VkExtent2D swapchainExtent, VkRenderPass renderPass);
+
 
     std::unique_ptr<Device> &device;
 

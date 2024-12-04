@@ -10,7 +10,7 @@
 
 namespace vulkan
 {
-  SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) : device{device}, queueManager{queueManager}
+  SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<FrameManager> &frameManager) : device{device}, queueManager{queueManager}, frameManager{frameManager}
   {
     SetupSwapChain();
   }
@@ -31,13 +31,6 @@ namespace vulkan
 
   void SwapChain::CleanupSwapChain()
   {
-    //for (size_t i = 0; i < swapchainFramebuffers.size(); i++) {
-    //  vkDestroyFramebuffer(device->getDevice(), swapchainFramebuffers[i], nullptr);
-    //}
-
-    for (size_t i = 0; i < swapchainImageViews.size(); i++) {
-      vkDestroyImageView(device->getDevice(), swapchainImageViews[i], nullptr);
-    }
   }
 
   void SwapChain::RecreateSwapChain()
@@ -208,31 +201,6 @@ namespace vulkan
     }
 
     logger::Info("Successfully Created RenderPass!");
-  }
-
-  void SwapChain::createFramebuffers()
-  {
-    swapchainFramebuffers.resize(swapchainImageViews.size());
-
-    for (size_t i = 0; i < swapchainImageViews.size(); i++) {
-      VkImageView attachments[] = {
-          swapchainImageViews[i]
-      };
-
-      VkFramebufferCreateInfo framebufferInfo{};
-      framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-      framebufferInfo.renderPass = renderPass;
-      framebufferInfo.attachmentCount = 1;
-      framebufferInfo.pAttachments = attachments;
-      framebufferInfo.width = swapchainExtent.width;
-      framebufferInfo.height = swapchainExtent.height;
-      framebufferInfo.layers = 1;
-
-      if (vkCreateFramebuffer(device->getDevice(), &framebufferInfo, nullptr, &swapchainFramebuffers[i]) !=
-          VK_SUCCESS) {
-        throw std::runtime_error("failed to create framebuffer!");
-      }
-    }
   }
 
   VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats)
