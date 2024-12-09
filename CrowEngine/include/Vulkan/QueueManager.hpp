@@ -35,9 +35,11 @@ namespace vulkan
 
     bool CreateCommandPools(VkDevice &device);
 
-    void AllocateCommandBuffers(VkDevice &device);
+    bool AllocateCommandBuffers(VkDevice &device);
 
     std::vector<VkDeviceQueueCreateInfo> CreateQueueInfos();
+
+    VkCommandBuffer* GetCommandBuffer(QueueType bufferType);
 
     std::vector<QueueFamily> GetQueueFamilies()
     { return queueFamilies; }

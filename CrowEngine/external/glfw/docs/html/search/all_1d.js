@@ -73,7 +73,7 @@ var searchData=
   ['with_20mingw_20w64_20and_20glfw_20binaries_70',['With MinGW-w64 and GLFW binaries',['../build_guide.html#build_link_mingw',1,'']]],
   ['with_20opengl_71',['Rendering with OpenGL',['../quick_guide.html#quick_render',1,'']]],
   ['with_20pkg_20config_20and_20glfw_20binaries_20on_20unix_72',['With pkg-config and GLFW binaries on Unix',['../build_guide.html#build_link_pkgconfig',1,'']]],
-  ['with_20the_20cmake_20gui_73',['Generating with the CMake GUI',['../compile_guide.html#compile_generate_gui',1,'']]],
+  ['with_20the_20cmake_20gui_73',['Generating with the CMake Gui',['../compile_guide.html#compile_generate_gui',1,'']]],
   ['with_20the_20right_20libraries_74',['Link with the right libraries',['../build_guide.html#build_link',1,'']]],
   ['with_20visual_20c_20and_20glfw_20binaries_75',['With Visual C++ and GLFW binaries',['../build_guide.html#build_link_win32',1,'']]],
   ['with_20xcode_20on_20macos_76',['With Xcode on macOS',['../build_guide.html#build_link_xcode',1,'']]],

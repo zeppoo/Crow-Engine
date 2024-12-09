@@ -161,7 +161,7 @@ namespace vulkan
     return true;
   }
 
-  void QueueManager::AllocateCommandBuffers(VkDevice &device)
+  bool QueueManager::AllocateCommandBuffers(VkDevice &device)
   {
     for (int i = 0; i < queueFamilies.size(); i++) {
       queueFamilies[i].commandBuffers.resize(FRAMES_IN_FLIGHT + 3);
@@ -173,7 +173,28 @@ namespace vulkan
 
       if (vkAllocateCommandBuffers(device, &allocInfo, queueFamilies[i].commandBuffers.data()) != VK_SUCCESS) {
         logger::FatalError("Failed to allocate command buffers.");
+        return false;
       }
+    }
+
+    return true;
+  }
+
+  VkCommandBuffer* QueueManager::GetCommandBuffer(QueueType bufferType)
+  {
+    switch(bufferType)
+    {
+      case PRESENT:
+        return &queueFamilies[presentQueues[0].familyIndex].commandBuffers[0];
+      case GRAPHICS:
+        return &queueFamilies[graphicsQueues[0].familyIndex].commandBuffers[0];
+      case COMPUTE:
+        return &queueFamilies[computeQueues[0].familyIndex].commandBuffers[0];
+      case TRANSFER:
+        return &queueFamilies[transferQueues[0].familyIndex].commandBuffers[0];
+      default:
+        logger::Warning("Can't find right command buffer type");
+        return nullptr;
     }
   }
 }

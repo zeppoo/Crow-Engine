@@ -18,14 +18,17 @@ namespace vulkan
 
     void RecreateSwapChain();
 
-    void BeginRenderPass(VkCommandBuffer* pCommandBuffer);
+    void CreateRenderPass(RenderPassConfig& RenderPassConfig);
+    void BeginRenderPass(VkCommandBuffer* pCommandBuffer, VkRenderPass renderPass);
+    void SetViewPort(VkCommandBuffer* pCommandBuffer);
+    void SetScissor(VkCommandBuffer* pCommandBuffer);
     void EndRenderPass(VkCommandBuffer* pCommandBuffer);
 
     VkSwapchainKHR GetSwapchain()
     { return swapchain; }
 
-    VkRenderPass GetRenderPass()
-    { return renderPass; }
+    std::vector<VkRenderPass> GetRenderPasses()
+    { return renderPasses; }
 
     VkFormat GetSwapchainImageFormat()
     { return swapchainImageFormat; }
@@ -38,8 +41,6 @@ namespace vulkan
 
     void createSwapChain(VkSwapchainKHR oldSwapChain);
 
-    void CreateRenderPass(RenderPassConfig& RenderPassConfig);
-
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
@@ -48,7 +49,7 @@ namespace vulkan
     std::unique_ptr<QueueManager> &queueManager;
     std::unique_ptr<FrameManager> &frameManager;
     VkSwapchainKHR swapchain;
-    VkRenderPass renderPass;
+    std::vector<VkRenderPass> renderPasses;
     VkFormat swapchainImageFormat;
     VkExtent2D swapchainExtent;
   };

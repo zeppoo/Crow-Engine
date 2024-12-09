@@ -1,30 +1,40 @@
 #pragma once
 
-#include "crow_lib.hpp"
 #include "../Core/Window.hpp"
-#include "QueueManager.hpp"
-#include "Device.hpp"
-#include "SwapChain.hpp"
-#include "PipelineManager.hpp"
-#include "PipelineInfo.hpp"
+#include "BufferManager.hpp"
 #include "Debugger.hpp"
-#include "VulkanUtilities.hpp"
+#include "Device.hpp"
 #include "FrameManager.hpp"
+#include "PipelineInfo.hpp"
+#include "PipelineManager.hpp"
+#include "QueueManager.hpp"
+#include "SwapChain.hpp"
+#include "VulkanUtilities.hpp"
+#include "crow_lib.hpp"
 
 namespace vulkan
 {
-
   class VulkanModule {
   public:
     explicit VulkanModule(std::unique_ptr<core::Window> &window);
 
     ~VulkanModule();
 
+    QueueManager* GetQueueManager() const { return queueManager.get(); }
+    Device* GetDevice() const { return device.get(); }
+    FrameManager* GetFrameManager() const { return frameManager.get(); }
+    SwapChain* GetSwapChain() const { return swapchain.get(); }
+    PipelineManager* GetPipelineManager() const { return pipelineManager.get(); }
+    BufferManager* GetBufferManager() const { return bufferManager.get(); }
+
     bool Startup();
 
     void ShutDown();
-
-    void RenderFrame();
+    void RecordGUIBuffer();
+    void RecordShaderBuffer();
+    void BeginShaderExecution();
+    void RenderingLoop();
+    void EndShaderExecution();
 
     void CreateNewGraphicsPipeline();
     void CreateNewGraphicsPipeline(const char* pipelineConfigFile);
@@ -42,5 +52,6 @@ namespace vulkan
     std::unique_ptr<FrameManager> frameManager;
     std::unique_ptr<SwapChain> swapchain;
     std::unique_ptr<PipelineManager> pipelineManager;
+    std::unique_ptr<BufferManager> bufferManager;
   };
 }

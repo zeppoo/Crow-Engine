@@ -13,9 +13,15 @@ namespace vulkan{
     VkPipeline pipeline;
     VkPipelineLayout pipelineLayout;
     VkDescriptorSetLayout descriptorSetLayout;
+    VkDescriptorPool descriptorPool;
+    std::vector<VkDescriptorSet> descriptorSets;
 
     void InitializePipelineLayout(const VkDevice &device);
     void InitializePipeline(const VkDevice& device, const VkRenderPass& renderPass, const PipelineInfo pipelineInfo);
+    void InitializeDescriptorLayout(const VkDevice& device);
+    void InitializeDescriptorPool(const VkDevice& device, std::vector<VkDescriptorPoolSize> poolSizes);
+    void InitializeDescriptorSets(const VkDevice& device, std::vector<Buffer> buffers);
+    void BindPipeline(VkCommandBuffer* pCommandBuffer);
   };
 
   class PipelineManager
@@ -29,7 +35,6 @@ namespace vulkan{
 
     void CreateGraphicsPipeline(PipelineInfo pipelineInfo);
 
-    void BindPipeline(VkCommandBuffer* pCommandBuffer, GraphicsPipeline& graphicsPipeline);
 
   private:
 

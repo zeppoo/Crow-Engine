@@ -10,25 +10,25 @@ namespace vulkan
   public:
     Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager);
 
-    VkInstance getVkInstance()
+    VkInstance GetVkInstance()
     { return vkInstance; }
 
-    VkSurfaceKHR getSurface()
+    VkSurfaceKHR GetSurface()
     { return surface; }
 
-    VkDevice getDevice() const
+    VkDevice GetDevice() const
     { return device; }
 
-    VkPhysicalDevice getPhysicDevice() const
+    VkPhysicalDevice GetPhysicDevice() const
     { return physicDevice; }
 
-    VkDebugUtilsMessengerEXT getDebugMessenger() const
+    VkDebugUtilsMessengerEXT GetDebugMessenger() const
     { return debugMessenger; }
 
-    const std::vector<const char *> &getValidationLayers()
+    const std::vector<const char *> &GetValidationLayers()
     { return validationLayers; }
 
-    const std::vector<const char *> &getDeviceExtensions()
+    const std::vector<const char *> &GetDeviceExtensions()
     { return deviceExtensions; }
 
   private:

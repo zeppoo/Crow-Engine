@@ -2,6 +2,7 @@
 
 #include "crow_lib.hpp"
 #include "Vulkan/Device.hpp"
+#include <Vulkan/BufferManager.hpp>
 
 namespace vulkan
 {
@@ -12,7 +13,6 @@ namespace vulkan
     VkImage image;
     VkImageView imageView;
     VkFramebuffer buffer;
-    VkCommandBuffer commandBuffer;
     VkSemaphore semaphore[2];
     VkFence fence;
   };
@@ -30,8 +30,8 @@ namespace vulkan
     void CreateImageViews(VkFormat swapchainImageFormat);
     void CreateFrameBuffers(VkExtent2D swapchainExtent, VkRenderPass renderPass);
     void CreateSynchronizationObjects();
-    VkCommandBuffer* BeginCommandBuffer(VkSwapchainKHR swapchain);
-    void EndCommandBuffer(VkSwapchainKHR swapchain);
+    void AddFrameToQueue(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain);
+    void PresentFrame(VkSwapchainKHR swapchain);
 
   private:
     std::unique_ptr<QueueManager> &queueManager;

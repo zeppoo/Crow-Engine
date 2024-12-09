@@ -8,7 +8,7 @@ var searchData=
   ['generated_5',['Configuration header is no longer generated',['../news.html#config_header_caveat',1,'']]],
   ['generating_20build_20files_20with_20cmake_6',['Generating build files with CMake',['../compile_guide.html#compile_generate',1,'']]],
   ['generating_20with_20command_20line_20cmake_7',['Generating with command-line CMake',['../compile_guide.html#compile_generate_cli',1,'']]],
-  ['generating_20with_20the_20cmake_20gui_8',['Generating with the CMake GUI',['../compile_guide.html#compile_generate_gui',1,'']]],
+  ['generating_20with_20the_20cmake_20gui_8',['Generating with the CMake Gui',['../compile_guide.html#compile_generate_gui',1,'']]],
   ['generation_20requires_20doxygen_201_209_208_20or_20later_9',['Documentation generation requires Doxygen 1.9.8 or later',['../news.html#docs_target_caveat',1,'']]],
   ['get_20window_20title_10',['Ability to get window title',['../news.html#window_title_function',1,'']]],
   ['getting_20started_11',['Getting started',['../quick_guide.html',1,'']]],
@@ -550,6 +550,6 @@ var searchData=
   ['green_547',['green',['../struct_g_l_f_wgammaramp.html#affccc6f5df47820b6562d709da3a5a3a',1,'GLFWgammaramp']]],
   ['greenbits_548',['greenBits',['../struct_g_l_f_wvidmode.html#a292fdd281f3485fb3ff102a5bda43faa',1,'GLFWvidmode']]],
   ['guarantees_20and_20limitations_549',['Guarantees and limitations',['../intro_guide.html#guarantees_limitations',1,'']]],
-  ['gui_550',['Generating with the CMake GUI',['../compile_guide.html#compile_generate_gui',1,'']]],
+  ['gui_550',['Generating with the CMake Gui',['../compile_guide.html#compile_generate_gui',1,'']]],
   ['guide_551',['guide',['../context_guide.html',1,'Context guide'],['../input_guide.html',1,'Input guide'],['../monitor_guide.html',1,'Monitor guide'],['../vulkan_guide.html',1,'Vulkan guide'],['../window_guide.html',1,'Window guide']]]
 ];

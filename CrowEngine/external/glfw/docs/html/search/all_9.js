@@ -21,7 +21,7 @@ var searchData=
   ['cmake_20and_20glfw_20source_18',['With CMake and GLFW source',['../build_guide.html#build_link_cmake_source',1,'']]],
   ['cmake_20and_20installed_20glfw_20binaries_19',['With CMake and installed GLFW binaries',['../build_guide.html#build_link_cmake_package',1,'']]],
   ['cmake_20and_20mingw_20',['Cross-compilation with CMake and MinGW',['../compile_guide.html#compile_mingw_cross',1,'']]],
-  ['cmake_20gui_21',['Generating with the CMake GUI',['../compile_guide.html#compile_generate_gui',1,'']]],
+  ['cmake_20gui_21',['Generating with the CMake Gui',['../compile_guide.html#compile_generate_gui',1,'']]],
   ['cmake_20option_20has_20been_20removed_22',['cmake option has been removed',['../news.html#use_osmesa_removed',1,'GLFW_USE_OSMESA CMake option has been removed'],['../news.html#use_wayland_removed',1,'GLFW_USE_WAYLAND CMake option has been removed'],['../news.html#vulkan_static_removed',1,'GLFW_VULKAN_STATIC CMake option has been removed']]],
   ['cmake_20options_23',['cmake options',['../compile_guide.html#compile_options',1,'CMake options'],['../compile_guide.html#compile_options_macos',1,'macOS specific CMake options'],['../compile_guide.html#compile_options_shared',1,'Shared CMake options'],['../compile_guide.html#compile_options_unix',1,'Unix-like system specific CMake options'],['../compile_guide.html#compile_options_win32',1,'Win32 specific CMake options']]],
   ['cocoa_20nsview_20native_20access_20function_24',['Cocoa NSView native access function',['../news.html#cocoa_nsview_function',1,'']]],

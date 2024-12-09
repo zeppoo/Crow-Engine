@@ -8,7 +8,7 @@ var searchData=
   ['texture_20loading_5',['Removal of image and texture loading',['../moving_guide.html#moving_image',1,'']]],
   ['than_20xp_6',['Support for versions of Windows older than XP',['../moving_guide.html#moving_windows',1,'']]],
   ['the_20api_7',['Introduction to the API',['../intro_guide.html',1,'']]],
-  ['the_20cmake_20gui_8',['Generating with the CMake GUI',['../compile_guide.html#compile_generate_gui',1,'']]],
+  ['the_20cmake_20gui_8',['Generating with the CMake Gui',['../compile_guide.html#compile_generate_gui',1,'']]],
   ['the_20glext_20h_20header_9',['The glext.h header',['../context_guide.html#context_glext_header',1,'']]],
   ['the_20glfw_20header_10',['Including the GLFW header',['../quick_guide.html#quick_include',1,'']]],
   ['the_20glfw_20header_20file_11',['Including the GLFW header file',['../build_guide.html#build_include',1,'']]],

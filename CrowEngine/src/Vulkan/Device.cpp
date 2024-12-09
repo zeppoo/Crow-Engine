@@ -88,6 +88,9 @@ namespace vulkan
     if (queueManager->CreateCommandPools(device)) {
       logger::Info("Created Command Pools!");
     }
+    if (queueManager->AllocateCommandBuffers(device)) {
+      logger::Info("Allocated Command Buffers!");
+    }
   }
 
   bool Device::FindPhysicalDevice()
@@ -136,19 +139,19 @@ namespace vulkan
     createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
     createInfo.pQueueCreateInfos = queueCreateInfos.data();
     createInfo.pEnabledFeatures = &deviceFeatures;
-    createInfo.enabledExtensionCount = static_cast<uint32_t>((getDeviceExtensions()).size());
-    createInfo.ppEnabledExtensionNames = (getDeviceExtensions()).data();
+    createInfo.enabledExtensionCount = static_cast<uint32_t>((GetDeviceExtensions()).size());
+    createInfo.ppEnabledExtensionNames = (GetDeviceExtensions()).data();
 
     // Validation layers
     if (settings::getEnableValidationLayers()) {
-      createInfo.enabledLayerCount = static_cast<uint32_t>(getValidationLayers().size());
-      createInfo.ppEnabledLayerNames = getValidationLayers().data();
+      createInfo.enabledLayerCount = static_cast<uint32_t>(GetValidationLayers().size());
+      createInfo.ppEnabledLayerNames = GetValidationLayers().data();
     } else {
       createInfo.enabledLayerCount = 0;
     }
 
     // Create the logical device
-    if (vkCreateDevice(getPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
+    if (vkCreateDevice(GetPhysicDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
       logger::FatalError("Failed to Create Logical Device");
       return false;
     }
@@ -181,7 +184,7 @@ namespace vulkan
 
     bool swapChainAdequate = false;
     if (extensionsSupported) {
-      SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(device, getSurface());
+      SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(device, GetSurface());
       swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
     }
 
