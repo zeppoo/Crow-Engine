@@ -29,7 +29,7 @@ namespace vulkan
                                 queueFamilyProperties, transferQueues, settings::getQueueConfig().transferQueuesCount, false);
     CleanupEmptyFamilies(currentQueueFamilies);
 
-    queueFamilies = currentQueueFamilies; //Allocate to the heap without fragmentation
+    queueFamilies = currentQueueFamilies; // Allocate to prevent memory fragmentation
   }
 
   void QueueManager::AssignQueuesToQueueFamilies(
@@ -37,27 +37,30 @@ namespace vulkan
       VkSurfaceKHR &surface,
       VkQueueFlagBits flagBit,
       std::vector<QueueFamily> &currentQueueFamilies,
-      const std::vector<VkQueueFamilyProperties> &queueFamilyProperties,
+      const std::vector<VkQueueFamilyProperties> &queueFamiliesProperties,
       std::vector<QueueData> &queueType,
-      int queueCount, bool isPresentQueue)
+      int queueCount,
+      bool isPresentQueue)
   {
     int bestQueueFamilyindex = 0;
-    int bestQueueFamilySupportLevel = CheckFlagSupportNum(queueFamilyProperties[0].queueFlags);
-    for (int i = 0; i < queueCount; i++) {
-      for (int j = 0; j < queueFamilyProperties.size(); j++) {
-        int supportedQueueCount = queueFamilyProperties[j].queueCount - currentQueueFamilies[j].queueCount;
+    // I look for how many flags the first family supports.
+    // this makes sure that a queue gets assigned to the family that is most dedicated to the flag we're looking for
+    int bestQueueFamilySupportLevel = CheckFlagSupportNum(queueFamiliesProperties[0].queueFlags);
+    for (int i = 0; i < queueCount; i++) { // Iterate for the amount of queues we're looking to allocate
+      for (int j = 0; j < queueFamiliesProperties.size(); j++) { // Iterate over every family we found
+        int supportedQueueCount = queueFamiliesProperties[j].queueCount - currentQueueFamilies[j].queueCount; // Check if current family has enough queues left to assign
         if (supportedQueueCount <= 0) continue; // Skip if no queues are available
 
-        if (isPresentQueue && (queueFamilyProperties[j].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
+        if (isPresentQueue && (queueFamiliesProperties[j].queueFlags & VK_QUEUE_GRAPHICS_BIT)) {
           VkBool32 presentSupport = VK_FALSE;
           vkGetPhysicalDeviceSurfaceSupportKHR(physicDevice, j, surface, &presentSupport);
           if (presentSupport) {
             bestQueueFamilyindex = j;
             continue;
           }
-        } else if (queueFamilyProperties[j].queueFlags & flagBit) {
-          int flagSupportLevel = CheckFlagSupportNum(queueFamilyProperties[j].queueFlags);
-
+        } else if (queueFamiliesProperties[j].queueFlags & flagBit) {
+          int flagSupportLevel = CheckFlagSupportNum(queueFamiliesProperties[j].queueFlags);
+          // Check if this family is more dedicated than the previous best family
           if (flagSupportLevel < bestQueueFamilySupportLevel) {
             bestQueueFamilySupportLevel = flagSupportLevel;
             bestQueueFamilyindex = j;
@@ -65,12 +68,20 @@ namespace vulkan
         }
       }
       QueueData data = CreateQueueData(currentQueueFamilies[bestQueueFamilyindex],
-                                       queueFamilyProperties[bestQueueFamilyindex].queueCount);
+                                       queueFamiliesProperties[bestQueueFamilyindex].queueCount);
       currentQueueFamilies[bestQueueFamilyindex].queueCount++;
       currentQueueFamilies[bestQueueFamilyindex].queuePriorities.push_back(1.0f);
       queueType.push_back(data);
       queueCount--;
     }
+  }
+
+  int QueueManager::CheckFlagSupportNum(VkQueueFlags flags)
+  {
+    return ((flags & VK_QUEUE_GRAPHICS_BIT) ? 1 : 0) +
+           ((flags & VK_QUEUE_COMPUTE_BIT) ? 1 : 0) +
+           ((flags & VK_QUEUE_TRANSFER_BIT) ? 1 : 0) +
+           ((flags & VK_QUEUE_SPARSE_BINDING_BIT) ? 1 : 0);
   }
 
   QueueData QueueManager::CreateQueueData(QueueFamily &family, int maxQueueCount)
@@ -96,15 +107,7 @@ namespace vulkan
     }
   };
 
-  int QueueManager::CheckFlagSupportNum(VkQueueFlags flags)
-  {
-    return ((flags & VK_QUEUE_GRAPHICS_BIT) ? 1 : 0) +
-           ((flags & VK_QUEUE_COMPUTE_BIT) ? 1 : 0) +
-           ((flags & VK_QUEUE_TRANSFER_BIT) ? 1 : 0) +
-           ((flags & VK_QUEUE_SPARSE_BINDING_BIT) ? 1 : 0);
-  }
-
-  void QueueManager::CreateQueues(VkDevice &device)
+  void QueueManager::AllocateQueues(VkDevice &device)
   {
     GetQueueHandles(device);
     BindQueueDataToQueues(presentQueues);

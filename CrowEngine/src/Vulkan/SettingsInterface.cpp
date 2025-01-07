@@ -7,6 +7,18 @@ namespace vulkan
 *       GENERAL RESOURCE MANAGEMENT       *
 *                                         *
 *******************************************/
+void RestartVulkan() {
+  VLK->ShutDown();
+  VLK->InitiliazeVulkan();
+}
+
+void ShutDownVulkan() {
+  VLK->ShutDown();
+}
+
+void BeginFrame() {
+  VLK->GetFrameManager().
+}
 
 
 

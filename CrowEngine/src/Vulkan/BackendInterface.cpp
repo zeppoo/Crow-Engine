@@ -8,7 +8,7 @@ namespace vulkan
   VulkanModule::VulkanModule(std::unique_ptr<core::Window> &window) : window{window}
   {
     logger::Info("Setting up VulkanModule");
-    if (Startup() == true) {
+    if (InitiliazeVulkan() == true) {
       logger::Info("Vulkan Module Succesfully Created!");
     }
   }
@@ -18,7 +18,7 @@ namespace vulkan
 
   }
 
-  bool VulkanModule::Startup()
+  bool VulkanModule::InitiliazeVulkan()
   {
     logger::Info("Setting Up Queue Manager...");
     queueManager = std::make_unique<QueueManager>();

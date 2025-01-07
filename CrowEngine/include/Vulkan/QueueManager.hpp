@@ -31,7 +31,7 @@ namespace vulkan
   public:
     void FindQueueFamilies(VkPhysicalDevice &physicDevice, VkSurfaceKHR &surface);
 
-    void CreateQueues(VkDevice &device);
+    void AllocateQueues(VkDevice &device);
 
     bool CreateCommandPools(VkDevice &device);
 
@@ -62,7 +62,7 @@ namespace vulkan
         VkSurfaceKHR &surface,
         VkQueueFlagBits flagBit,
         std::vector<QueueFamily> &currentQueueFamilies,
-        const std::vector<VkQueueFamilyProperties> &queueFamilyProperties,
+        const std::vector<VkQueueFamilyProperties> &queueFamiliesProperties,
         std::vector<QueueData> &queueType,
         int indicies, bool isPresentQueue);
 

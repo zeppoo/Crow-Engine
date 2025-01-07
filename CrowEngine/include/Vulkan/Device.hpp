@@ -32,9 +32,7 @@ namespace vulkan
     { return deviceExtensions; }
 
   private:
-    bool InitVulkan();
-
-    void SetupDevice();
+    bool InitVulkan(const char* appName, const char* engineName);
 
     bool FindPhysicalDevice();
 

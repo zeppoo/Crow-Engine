@@ -24,7 +24,10 @@ add_executable(CrowEngine ${SOURCE_FILES}
         src/Gui/Inspector.hpp
         src/Gui/Gui_Defaults.hpp
         src/Gui/GUI_Module.cpp
-        src/Gui/GUI_Module.hpp)
+        src/Gui/GUI_Module.hpp
+        src/Vulkan/CommandBuffers.cpp
+        src/Vulkan/CommandBuffers.hpp
+)
 
 # Set External Libraries
 add_subdirectory(${EXTERNAL_DIR}/glm)

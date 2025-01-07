@@ -1,12 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include <unordered_map>
 
 namespace GeneralSettings
 {
   struct EngineConfig {
-    std::string engineName = "Crow Engine";
+    std::string appName = "Application";
+    std::string engineName = "Engine";
     std::string version = "0.0.1";
     std::string credit = "Rein Verhaag, Clement Malaka";
     bool isRunning = false;
@@ -73,6 +75,15 @@ namespace ShaderSettings
   };
 }
 
+namespace VulkanSettings
+{
+  //VkInstance
+
+
+  //VkDevice
+
+}
+
 namespace DebugSettings
 {
   struct LogConfig {
@@ -85,6 +96,8 @@ namespace DebugSettings
     std::string logFile = "path/to/log.txt";
   };
 }
+
+
 
 namespace settings
 {

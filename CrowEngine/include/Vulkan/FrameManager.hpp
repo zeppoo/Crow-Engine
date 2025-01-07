@@ -31,6 +31,7 @@ namespace vulkan
     void CreateFrameBuffers(VkExtent2D swapchainExtent, VkRenderPass renderPass);
     void CreateSynchronizationObjects();
     void AddFrameToQueue(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain);
+    void RecordCommands();
     void PresentFrame(VkSwapchainKHR swapchain);
 
   private:

@@ -10,36 +10,32 @@
 
 namespace vulkan
 {
-  struct Buffer {
-    std::string name;
-    std::vector<VkBuffer> buffers = {};
-    VkBufferCreateInfo bufferInfo{};
-    VkDeviceMemory bufferMemory = VK_NULL_HANDLE;
+  class Buffer {
+  public:
+    struct CreateInfo {
+      VkDeviceSize size;
+      VkBufferUsageFlags usage;
+      VkMemoryPropertyFlags memoryProperties;
+      bool createStaging = false;
+      // You could add more parameters like:
+      // - Custom alignment requirements
+      // - Sharing mode/queue families
+      // - Debug name
+    };
 
-    virtual VkBufferCreateInfo* createBufferInfo();
+    virtual ~Buffer() = default;
 
-    uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
-  };
+    virtual void create(const CreateInfo& info) = 0;
+    virtual void destroy() = 0;
+    virtual void update(const void* data, VkDeviceSize size, VkDeviceSize offset = 0) = 0;
 
-  struct VertexBuffer : Buffer {
-    const std::vector<std::vector<Vertex>> vertices;
+    VkBuffer getHandle() const { return buffer; }
+    VkDeviceSize getSize() const { return size; }
 
-    VkBufferCreateInfo* createBufferInfo() override;
-
-    void BindVertexBuffer(VkCommandBuffer* pCommandBuffer);
-  };
-
-  struct IndexBuffer : Buffer {
-    const std::vector<uint16_t> indices;
-
-    VkBufferCreateInfo* createBufferInfo() override;
-
-    void BindIndexBuffer(VkCommandBuffer* pCommandBuffer);
-  };
-
-  struct UniformBuffer : Buffer {
-
-    VkBufferCreateInfo* createBufferInfo() override;
+  protected:
+    VkBuffer buffer = VK_NULL_HANDLE;
+    VkDeviceMemory memory = VK_NULL_HANDLE;
+    VkDeviceSize size = 0;
   };
 
   class BufferManager

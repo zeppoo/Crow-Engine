@@ -27,7 +27,7 @@ namespace vulkan
     PipelineManager* GetPipelineManager() const { return pipelineManager.get(); }
     BufferManager* GetBufferManager() const { return bufferManager.get(); }
 
-    bool Startup();
+    bool InitiliazeVulkan();
 
     void ShutDown();
     void RecordGUIBuffer();

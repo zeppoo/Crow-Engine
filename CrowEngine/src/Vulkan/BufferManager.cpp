@@ -2,44 +2,6 @@
 
 namespace vulkan
 {
-    VkBufferCreateInfo* Buffer::createBufferInfo()
-    {
-      return nullptr;
-    }
-
-    VkBufferCreateInfo* VertexBuffer::createBufferInfo()
-    {
-      bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-      bufferInfo.size = sizeof(vertices[0]) * vertices.size();
-      bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-      bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-      return &bufferInfo;
-    }
-
-    void VertexBuffer::BindVertexBuffer(VkCommandBuffer* pCommandBuffer)
-    {
-      VkDeviceSize offsets[] = {0};
-      vkCmdBindVertexBuffers(*pCommandBuffer, 0, 1, buffers.data(), offsets);
-    }
-
-    VkBufferCreateInfo* IndexBuffer::createBufferInfo()
-    {
-      bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-      bufferInfo.size = sizeof(indices[0]) * indices.size();
-      bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-      bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-      return &bufferInfo;
-    }
-
-    void IndexBuffer::BindIndexBuffer(VkCommandBuffer *pCommandBuffer)
-    {
-      vkCmdBindIndexBuffer(*pCommandBuffer, buffer, 0, VK_INDEX_TYPE_UINT16);
-
-      vkCmdDrawIndexed(*pCommandBuffer, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
-    }
-
      BufferManager::BufferManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) : device{device}, queueManager{queueManager} {}
 
      BufferManager::~BufferManager()

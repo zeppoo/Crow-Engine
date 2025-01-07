@@ -12,13 +12,24 @@ namespace vulkan
   Device::Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager)
       : queueManager{queueManager}
   {
-    InitVulkan();
+    InitVulkan(settings::getEngineConfig().appName.data(), settings::getEngineConfig().engineName.data());
     logger::Info("Succesfully Created Vulkan Instance");
     surface = window->CreateVulkanSurface(vkInstance);
-    SetupDevice();
+    if (FindPhysicalDevice()) {
+      logger::Info("Found Physical Device!");
+    }
+    if (CreateLogicalDevice()) {
+      logger::Info("Created Logical Device!");
+    }
+    if (queueManager->CreateCommandPools(device)) {
+      logger::Info("Created Command Pools!");
+    }
+    if (queueManager->AllocateCommandBuffers(device)) {
+      logger::Info("Allocated Command Buffers!");
+    }
   }
 
-  bool Device::InitVulkan()
+  bool Device::InitVulkan(const char* appName, const char* engineName)
   {
     if (!checkValidationLayerSupport()) {
       logger::FatalError("Validation layers requested, but not available!");
@@ -26,9 +37,9 @@ namespace vulkan
 
     VkApplicationInfo appInfo{};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName = "Hello Vulkan";
+    appInfo.pApplicationName = appName;
     appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-    appInfo.pEngineName = "No Engine";
+    appInfo.pEngineName = engineName;
     appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
     appInfo.apiVersion = VK_API_VERSION_1_0;
 
@@ -75,22 +86,6 @@ namespace vulkan
     }
 
     return true;
-  }
-
-  void Device::SetupDevice()
-  {
-    if (FindPhysicalDevice()) {
-      logger::Info("Found Physical Device!");
-    }
-    if (CreateLogicalDevice()) {
-      logger::Info("Created Logical Device!");
-    }
-    if (queueManager->CreateCommandPools(device)) {
-      logger::Info("Created Command Pools!");
-    }
-    if (queueManager->AllocateCommandBuffers(device)) {
-      logger::Info("Allocated Command Buffers!");
-    }
   }
 
   bool Device::FindPhysicalDevice()
@@ -156,7 +151,7 @@ namespace vulkan
       return false;
     }
 
-    queueManager->CreateQueues(device);
+    queueManager->AllocateQueues(device);
     return true;
   }
 

@@ -5,19 +5,20 @@
 #include "Vulkan/BackendInterface.hpp"
 namespace vulkan
 {
-  static VulkanModule* module = nullptr;
+  static VulkanModule* VLK = nullptr;
 
 /*******************************************
 *                                         *
 *       GENERAL RESOURCE MANAGEMENT       *
 *                                         *
 *******************************************/
-void InitializeRenderResources(); // Set up Vulkan resources needed for rendering.
-void CleanupRenderResources();    // Release Vulkan resources at the end.
+void RestartVulkan(); // Set up Vulkan resources needed for rendering.
+void ShutDownVulkan(); // Release Vulkan resources at the end.
 void BeginFrame(); // Prepare resources and begin the frame.
-void EndFrame(); // Present the frame and clean up temporary resources.
+void ShowFrame(); // Present the frame and clean up temporary resources.
 void ResizeWindow(int width, int height); // Handle window resizing.
 void UpdateFrameBuffers(); // Recreate framebuffers if needed.
+void UpdateBuffers(); // Recreate buffers if needed.
 void UpdateDescriptorSets(); // Update descriptor sets for rendering.
 void ReloadShaders(); // Reload shaders dynamically.
 void SetShaderParameter(const char* name, float value); // Update a uniform parameter for shaders.
@@ -32,8 +33,6 @@ void UpdateImGuiSettings(); // Update settings controlled via ImGui.
 *        SWAPCHAIN MANAGEMENT             *
 *                                         *
 *******************************************/
-void CreateSwapchain(const SwapchainConfig& config); // Creates a new swapchain with specified configurations.
-void DestroySwapchain(VkSwapchainKHR swapchain); // Cleans up the swapchain and its associated resources.
 void RecreateSwapchain(VkDevice device, VkSurfaceKHR surface, VkSwapchainKHR oldSwapchain, VkExtent2D newExtent); // Recreates the swapchain during resizing or format changes.
 void PresentSwapchainImage(VkQueue queue, VkSwapchainKHR swapchain, uint32_t imageIndex, VkSemaphore waitSemaphore); // Submits the image to the presentation engine.
 
@@ -71,6 +70,7 @@ void Stop();
 *                                         *
 *******************************************/
 void CreateNewPipeline(); // Creates New Graphics Pipeline
+void LoadPipeline();
 void SetPipeline(VkPipeline newPipeline); // Binds a new pipeline for rendering.
 void UpdatePipelineLayout(VkPipelineLayout newLayout); // Updates the pipeline layout, affecting descriptor sets and push constants.
 void SetViewport(const VkViewport& viewport); // Sets a new viewport dynamically.
