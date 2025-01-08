@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Gui_Defaults.hpp"
+#include "Gui/Gui_Defaults.hpp"
 #include "Core/Window.hpp"
 #include "Vulkan/BackendInterface.hpp"
 #include "Vulkan/SettingsInterface.hpp"

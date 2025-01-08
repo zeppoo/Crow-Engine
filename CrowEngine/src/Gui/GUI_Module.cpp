@@ -1,4 +1,4 @@
-#include "GUI_Module.hpp"
+#include "Gui/GUI_Module.hpp"
 
 namespace GUI
 {
@@ -32,7 +32,6 @@ namespace GUI
     init_info.ImageCount = vulkan::FRAMES_IN_FLIGHT; // Swapchain image count
     init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT; // Change if using MSAA
     init_info.Allocator = nullptr; // Custom allocator, pass null if unused
-    init_info.CheckVkResultFn = check_vk_result; // Function to handle Vulkan errors
   }
 
 

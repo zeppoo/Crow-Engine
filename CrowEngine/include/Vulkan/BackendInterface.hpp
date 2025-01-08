@@ -9,6 +9,7 @@
 #include "PipelineManager.hpp"
 #include "QueueManager.hpp"
 #include "SwapChain.hpp"
+#include "CommandBuffers.hpp"
 #include "VulkanUtilities.hpp"
 #include "crow_lib.hpp"
 
@@ -26,6 +27,7 @@ namespace vulkan
     SwapChain* GetSwapChain() const { return swapchain.get(); }
     PipelineManager* GetPipelineManager() const { return pipelineManager.get(); }
     BufferManager* GetBufferManager() const { return bufferManager.get(); }
+    CommandBufferManager* GetCmdBufferManager() const { return cmdBufferManager.get(); }
 
     bool InitiliazeVulkan();
 
@@ -53,5 +55,6 @@ namespace vulkan
     std::unique_ptr<SwapChain> swapchain;
     std::unique_ptr<PipelineManager> pipelineManager;
     std::unique_ptr<BufferManager> bufferManager;
+    std::unique_ptr<CommandBufferManager> cmdBufferManager;
   };
 }

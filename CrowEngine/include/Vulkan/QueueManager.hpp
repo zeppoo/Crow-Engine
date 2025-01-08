@@ -13,9 +13,21 @@ namespace vulkan
   };
 
   struct QueueData {
+    VkFence queueFence;
+    std::vector<VkCommandBuffer> recordedBuffers;
     VkQueue *pQueue;
     int queueIndex;
     int familyIndex;
+
+    void SubmitBuffers(VkDevice device)
+    {
+      vkWaitForFences(device, 1, &queueFence, VK_TRUE, UINT64_MAX); // Wait for previous frame
+      vkResetFences(device, 1, &queueFence);  // Reset for reuse
+      VkSubmitInfo submitInfo{};
+      submitInfo.commandBufferCount = recordedBuffers.size();
+      submitInfo.pCommandBuffers = recordedBuffers.data();
+      vkQueueSubmit(*pQueue, 1, &submitInfo, queueFence);
+    }
   };
 
   struct QueueFamily {
@@ -40,6 +52,8 @@ namespace vulkan
     std::vector<VkDeviceQueueCreateInfo> CreateQueueInfos();
 
     VkCommandBuffer* GetCommandBuffer(QueueType bufferType);
+
+    void SubmitCommandBuffer(VkCommandBuffer* commandBuffer, QueueType queueType);
 
     std::vector<QueueFamily> GetQueueFamilies()
     { return queueFamilies; }
@@ -74,11 +88,11 @@ namespace vulkan
 
     void GetQueueHandles(VkDevice &device);
 
-    void BindQueueDataToQueues(std::vector<QueueData> &queueType);
+    void BindQueueDataToQueues(std::vector<QueueData> &queueList);
 
+    void CreateQueueFences(VkDevice &device, std::vector<QueueData> &queueList);
 
     std::vector<QueueFamily> queueFamilies;
-
     std::vector<QueueData> presentQueues;
     std::vector<QueueData> graphicsQueues;
     std::vector<QueueData> computeQueues;

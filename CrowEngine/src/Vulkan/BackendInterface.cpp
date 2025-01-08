@@ -26,7 +26,10 @@ namespace vulkan
     logger::Info("Setting Up Device...");
     device = std::make_unique<Device>(window, queueManager);
 
-    logger::Info("Setting Up BufferManager");
+    logger::Info("Setting Up CommandBufferManager...");
+    cmdBufferManager = std::make_unique<CommandBufferManager>(device, queueManager);
+
+    logger::Info("Setting Up BufferManager...");
     bufferManager = std::make_unique<BufferManager>(device, queueManager);
 
     logger::Info("Setting Up Frame Manager...");
@@ -35,7 +38,7 @@ namespace vulkan
     logger::Info("Setting Up SwapChain...");
     swapchain = std::make_unique<SwapChain>(device, queueManager, frameManager);
 
-    logger::Info("Setting Up PipelineManager");
+    logger::Info("Setting Up PipelineManager...");
     pipelineManager = std::make_unique<PipelineManager>(device, swapchain, frameManager);
 
     CreateNewGraphicsPipeline();

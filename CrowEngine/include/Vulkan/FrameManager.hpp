@@ -29,9 +29,8 @@ namespace vulkan
     void CreateSwapchainImages(VkSwapchainKHR& swapchain, uint32_t imageCount);
     void CreateImageViews(VkFormat swapchainImageFormat);
     void CreateFrameBuffers(VkExtent2D swapchainExtent, VkRenderPass renderPass);
-    void CreateSynchronizationObjects();
+    void CreateFrameSyncObjects();
     void AddFrameToQueue(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain);
-    void RecordCommands();
     void PresentFrame(VkSwapchainKHR swapchain);
 
   private:

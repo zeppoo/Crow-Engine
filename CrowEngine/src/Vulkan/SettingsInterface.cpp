@@ -1,4 +1,5 @@
 #include "Vulkan/SettingsInterface.hpp"
+#include "Gui/Gui_Defaults.hpp"
 
 namespace vulkan
 {
@@ -16,8 +17,40 @@ void ShutDownVulkan() {
   VLK->ShutDown();
 }
 
-void BeginFrame() {
-  VLK->GetFrameManager().
+void BeginFrame()
+{
+
+}
+
+
+/*******************************************
+*                                         *
+*        COMMANDBUFFER MANAGEMENT         *
+*                                         *
+*******************************************/
+void RecordRenderBuffer() {
+  VLK->GetFrameManager();
+  CommandBuffer cmdBuffer = VLK->GetCmdBufferManager()->CreateBuffer(PRESENT);
+  cmdBuffer.Reset();
+  cmdBuffer.BeginRecording();
+  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, VLK->GetSwapChain()->GetRenderPasses()[0]);
+  VLK->GetPipelineManager()->GetGraphicsPipelines()[0].BindPipeline(cmdBuffer.buffer);
+  VLK->GetSwapChain()->SetViewPort(cmdBuffer.buffer);
+  VLK->GetSwapChain()->SetScissor(cmdBuffer.buffer);
+  VLK->GetSwapChain()->EndRenderPass(cmdBuffer.buffer);
+  cmdBuffer.EndRecording();
+  VLK->GetCmdBufferManager()->AddBuffer(cmdBuffer);
+}
+
+void RecordGUIBuffer() {
+  VLK->GetFrameManager();
+  CommandBuffer cmdBuffer = VLK->GetCmdBufferManager()->CreateBuffer(PRESENT);
+  cmdBuffer.Reset();
+  cmdBuffer.BeginRecording();
+  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, VLK->GetSwapChain()->GetRenderPasses()[0]);
+  ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), *cmdBuffer.buffer);
+  VLK->GetSwapChain()->EndRenderPass(cmdBuffer.buffer);
+  cmdBuffer.EndRecording();
 }
 
 

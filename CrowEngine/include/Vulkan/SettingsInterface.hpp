@@ -23,14 +23,22 @@ void UpdateDescriptorSets(); // Update descriptor sets for rendering.
 void ReloadShaders(); // Reload shaders dynamically.
 void SetShaderParameter(const char* name, float value); // Update a uniform parameter for shaders.
 void CompileShader(const std::string& path); // Compile a new shader at runtime.
-void RenderImGui(); // Render ImGui interface.
 void UpdateImGuiSettings(); // Update settings controlled via ImGui.
 
 
 
 /*******************************************
 *                                         *
-*        SWAPCHAIN MANAGEMENT             *
+*        COMMANDBUFFER MANAGEMENT         *
+*                                         *
+*******************************************/
+void RecordRenderBuffer();
+
+
+
+/*******************************************
+*                                         *
+*          SWAPCHAIN MANAGEMENT           *
 *                                         *
 *******************************************/
 void RecreateSwapchain(VkDevice device, VkSurfaceKHR surface, VkSwapchainKHR oldSwapchain, VkExtent2D newExtent); // Recreates the swapchain during resizing or format changes.
@@ -40,7 +48,7 @@ void PresentSwapchainImage(VkQueue queue, VkSwapchainKHR swapchain, uint32_t ima
 
 /*******************************************
 *                                         *
-*       RENDER PASS MANAGEMENT            *
+*         RENDER PASS MANAGEMENT          *
 *                                         *
 *******************************************/
 void CreateRenderPass(const RenderPassConfig& config); // Creates a new render pass with the given configuration.
@@ -142,7 +150,7 @@ void SetDynamicStates(PipelineSettings& settings, const std::vector<VkDynamicSta
 
 /*******************************************
 *                                         *
-*       DEBUGGING AND UTILITIES           *
+*        DEBUGGING AND UTILITIES          *
 *                                         *
 *******************************************/
 }

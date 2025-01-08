@@ -1,6 +1,4 @@
 #include "Vulkan/FrameManager.hpp"
-
-
 #include "Logger.hpp"
 
 namespace vulkan
@@ -31,7 +29,7 @@ namespace vulkan
       frames[i].image = swapchainImages[i];
     }
 
-    CreateSynchronizationObjects();
+    CreateFrameSyncObjects();
   }
 
   void FrameManager::CreateImageViews(VkFormat swapchainImageFormat)
@@ -82,7 +80,7 @@ namespace vulkan
     }
   }
 
-  void FrameManager::CreateSynchronizationObjects()
+  void FrameManager::CreateFrameSyncObjects()
   {
     for (Frame & frame : frames) {
       VkSemaphoreCreateInfo semaphoreInfo{};
@@ -95,13 +93,15 @@ namespace vulkan
       if (vkCreateSemaphore(device->GetDevice(), &semaphoreInfo, nullptr, &frame.semaphore[0]) != VK_SUCCESS ||
         vkCreateSemaphore(device->GetDevice(), &semaphoreInfo, nullptr, &frame.semaphore[1]) != VK_SUCCESS ||
         vkCreateFence(device->GetDevice(), &fenceInfo, nullptr, &frame.fence) != VK_SUCCESS) {
-        throw std::runtime_error("failed to create semaphores!");
+        throw std::runtime_error("failed to create synchronization objects!");
       }
     }
   }
 
   void FrameManager::AddFrameToQueue(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain)
   {
+    queueManager->GetPresentQueues()[0].SubmitBuffers(device->GetDevice());
+
     vkWaitForFences(device->GetDevice(), 1, &frames[currentFrame].fence, VK_TRUE, UINT64_MAX);
     vkResetFences(device->GetDevice(), 1, &frames[currentFrame].fence);
     vkAcquireNextImageKHR(device->GetDevice(), swapchain, UINT64_MAX, frames[currentFrame].semaphore[0], VK_NULL_HANDLE, &currentFrame);

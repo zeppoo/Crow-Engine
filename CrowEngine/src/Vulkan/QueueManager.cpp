@@ -114,6 +114,10 @@ namespace vulkan
     BindQueueDataToQueues(graphicsQueues);
     BindQueueDataToQueues(computeQueues);
     BindQueueDataToQueues(transferQueues);
+    CreateQueueFences(device, presentQueues);
+    CreateQueueFences(device, graphicsQueues);
+    CreateQueueFences(device, computeQueues);
+    CreateQueueFences(device, transferQueues);
   }
 
   void QueueManager::GetQueueHandles(VkDevice &device)
@@ -126,10 +130,23 @@ namespace vulkan
     }
   }
 
-  void QueueManager::BindQueueDataToQueues(std::vector<QueueData> &queueType)
+  void QueueManager::BindQueueDataToQueues(std::vector<QueueData> &queueList)
   {
     for (int i = 0; i < queueFamilies[i].queues.size(); ++i) {
-      queueType[i].pQueue = &queueFamilies[queueType[i].familyIndex].queues[queueType[i].queueIndex];
+      queueList[i].pQueue = &queueFamilies[queueList[i].familyIndex].queues[queueList[i].queueIndex];
+    }
+  }
+
+  void QueueManager::CreateQueueFences(VkDevice &device, std::vector<QueueData> &queueList)
+  {
+    for (int i = 0; i < queueFamilies[i].queues.size(); ++i) {
+      VkFenceCreateInfo fenceInfo{};
+      fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+      fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+
+      if (vkCreateFence(device, &fenceInfo, nullptr, &queueList[i].queueFence) != VK_SUCCESS) {
+        logger::FatalError("Failed to create queue fences");
+      }
     }
   }
 
@@ -198,6 +215,23 @@ namespace vulkan
       default:
         logger::Warning("Can't find right command buffer type");
         return nullptr;
+    }
+  }
+
+  void QueueManager::SubmitCommandBuffer(VkCommandBuffer* commandBuffer, QueueType queueType)
+  {
+    switch(queueType)
+    {
+      case PRESENT:
+        presentQueues[0].recordedBuffers.push_back(*commandBuffer);
+      case GRAPHICS:
+        graphicsQueues[0].recordedBuffers.push_back(*commandBuffer);
+      case COMPUTE:
+        computeQueues[0].recordedBuffers.push_back(*commandBuffer);
+      case TRANSFER:
+        transferQueues[0].recordedBuffers.push_back(*commandBuffer);
+      default:
+        logger::Warning("Couldn't submit commandbuffer");
     }
   }
 }
