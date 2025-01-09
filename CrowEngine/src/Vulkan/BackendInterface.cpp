@@ -33,10 +33,10 @@ namespace vulkan
     bufferManager = std::make_unique<BufferManager>(device, queueManager);
 
     logger::Info("Setting Up Frame Manager...");
-    frameManager = std::make_unique<FrameManager>(device, queueManager);
+    frameManager = std::make_unique<FrameManager>(device, queueManager, swapchain);
 
     logger::Info("Setting Up SwapChain...");
-    swapchain = std::make_unique<SwapChain>(device, queueManager, frameManager);
+    swapchain = std::make_unique<SwapChain>(device, queueManager);
 
     logger::Info("Setting Up PipelineManager...");
     pipelineManager = std::make_unique<PipelineManager>(device, swapchain, frameManager);
@@ -52,13 +52,17 @@ namespace vulkan
     vkDeviceWaitIdle(device->GetDevice());
     logger::Info("Destroying Vulkan Objects");
 
-    frameManager->DestroyFrames();
-
     for (GraphicsPipeline & pipeline : pipelineManager->GetGraphicsPipelines())
     {
       vkDestroyPipeline(device->GetDevice(), pipeline.pipeline, nullptr);
       vkDestroyPipelineLayout(device->GetDevice(), pipeline.pipelineLayout, nullptr);
     }
+
+    for(SwapchainImage & image : swapchain->GetSwapchainImages()) {
+      vkDestroyFramebuffer(device->GetDevice(), image.framebuffer, nullptr);
+      vkDestroyImageView(device->GetDevice(), image.view, nullptr);
+    }
+
     // Destroy the render pass
     for (VkRenderPass & renderPass : swapchain->GetRenderPasses()) {
       vkDestroyRenderPass(device->GetDevice(), renderPass, nullptr);
@@ -80,16 +84,6 @@ namespace vulkan
     vkDestroyInstance(device->GetVkInstance(), nullptr);
 
     logger::Info("All Vulkan Objects Destroyed!");
-  }
-
-  void VulkanModule::RecordGUIBuffer()
-  {
-
-  }
-
-  void VulkanModule::RecordShaderBuffer()
-  {
-
   }
 
   void VulkanModule::RenderingLoop()

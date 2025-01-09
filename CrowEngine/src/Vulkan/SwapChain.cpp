@@ -10,8 +10,8 @@
 
 namespace vulkan
 {
-SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<FrameManager> &frameManager) :
-    device{device}, queueManager{queueManager}, frameManager{frameManager}
+SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) :
+    device{device}, queueManager{queueManager}
 {
   SetupSwapChain();
 }
@@ -21,11 +21,10 @@ SwapChain::~SwapChain() {}
 void SwapChain::SetupSwapChain()
 {
   createSwapChain(VK_NULL_HANDLE);
-  frameManager->CreateImageViews(swapchainImageFormat);
   RenderPassConfig renderPassConfig = GenerateDefaultRenderPassConfig();
   DeserializeStructsFromFile(DefaultRenderpass_json, &renderPassConfig);
   CreateRenderPass(renderPassConfig);
-  frameManager->CreateFrameBuffers(swapchainExtent, renderPasses[0]);
+  CreateSwapchainImages();
 }
 
 void SwapChain::CleanupSwapChain() {}
@@ -36,8 +35,6 @@ void SwapChain::RecreateSwapChain()
   CleanupSwapChain();
 
   createSwapChain(swapchain);
-  frameManager->CreateImageViews(swapchainImageFormat);
-  frameManager->CreateFrameBuffers(swapchainExtent, renderPasses[0]);
 }
 
 void SwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
@@ -94,14 +91,70 @@ void SwapChain::createSwapChain(VkSwapchainKHR oldSwapChain)
   }
 
   vkDestroySwapchainKHR(device->GetDevice(), oldSwapChain, nullptr);
-
-  frameManager->CreateSwapchainImages(swapchain, imageCount);
-
   swapchainImageFormat = surfaceFormat.format;
   swapchainExtent = extent;
 
   logger::Info("SwapChain is setup!");
 }
+
+  void SwapChain::CreateSwapchainImages()
+  {
+    // Step 1: Get the number of swapchain images
+    uint32_t imageCount;
+    vkGetSwapchainImagesKHR(device->GetDevice(), swapchain, &imageCount, nullptr);
+    swapchainImages.resize(imageCount);
+
+    std::vector<VkImage> images(imageCount);
+    vkGetSwapchainImagesKHR(device->GetDevice(), swapchain, &imageCount, images.data());
+    // Store each image in your struct
+    for (size_t i = 0; i < imageCount; i++) {
+      swapchainImages[i].image = images[i];
+      CreateImageView(i);
+      CreateFrameBuffer(i);
+    }
+  }
+
+  void SwapChain::CreateImageView(uint32_t index)
+  {
+    VkImageViewCreateInfo createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    createInfo.image = swapchainImages[index].image;
+    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.format = swapchainImageFormat;
+    createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+    createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+    createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+    createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+    createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    createInfo.subresourceRange.baseMipLevel = 0;
+    createInfo.subresourceRange.levelCount = 1;
+    createInfo.subresourceRange.baseArrayLayer = 0;
+    createInfo.subresourceRange.layerCount = 1;
+
+    if (vkCreateImageView(device->GetDevice(), &createInfo, nullptr, &swapchainImages[index].view) != VK_SUCCESS) {
+      logger::FatalError("Failed to create Image Views");
+    }
+    logger::Info("Created Image View");
+  }
+
+  void SwapChain::CreateFrameBuffer(uint32_t index)
+  {
+      VkImageView attachments[] = {swapchainImages[index].view};
+
+      VkFramebufferCreateInfo framebufferInfo{};
+      framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+      framebufferInfo.renderPass = renderPasses[0];
+      framebufferInfo.attachmentCount = 1;
+      framebufferInfo.pAttachments = attachments;
+      framebufferInfo.width = swapchainExtent.width;
+      framebufferInfo.height = swapchainExtent.height;
+      framebufferInfo.layers = 1;
+
+      if (vkCreateFramebuffer(device->GetDevice(), &framebufferInfo, nullptr, &swapchainImages[index].framebuffer) !=
+          VK_SUCCESS) {
+        throw std::runtime_error("failed to create framebuffer!");
+      }
+  }
 
 void SwapChain::CreateRenderPass(RenderPassConfig &renderPassConfig)
 {
@@ -174,12 +227,12 @@ void SwapChain::CreateRenderPass(RenderPassConfig &renderPassConfig)
   renderPasses.push_back(renderPass);
 }
 
-void SwapChain::BeginRenderPass(VkCommandBuffer *pCommandBuffer, VkRenderPass renderPass)
+void SwapChain::BeginRenderPass(VkCommandBuffer *pCommandBuffer, uint32_t renderpassIndex, uint32_t currentImage)
 {
   VkRenderPassBeginInfo renderPassInfo{};
   renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-  renderPassInfo.renderPass = renderPass;
-  renderPassInfo.framebuffer = frameManager->GetFrames()[frameManager->GetCurrentFrame()].buffer;
+  renderPassInfo.renderPass = renderPasses[renderpassIndex];
+  renderPassInfo.framebuffer = swapchainImages[currentImage].framebuffer;
   renderPassInfo.renderArea.offset = {0, 0};
   renderPassInfo.renderArea.extent = swapchainExtent;
   VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 1.0f}}};

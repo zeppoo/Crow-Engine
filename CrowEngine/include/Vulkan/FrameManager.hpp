@@ -2,6 +2,7 @@
 
 #include "crow_lib.hpp"
 #include "Vulkan/Device.hpp"
+#include "Vulkan/SwapChain.hpp"
 #include <Vulkan/BufferManager.hpp>
 
 namespace vulkan
@@ -10,8 +11,6 @@ namespace vulkan
 
   struct Frame
   {
-    VkImage image;
-    VkImageView imageView;
     VkFramebuffer buffer;
     VkSemaphore semaphore[2];
     VkFence fence;
@@ -20,24 +19,23 @@ namespace vulkan
   class FrameManager
   {
   public:
-    FrameManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
+    FrameManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<SwapChain> &swapchain);
 
-    std::vector<Frame> GetFrames(){ return frames; }
-    uint32_t GetCurrentFrame(){return currentFrame; }
+    std::vector<Frame> GetFrames() { return frames; }
+    uint32_t GetCurrentImage() { return currentImage; }
+    uint32_t GetCurrentFrame() { return currentFrame; }
 
-    void DestroyFrames();
-    void CreateSwapchainImages(VkSwapchainKHR& swapchain, uint32_t imageCount);
-    void CreateImageViews(VkFormat swapchainImageFormat);
-    void CreateFrameBuffers(VkExtent2D swapchainExtent, VkRenderPass renderPass);
     void CreateFrameSyncObjects();
-    void AddFrameToQueue(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain);
+    void PrepareFrame(VkCommandBuffer* pCommandBuffer, VkSwapchainKHR swapchain);
     void PresentFrame(VkSwapchainKHR swapchain);
 
   private:
     std::unique_ptr<QueueManager> &queueManager;
     std::unique_ptr<Device> &device;
+    std::unique_ptr<SwapChain> &swapchain;
     VkDescriptorPool descriptorPool;
     std::vector<Frame> frames;
+    uint32_t currentImage;
     uint32_t currentFrame = 0;
   };
 }

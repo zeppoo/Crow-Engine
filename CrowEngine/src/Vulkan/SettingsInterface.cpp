@@ -33,7 +33,7 @@ void RecordRenderBuffer() {
   CommandBuffer cmdBuffer = VLK->GetCmdBufferManager()->CreateBuffer(PRESENT);
   cmdBuffer.Reset();
   cmdBuffer.BeginRecording();
-  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, VLK->GetSwapChain()->GetRenderPasses()[0]);
+  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, 0, VLK->GetFrameManager()->GetCurrentImage());
   VLK->GetPipelineManager()->GetGraphicsPipelines()[0].BindPipeline(cmdBuffer.buffer);
   VLK->GetSwapChain()->SetViewPort(cmdBuffer.buffer);
   VLK->GetSwapChain()->SetScissor(cmdBuffer.buffer);
@@ -47,7 +47,7 @@ void RecordGUIBuffer() {
   CommandBuffer cmdBuffer = VLK->GetCmdBufferManager()->CreateBuffer(PRESENT);
   cmdBuffer.Reset();
   cmdBuffer.BeginRecording();
-  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, VLK->GetSwapChain()->GetRenderPasses()[0]);
+  VLK->GetSwapChain()->BeginRenderPass(cmdBuffer.buffer, 0, VLK->GetFrameManager()->GetCurrentImage());
   ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), *cmdBuffer.buffer);
   VLK->GetSwapChain()->EndRenderPass(cmdBuffer.buffer);
   cmdBuffer.EndRecording();
@@ -95,7 +95,6 @@ void CompileShader(const std::string& path)
 
 void Play()
 {
-  module->BeginShaderExecution();
 }
 
 void Pause()
@@ -103,9 +102,10 @@ void Pause()
 
 }
 
+
 void Stop()
 {
-  module->EndShaderExecution();
+
 }
 
 
@@ -117,12 +117,12 @@ void Stop()
 *******************************************/
 void CreateNewGraphicsPipeline()
 {
-  module->CreateNewGraphicsPipeline();
+
 }
 
 void RemoveGraphicsPipeline()
 {
- module.
+
 }
 
 // Vertex Input
