@@ -2,7 +2,7 @@
 
 namespace vulkan
 {
-     BufferManager::BufferManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) : device{device}, queueManager{queueManager} {}
+     BufferManager::BufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager) : device{device}, queueManager{queueManager} {}
 
      BufferManager::~BufferManager()
     {

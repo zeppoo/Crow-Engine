@@ -8,7 +8,7 @@ namespace vulkan
 {
   class Device {
   public:
-    Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager);
+    Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager);
 
     VkInstance GetVkInstance()
     { return vkInstance; }
@@ -49,7 +49,7 @@ namespace vulkan
     bool checkExtensionSupport(const std::vector<const char *> &requiredExtensions);
 
     //References
-    std::unique_ptr<QueueManager> &queueManager;
+    std::shared_ptr<QueueManager> queueManager;
     // Members
     VkInstance vkInstance;
     VkSurfaceKHR surface;

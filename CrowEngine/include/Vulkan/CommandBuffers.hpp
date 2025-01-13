@@ -14,6 +14,7 @@ struct CommandBuffer {
   void EndRecording();
   void Reset();
 
+  std::shared_ptr<QueueManager> queueManager;
   VkCommandBuffer *buffer;
   QueueType bufferType;
   bool isRecorded = false;
@@ -21,18 +22,14 @@ struct CommandBuffer {
 
 class CommandBufferManager {
 public:
-  CommandBufferManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
+  CommandBufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager);
 
   CommandBuffer CreateBuffer(QueueType bufferType);
   void QueueBuffer(CommandBuffer commandBuffer);
-  void AddBuffer(CommandBuffer commandBuffer);
-  void RemoveBuffer(int index);
-  void ResetStoredBuffers();
-  void SubmitStoredBuffers();
+  void SubmitBuffers(QueueType bufferType, uint32_t queueIndex);
 
 private:
-  std::vector<CommandBuffer> reuseBuffers;
-  std::unique_ptr<Device> &device;
-  std::unique_ptr<QueueManager> &queueManager;
+  std::shared_ptr<Device> device;
+  std::shared_ptr<QueueManager> queueManager;
 };
 } // namespace vulkan

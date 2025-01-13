@@ -41,7 +41,7 @@ namespace vulkan
   class BufferManager
   {
   public:
-    BufferManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
+    BufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager);
     ~BufferManager();
 
     void AddCommandBuffer(const std::string name, QueueType type);
@@ -54,8 +54,8 @@ namespace vulkan
   private:
     uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
-    std::unique_ptr<QueueManager> &queueManager;
-    std::unique_ptr<Device> &device;
+    std::shared_ptr<QueueManager> queueManager;
+    std::shared_ptr<Device> device;
 
     std::unordered_map<std::string, Buffer> buffers;
   };

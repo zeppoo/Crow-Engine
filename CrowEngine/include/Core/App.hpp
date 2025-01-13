@@ -26,7 +26,7 @@ namespace core
 
     // Members
     static App instance;
-    std::unique_ptr<Window> window;
+    std::shared_ptr<Window> window;
     std::unique_ptr<vulkan::VulkanModule> vulkanModule;
   };
 }

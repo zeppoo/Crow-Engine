@@ -5,7 +5,7 @@
 
 namespace vulkan
 {
-  VulkanModule::VulkanModule(std::unique_ptr<core::Window> &window) : window{window}
+  VulkanModule::VulkanModule(std::shared_ptr<core::Window> &window) : window{window}
   {
     logger::Info("Setting up VulkanModule");
     if (InitiliazeVulkan() == true) {
@@ -21,25 +21,25 @@ namespace vulkan
   bool VulkanModule::InitiliazeVulkan()
   {
     logger::Info("Setting Up Queue Manager...");
-    queueManager = std::make_unique<QueueManager>();
+    queueManager = std::make_shared<QueueManager>();
 
     logger::Info("Setting Up Device...");
-    device = std::make_unique<Device>(window, queueManager);
+    device = std::make_shared<Device>(window, queueManager);
 
     logger::Info("Setting Up CommandBufferManager...");
-    cmdBufferManager = std::make_unique<CommandBufferManager>(device, queueManager);
+    cmdBufferManager = std::make_shared<CommandBufferManager>(device, queueManager);
 
     logger::Info("Setting Up BufferManager...");
-    bufferManager = std::make_unique<BufferManager>(device, queueManager);
+    bufferManager = std::make_shared<BufferManager>(device, queueManager);
 
     logger::Info("Setting Up Frame Manager...");
-    frameManager = std::make_unique<FrameManager>(device, queueManager, swapchain);
+    frameManager = std::make_shared<FrameManager>(device, queueManager, swapchain);
 
     logger::Info("Setting Up SwapChain...");
-    swapchain = std::make_unique<SwapChain>(device, queueManager);
+    swapchain = std::make_shared<SwapChain>(device, queueManager);
 
     logger::Info("Setting Up PipelineManager...");
-    pipelineManager = std::make_unique<PipelineManager>(device, swapchain, frameManager);
+    pipelineManager = std::make_shared<PipelineManager>(device, swapchain, frameManager);
 
     CreateNewGraphicsPipeline();
 

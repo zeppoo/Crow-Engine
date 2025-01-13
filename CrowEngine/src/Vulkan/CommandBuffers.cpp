@@ -2,7 +2,7 @@
 
 namespace vulkan {
   CommandBuffer::CommandBuffer(VkCommandBuffer* buffer, QueueType type)
-      : buffer{buffer}, bufferType{type} {}
+      : buffer{buffer}, bufferType{type}{}
 
   CommandBuffer::~CommandBuffer() {
     vkResetCommandBuffer(*buffer, 0);
@@ -25,37 +25,23 @@ namespace vulkan {
     isRecorded = false;
   }
 
-  CommandBufferManager::CommandBufferManager(std::unique_ptr<Device>& device, std::unique_ptr<QueueManager>& queueManager) : device{device}, queueManager{queueManager} {}
+  CommandBufferManager::CommandBufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager) : device{device}, queueManager{std::move(queueManager)} {}
 
 
   CommandBuffer CommandBufferManager::CreateBuffer(QueueType bufferType) {
-    CommandBuffer newBuffer(queueManager->GetCommandBuffer(bufferType), bufferType);
+
+    CommandBuffer newBuffer(queueManager->GetCommandBuffer(bufferType, 1),bufferType);
     return newBuffer;
   }
 
   void CommandBufferManager::QueueBuffer(CommandBuffer commandBuffer) {
     if(!commandBuffer.isRecorded)
       return logger::Error("Cannot submit commandbuffer because it is not recorded");
-    queueManager->SubmitCommandBuffer(commandBuffer.buffer, commandBuffer.bufferType);
+    queueManager->QueueCommandBuffer(commandBuffer.buffer, commandBuffer.bufferType, 1);
   }
 
-  void CommandBufferManager::AddBuffer(CommandBuffer commandBuffer) {
-    reuseBuffers.push_back(commandBuffer);
-  }
-
-  void CommandBufferManager::RemoveBuffer(int index) {
-    reuseBuffers.erase(reuseBuffers.begin() + index);
-  }
-
-  void CommandBufferManager::ResetStoredBuffers() {
-    for(CommandBuffer & buffer : reuseBuffers) {
-      buffer.Reset();
-    }
-  }
-
-  void CommandBufferManager::SubmitStoredBuffers() {
-    for(CommandBuffer & buffer : reuseBuffers) {
-      queueManager->SubmitCommandBuffer(buffer.buffer, buffer.bufferType);
-    }
+  void CommandBufferManager::SubmitBuffers(QueueType queueType, uint32_t queueIndex)
+  {
+    queueManager->SubmitQueuedBuffers(device->GetDevice(), queueType, queueIndex);
   }
 }

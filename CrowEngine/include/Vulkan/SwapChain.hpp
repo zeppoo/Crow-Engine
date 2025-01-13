@@ -15,7 +15,7 @@ namespace vulkan
 
   class SwapChain {
   public:
-    SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager);
+    SwapChain(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager);
 
     ~SwapChain();
 
@@ -56,8 +56,8 @@ namespace vulkan
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
 
-    std::unique_ptr<Device> &device;
-    std::unique_ptr<QueueManager> &queueManager;
+    std::shared_ptr<Device> device;
+    std::shared_ptr<QueueManager> queueManager;
     VkSwapchainKHR swapchain;
     std::vector<VkRenderPass> renderPasses;
     std::vector<SwapchainImage> swapchainImages;

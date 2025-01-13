@@ -1,6 +1,6 @@
 #pragma once
 
-#include <functional>
+#include <unordered_set>
 #include <optional>
 #include "crow_lib.hpp"
 
@@ -14,16 +14,6 @@ struct QueueData {
   VkQueue *pQueue;
   int queueIndex;
   int familyIndex;
-
-  void SubmitBuffers(VkDevice device)
-  {
-    vkWaitForFences(device, 1, &queueFence, VK_TRUE, UINT64_MAX); // Wait for previous frame
-    vkResetFences(device, 1, &queueFence); // Reset for reuse
-    VkSubmitInfo submitInfo{};
-    submitInfo.commandBufferCount = recordedBuffers.size();
-    submitInfo.pCommandBuffers = recordedBuffers.data();
-    vkQueueSubmit(*pQueue, 1, &submitInfo, queueFence);
-  }
 };
 
 struct QueueFamily {
@@ -33,8 +23,7 @@ struct QueueFamily {
   std::vector<float> queuePriorities;
   VkCommandPool commandPool = VK_NULL_HANDLE;
   std::vector<VkCommandBuffer> commandBuffers = {VK_NULL_HANDLE};
-  std::vector<VkCommandBuffer *> availableBuffers;
-  std::vector<VkCommandBuffer *> inUseBuffers;
+  int currentBufferIndex = 0;
 };
 
 class QueueManager {
@@ -49,10 +38,11 @@ public:
 
   std::vector<VkDeviceQueueCreateInfo> CreateQueueInfos();
 
-  VkCommandBuffer *GetCommandBuffer(QueueType bufferType);
-  void ReturnCommandBuffer(VkCommandBuffer *buffer, QueueType bufferType);
+  VkCommandBuffer* GetCommandBuffer(QueueType bufferType, uint32_t queueIndex);
 
-  void SubmitCommandBuffer(VkCommandBuffer *commandBuffer, QueueType queueType);
+  void QueueCommandBuffer(VkCommandBuffer *commandBuffer, QueueType queueType, uint32_t queueIndex);
+
+  void SubmitQueuedBuffers(VkDevice device, QueueType queueType, uint32_t queueIndex);
 
   std::vector<QueueFamily> GetQueueFamilies() { return queueFamilies; }
 

@@ -27,7 +27,7 @@ namespace vulkan{
   class PipelineManager
   {
   public:
-    PipelineManager(std::unique_ptr<Device> &device, std::unique_ptr<SwapChain> &swapChain, std::unique_ptr<FrameManager> &frameManager);
+    PipelineManager(std::shared_ptr<Device> device, std::shared_ptr<SwapChain> swapChain, std::shared_ptr<FrameManager> frameManager);
 
     std::vector<GraphicsPipeline> GetGraphicsPipelines() {return graphicsPipelines;}
 
@@ -43,9 +43,9 @@ namespace vulkan{
     void createDescriptorPool();
     void createDescriptorSets();
 
-    std::unique_ptr<Device> &device;
-    std::unique_ptr<SwapChain> &swapchain;
-    std::unique_ptr<FrameManager> &frameManager;
+    std::shared_ptr<Device> &device;
+    std::shared_ptr<SwapChain> &swapchain;
+    std::shared_ptr<FrameManager> &frameManager;
     std::vector<GraphicsPipeline> graphicsPipelines;
     VkDescriptorPool descriptorPool;
     std::vector<VkDescriptorSet> descriptorSets;

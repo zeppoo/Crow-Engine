@@ -9,7 +9,7 @@
 
 namespace vulkan
 {
-  Device::Device(std::unique_ptr<core::Window> &window, std::unique_ptr<QueueManager> &queueManager)
+  Device::Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager)
       : queueManager{queueManager}
   {
     InitVulkan(settings::getEngineConfig().appName.data(), settings::getEngineConfig().engineName.data());

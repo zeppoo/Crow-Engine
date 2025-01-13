@@ -17,7 +17,7 @@ namespace vulkan
 {
   class VulkanModule {
   public:
-    explicit VulkanModule(std::unique_ptr<core::Window> &window);
+    explicit VulkanModule(std::shared_ptr<core::Window> &window);
 
     ~VulkanModule();
 
@@ -47,14 +47,14 @@ namespace vulkan
 
   private:
     // References
-    std::unique_ptr<core::Window> &window;
+    std::shared_ptr<core::Window> &window;
     // Memebers
-    std::unique_ptr<QueueManager> queueManager;
-    std::unique_ptr<Device> device;
-    std::unique_ptr<FrameManager> frameManager;
-    std::unique_ptr<SwapChain> swapchain;
-    std::unique_ptr<PipelineManager> pipelineManager;
-    std::unique_ptr<BufferManager> bufferManager;
-    std::unique_ptr<CommandBufferManager> cmdBufferManager;
+    std::shared_ptr<QueueManager> queueManager;
+    std::shared_ptr<Device> device;
+    std::shared_ptr<FrameManager> frameManager;
+    std::shared_ptr<SwapChain> swapchain;
+    std::shared_ptr<PipelineManager> pipelineManager;
+    std::shared_ptr<BufferManager> bufferManager;
+    std::shared_ptr<CommandBufferManager> cmdBufferManager;
   };
 }

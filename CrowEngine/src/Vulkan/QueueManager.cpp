@@ -194,75 +194,64 @@ bool QueueManager::AllocateCommandBuffers(VkDevice &device)
   return true;
 }
 
-VkCommandBuffer *QueueManager::GetCommandBuffer(QueueType bufferType)
-{
-  uint32_t familyIndex;
-  switch (bufferType) {
-    case PRESENT:
-      familyIndex = presentQueues[0].familyIndex;
-    case GRAPHICS:
-      familyIndex = graphicsQueues[0].familyIndex;
-    case COMPUTE:
-      familyIndex = computeQueues[0].familyIndex;
-    case TRANSFER:
-      familyIndex = transferQueues[0].familyIndex;
-    default:
-      logger::Warning("Couldn't submit commandbuffer");
-  }
-  QueueFamily &family = queueFamilies[familyIndex];
+  VkCommandBuffer* QueueManager::GetCommandBuffer(QueueType bufferType, uint32_t queueIndex) {
+    int familyIndex;
+    switch (bufferType) {
+      case PRESENT:
+        familyIndex = presentQueues[queueIndex].familyIndex;
+      case GRAPHICS:
+        familyIndex = graphicsQueues[queueIndex].familyIndex;
+      case COMPUTE:
+        familyIndex = computeQueues[queueIndex].familyIndex;
+      case TRANSFER:
+        familyIndex = transferQueues[queueIndex].familyIndex;
+      default:
+        logger::Warning("Couldn't find queue type commandbuffer");
+    }
+    QueueFamily& family = queueFamilies[familyIndex];
 
-  if (family.availableBuffers.empty()) {
-    logger::error("No available commandbuffers");
-    return nullptr;
+    family.currentBufferIndex = (family.currentBufferIndex + 1) % family.commandBuffers.size();
+    return &family.commandBuffers[family.currentBufferIndex];
   }
 
-  // Move from available to in-use
-  VkCommandBuffer *buffer = family.availableBuffers.back();
-  family.availableBuffers.pop_back();
-  family.inUseBuffers.push_back(buffer);
-
-  return buffer;
-}
-
-void QueueManager::ReturnCommandBuffer(VkCommandBuffer *buffer, QueueType bufferType)
-{
-  uint32_t familyIndex;
-  switch (bufferType) {
-    case PRESENT:
-      familyIndex = presentQueues[0].familyIndex;
-    case GRAPHICS:
-      familyIndex = graphicsQueues[0].familyIndex;
-    case COMPUTE:
-      familyIndex = computeQueues[0].familyIndex;
-    case TRANSFER:
-      familyIndex = transferQueues[0].familyIndex;
-    default:
-      logger::Warning("No buffer type");
-  }
-  QueueFamily &family = queueFamilies[familyIndex];
-
-  // Find and remove from in-use
-  auto it = std::find(family.inUseBuffers.begin(), family.inUseBuffers.end(), buffer);
-  if (it != family.inUseBuffers.end()) {
-    family.inUseBuffers.erase(it);
-    // Add back to available
-    family.availableBuffers.push_back(buffer);
-  }
-}
-
-void QueueManager::SubmitCommandBuffer(VkCommandBuffer *commandBuffer, QueueType queueType)
+void QueueManager::QueueCommandBuffer(VkCommandBuffer* commandBuffer, QueueType queueType, uint32_t queueIndex)
 {
   switch (queueType) {
     case PRESENT:
-      presentQueues[0].recordedBuffers.push_back(*commandBuffer);
+      presentQueues[queueIndex].recordedBuffers.push_back(*commandBuffer);
     case GRAPHICS:
-      graphicsQueues[0].recordedBuffers.push_back(*commandBuffer);
+      graphicsQueues[queueIndex].recordedBuffers.push_back(*commandBuffer);
     case COMPUTE:
-      computeQueues[0].recordedBuffers.push_back(*commandBuffer);
+      computeQueues[queueIndex].recordedBuffers.push_back(*commandBuffer);
     case TRANSFER:
-      transferQueues[0].recordedBuffers.push_back(*commandBuffer);
+      transferQueues[queueIndex].recordedBuffers.push_back(*commandBuffer);
+    default:
+      logger::Warning("Couldn't queue commandbuffer");
+  }
+}
+
+void QueueManager::SubmitQueuedBuffers(VkDevice device, QueueType queueType, uint32_t queueIndex)
+{
+  QueueData queue;
+  switch (queueType) {
+    case PRESENT:
+      queue = presentQueues[queueIndex];
+    case GRAPHICS:
+      queue = graphicsQueues[queueIndex];
+    case COMPUTE:
+      queue = computeQueues[queueIndex];
+    case TRANSFER:
+      queue = transferQueues[queueIndex];
     default:
       logger::Warning("Couldn't submit commandbuffer");
   }
+
+  vkWaitForFences(device, 1, &queue.queueFence, VK_TRUE, UINT64_MAX);
+  vkResetFences(device, 1, &queue.queueFence);
+  VkSubmitInfo submitInfo{};
+  submitInfo.commandBufferCount = queue.recordedBuffers.size();
+  submitInfo.pCommandBuffers = queue.recordedBuffers.data();
+  vkQueueSubmit(*queue.pQueue, 1, &submitInfo, queue.queueFence);
+  queue.recordedBuffers.clear();
 }
 } // namespace vulkan

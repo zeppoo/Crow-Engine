@@ -19,7 +19,7 @@ namespace vulkan
   class FrameManager
   {
   public:
-    FrameManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<SwapChain> &swapchain);
+    FrameManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager, std::shared_ptr<SwapChain> swapchain);
 
     std::vector<Frame> GetFrames() { return frames; }
     uint32_t GetCurrentImage() { return currentImage; }
@@ -30,9 +30,9 @@ namespace vulkan
     void PresentFrame(VkSwapchainKHR swapchain);
 
   private:
-    std::unique_ptr<QueueManager> &queueManager;
-    std::unique_ptr<Device> &device;
-    std::unique_ptr<SwapChain> &swapchain;
+    std::shared_ptr<QueueManager> queueManager;
+    std::shared_ptr<Device> device;
+    std::shared_ptr<SwapChain> swapchain;
     VkDescriptorPool descriptorPool;
     std::vector<Frame> frames;
     uint32_t currentImage;
