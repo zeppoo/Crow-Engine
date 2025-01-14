@@ -7,7 +7,7 @@ int main()
   GenerateDefaultPipelineConfig();
   GenerateDefaultRenderPassConfig();
 
-  crowe::App& app = crowe::App::GetInstance();
+  core::App& app = core::App::GetInstance();
 
   app.StartApplication();
 

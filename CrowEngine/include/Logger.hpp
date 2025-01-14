@@ -2,7 +2,7 @@
 
 #include "crow_lib.hpp"
 
-namespace crowe
+namespace logger
 {
   enum LoggingLevel {
     none,
@@ -11,27 +11,27 @@ namespace crowe
     error
   };
 
-  struct Log {
+  struct LogInfo {
     std::string message;
     LoggingLevel lvl;
   };
 
-  void INFO(std::string msg);
+  void Info(std::string msg);
 
-  void WARNING(std::string msg);
+  void Warning(std::string msg);
 
-  void ERROR(std::string msg);
+  void Error(std::string msg);
 
-  void FATAL_ERROR(std::string msg);
+  void FatalError(std::string msg);
 
-  void SHUTDOWN_APP(std::string msg);
+  void CallShutdown(std::string msg);
 
   class Logger {
   public:
     static Logger &GetInstance()
     { return instance; }
 
-    void PushToLog(Log log);
+    void PushToLog(LogInfo log);
 
     static void StopLogging();
 

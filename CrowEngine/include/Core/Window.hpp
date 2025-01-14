@@ -2,7 +2,7 @@
 
 #include "crow_lib.hpp"
 
-namespace crowe
+namespace core
 {
   class Window {
   public:

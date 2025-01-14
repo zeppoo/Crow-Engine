@@ -1,6 +1,6 @@
 #pragma once
 
-namespace crowe
+namespace core
 {
   class Engine {
   public:

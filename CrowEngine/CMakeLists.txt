@@ -33,6 +33,7 @@ target_include_directories(CrowEngine PRIVATE
         include
         libs/cppr
         ${PROJECT_BINARY_DIR}/resources
+        ${PROJECT_BINARY_DIR}/resources
         ${Vulkan_INCLUDE_DIRS}
 )
 

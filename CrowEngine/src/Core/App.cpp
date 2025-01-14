@@ -3,38 +3,42 @@
 #include "Config/SettingsManager.hpp"
 #include "Core/Window.hpp"
 
-namespace crowe
+namespace core
 {
   App App::instance;
 
   App::App()
   {
-    INFO("Application Started");
+    logger::Info("Application Started");
   }
 
   void App::StartApplication()
   {
-      StartRunning();
-      INFO("Creating Window...");
+      settings::StartRunning();
+      logger::Info("Creating Window...");
       window = std::make_unique<Window>();
-      INFO("Window created succesfully!");
-      vulkanModule = std::make_unique<VulkanModule>(window);
+      logger::Info("Window created succesfully!");
+      vulkanModule = std::make_unique<vulkan::VulkanModule>(window);
   }
 
   void App::RunApplication()
   {
-    while (getEngineConfig().isRunning)
+    while (settings::getEngineConfig().isRunning)
     {
-      window->windowLoop();
+      while (!glfwWindowShouldClose(window->GetWindow()))
+      {
+        glfwPollEvents();
+        vulkanModule->RenderFrame();
+      }
       break;
     }
   }
 
   bool App::ShutdownApplication()
   {
-    vulkanModule->VulkanShutDown();
+    vulkanModule->ShutDown();
     window->DestroyWindow();
-    SHUTDOWN_APP("All Objects Succesfully Destroyed!");
+    logger::CallShutdown("All Objects Succesfully Destroyed!");
     return true;
   }
 }

@@ -6,40 +6,40 @@
 #include <queue>
 #include <mutex>
 
-namespace crowe
+namespace logger
 {
   Logger Logger::instance;
   Logger& logger = Logger::GetInstance();
   bool Logger::loggingDone;
-  std::queue<Log> logQueue;
+  std::queue<LogInfo> logQueue;
   std::mutex mtx;
 
-  void INFO(std::string msg)
+  void Info(std::string msg)
   {
     msg = "| Type: INFO | Message: " + msg;
     logger.PushToLog({msg, info});
   }
 
-  void WARNING(std::string msg)
+  void Warning(std::string msg)
   {
     msg = "| Type: WARNING | Message: " + msg;
     logger.PushToLog({msg, warning});
   }
 
-  void ERROR(std::string msg)
+  void Error(std::string msg)
   {
     msg = "| Type: ERROR | Message: " + msg;
     logger.PushToLog({msg, error});
   }
 
-  void FATAL_ERROR(std::string msg)
+  void FatalError(std::string msg)
   {
     msg = "| Type: FATAL ERROR | Message: " + msg;
     logger.PushToLog({msg, none});
-    StopRunning();
+    CallShutdown("Fatal Error!");
   }
 
-  void SHUTDOWN_APP(std::string msg)
+  void CallShutdown(std::string msg)
   {
     msg = "| Type: SHUTDOWN | Message: " + msg;
     logger.PushToLog({msg, none});
@@ -53,7 +53,7 @@ namespace crowe
     logThread.detach();
   }
 
-  void Logger::PushToLog(Log log)
+  void Logger::PushToLog(LogInfo log)
   {
     logQueue.push(log);
   }
@@ -74,7 +74,7 @@ namespace crowe
       mtx.lock();
       for (int i = 0; i < logQueue.size(); i++)
       {
-        if (getLogConfig().loggingLevelSettings[logQueue.front().lvl]) {
+        if (settings::getLogConfig().loggingLevelSettings[logQueue.front().lvl]) {
           std::cout << GetTime() << logQueue.front().message << std::endl;
         }
         logQueue.pop();
@@ -99,6 +99,5 @@ namespace crowe
     strftime(timeBuffer, sizeof(timeBuffer), "%H:%M:%S", localTime);
     return std::string(timeBuffer);
   }
-
-
 }
+

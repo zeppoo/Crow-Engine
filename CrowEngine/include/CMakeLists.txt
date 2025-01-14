@@ -1,5 +1,6 @@
 target_include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Config)
 include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Core)
+include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Gui)
 include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils)
 include_directories(CrowEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vulkan)

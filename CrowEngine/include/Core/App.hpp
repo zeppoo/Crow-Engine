@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Window.hpp"
-#include "../Vulkan/VulkanBackend.hpp"
+#include "../Vulkan/BackendInterface.hpp"
 #include <memory>
 
-namespace crowe
+namespace core
 {
   class App {
   public:
@@ -26,7 +26,7 @@ namespace crowe
 
     // Members
     static App instance;
-    std::unique_ptr<Window> window;
-    std::unique_ptr<VulkanModule> vulkanModule;
+    std::shared_ptr<Window> window;
+    std::unique_ptr<vulkan::VulkanModule> vulkanModule;
   };
 }

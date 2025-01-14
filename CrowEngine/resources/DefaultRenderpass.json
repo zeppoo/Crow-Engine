@@ -1,7 +1,17 @@
 {
 "RenderPassConfig": {
 "name": "default",
+"SubpassInfo": {
+"pipelineBindPoint": 0,
+"srcSubpass": 4294967295,
+"dstSubpass": 0,
+"srcStageMask": 1024,
+"dstStageMask": 1024,
+"srcAccessMask": 256,
+"dstAccessMask": 256
+},
 "RenderPassAttachmentInfo": {
+"type": 2,
 "format": 0,
 "samples": 1,
 "loadOp": 1,
@@ -10,19 +20,7 @@
 "stencilStoreOp": 1,
 "initialLayout": 0,
 "finalLayout": 1000001002,
-"attachment": 0,
 "layout": 2
-},
-"SubpassInfo": {
-"pipelineBindPoint": 0,
-"inputAttachmentCount": 0,
-"pInputAttachments": "0",
-"colorAttachmentCount": 0,
-"pColorAttachments": "0",
-"pDepthStencilAttachment": "0",
-"pResolveAttachments": "0",
-"preserveAttachmentCount": 0,
-"pPreserveAttachments": "0"
 }
 }
 }

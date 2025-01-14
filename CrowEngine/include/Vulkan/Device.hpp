@@ -1,0 +1,62 @@
+#pragma once
+
+#include "crow_lib.hpp"
+#include "Core/Window.hpp"
+#include "QueueManager.hpp"
+
+namespace vulkan
+{
+  class Device {
+  public:
+    Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager);
+
+    VkInstance GetVkInstance()
+    { return vkInstance; }
+
+    VkSurfaceKHR GetSurface()
+    { return surface; }
+
+    VkDevice GetDevice() const
+    { return device; }
+
+    VkPhysicalDevice GetPhysicDevice() const
+    { return physicDevice; }
+
+    VkDebugUtilsMessengerEXT GetDebugMessenger() const
+    { return debugMessenger; }
+
+    const std::vector<const char *> &GetValidationLayers()
+    { return validationLayers; }
+
+    const std::vector<const char *> &GetDeviceExtensions()
+    { return deviceExtensions; }
+
+  private:
+    bool InitVulkan(const char* appName, const char* engineName);
+
+    bool FindPhysicalDevice();
+
+    bool CreateLogicalDevice();
+
+    bool checkDeviceExtensionSupport(VkPhysicalDevice physicDevice);
+
+    bool CheckDeviceSuitability(VkPhysicalDevice device);
+
+    int RateDevice(VkPhysicalDevice device);
+
+    bool checkValidationLayerSupport();
+
+    bool checkExtensionSupport(const std::vector<const char *> &requiredExtensions);
+
+    //References
+    std::shared_ptr<QueueManager> queueManager;
+    // Members
+    VkInstance vkInstance;
+    VkSurfaceKHR surface;
+    VkDevice device;
+    VkPhysicalDevice physicDevice;
+    VkDebugUtilsMessengerEXT debugMessenger;
+    std::vector<const char *> validationLayers = {"VK_LAYER_KHRONOS_validation"};
+    std::vector<const char *> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
+  };
+}
