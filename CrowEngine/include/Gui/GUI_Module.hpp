@@ -3,7 +3,7 @@
 #include "Gui/Gui_Defaults.hpp"
 #include "Core/Window.hpp"
 #include "Vulkan/BackendInterface.hpp"
-#include "Vulkan/SettingsInterface.hpp"
+#include "Vulkan/VulkanInterface.hpp"
 
 namespace GUI
 {
