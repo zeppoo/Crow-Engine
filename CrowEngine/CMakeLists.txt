@@ -13,7 +13,10 @@ set(CPPR ${LIBS_DIR}/cppr/libCPPR.a)
 
 # Link Source Files
 file(GLOB_RECURSE SOURCE_FILES ${SOURCES_DIR}/*.cpp)
-add_executable(CrowEngine ${SOURCE_FILES})
+add_executable(CrowEngine ${SOURCE_FILES}
+        include/Config/EngineConfig.hpp
+        include/Config/RendererConfig.hpp
+        include/Config/VulkanConfig.hpp)
 
 # Set External Libraries
 add_subdirectory(${EXTERNAL_DIR}/glm)
