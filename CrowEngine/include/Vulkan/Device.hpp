@@ -10,6 +10,8 @@ namespace vulkan
   public:
     Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager);
 
+    uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
+
     VkInstance GetVkInstance()
     { return vkInstance; }
 

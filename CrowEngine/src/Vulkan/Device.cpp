@@ -29,6 +29,11 @@ namespace vulkan
     }
   }
 
+  uint32_t Device::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+    VkPhysicalDeviceMemoryProperties memProperties;
+    vkGetPhysicalDeviceMemoryProperties(physicDevice, &memProperties);
+  }
+
   bool Device::InitVulkan(const char* appName, const char* engineName)
   {
     if (!checkValidationLayerSupport()) {

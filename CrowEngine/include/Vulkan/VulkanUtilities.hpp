@@ -18,4 +18,5 @@ namespace vulkan
 
   SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 
+  uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 }

@@ -6,40 +6,48 @@ namespace vulkan
 
      BufferManager::~BufferManager()
     {
-      for (const auto& pair : buffers){
-        vkDestroyBuffer(device->GetDevice(), pair.second.buffer, nullptr);
-        vkFreeMemory(device->GetDevice(), pair.second.bufferMemory, nullptr);
-      }
+
     }
 
-    void BufferManager::CreateNewBuffer(const std::string name, Buffer& buffer)
+    void BufferManager::CreateBuffer(BufferType bufferType, size_t dataSize)
     {
-      if (vkCreateBuffer(device->GetDevice(), buffer.createBufferInfo(), nullptr, &buffer.buffer) != VK_SUCCESS) {
+      VulkanBuffer buffer;
+      buffer.size = dataSize;
+      VkBufferCreateInfo bufferInfo{};
+      bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+      bufferInfo.size = buffer.size;
+      bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+      VkMemoryAllocateInfo allocInfo{};
+      allocInfo.usage = VMA_MEMORY_USAGE_AUTO;  // Let VMA decide the best memory type
+
+      switch (bufferType)
+      {
+        case VERTEX:
+          bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+          buffers.push_back(buffer); // Handle, memory, size
+
+          break;
+        case INDEX:
+          bufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+          buffers.push_back(buffer); // Handle, memory, size
+          break;
+        case STORAGE:
+          bufferInfo.usage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+          buffers.push_back(buffer); // Handle, memory, size
+          break;
+        case UNIFORM:
+          bufferInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
+          buffers.push_back(buffer); // Handle, memory, size
+          break;
+      }
+
+      if (vkCreateBuffer(device->GetDevice(), &bufferInfo, nullptr, &buffer.buffer) != VK_SUCCESS) {
         throw std::runtime_error("failed to create vertex buffer!");
       }
 
       VkMemoryRequirements memRequirements;
       vkGetBufferMemoryRequirements(device->GetDevice(), buffer.buffer, &memRequirements);
-
-      VkMemoryAllocateInfo allocInfo{};
-      allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-      allocInfo.allocationSize = memRequirements.size;
-      allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-
-      if (vkAllocateMemory(device->GetDevice(), &allocInfo, nullptr, &buffer.bufferMemory) != VK_SUCCESS) {
-        throw std::runtime_error("failed to allocate vertex buffer memory!");
-      }
-
-      vkBindBufferMemory(device->GetDevice(), buffer.buffer, buffer.bufferMemory, 0);
-      buffer.name = name;
-
-      auto result = buffers.insert({name, buffer});
-
-      if (result.second) {
-        std::cout << "Buffer created successfully" << std::endl;
-      } else {
-        std::cout << "Buffer already exists" << std::endl;
-      }
     }
 
     void BufferManager::CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
