@@ -1,23 +1,23 @@
-#include "Vulkan/BackendInterface.hpp"
+#include "Vulkan/Vulkan_Module.hpp"
+#include "Vulkan/Debugger.hpp"
 #include "Config/SettingsManager.hpp"
-#include "Logger.hpp"
-#include <memory>
+#include "Utils/Logger.hpp"
 
 namespace vulkan
 {
-  bool VulkanModule::InitiliazeVulkan()
+  void VulkanModule::InitiliazeVulkan()
   {
     logger::Info("Setting Up Queue Manager...");
     queueManager = std::make_shared<QueueManager>();
 
     logger::Info("Setting Up Device...");
-    device = std::make_shared<Device>(window, queueManager);
+    device = std::make_shared<Device>(queueManager);
 
     logger::Info("Setting Up CommandBufferManager...");
     cmdBufferManager = std::make_shared<CommandBufferManager>(device, queueManager);
 
     logger::Info("Setting Up BufferManager...");
-    bufferManager = std::make_shared<BufferManager>(device, queueManager);
+    bufferManager = std::make_shared<BufferManager>(device, cmdBufferManager);
 
     logger::Info("Setting Up Frame Manager...");
     frameManager = std::make_shared<FrameManager>(device, queueManager, swapchain);
@@ -29,8 +29,6 @@ namespace vulkan
     pipelineManager = std::make_shared<PipelineManager>(device, swapchain, frameManager);
 
     CreateNewGraphicsPipeline();
-
-    return true;
   }
 
   void VulkanModule::ShutDown()
@@ -71,48 +69,5 @@ namespace vulkan
     vkDestroyInstance(device->GetVkInstance(), nullptr);
 
     logger::Info("All Vulkan Objects Destroyed!");
-  }
-
-  void VulkanModule::RenderingLoop()
-  {
-
-  }
-
-  void VulkanModule::BeginShaderExecution()
-  {
-    frameManager->PresentFrame(swapchain->GetSwapchain());
-  }
-
-  void VulkanModule::EndShaderExecution()
-  {
-
-  }
-
-  void VulkanModule::CreateNewGraphicsPipeline()
-  {
-
-  }
-
-  void VulkanModule::CreateNewGraphicsPipeline(const char* pipelineConfigFile)
-  {
-    logger::Info("Creating New GraphicsPipeline...");
-    logger::Info("Successfully created new pipeline");
-  }
-
-  void RemoveGraphicsPipeline()
-  {
-
-  }
-
-  void VulkanModule::RecreateSwapchain()
-  {
-    logger::Warning("Recreating SwapChain");
-    swapchain->RecreateSwapChain();
-    logger::Info("Swapchain Recreated");
-  }
-
-  void VulkanModule::RecreateGraphicsPipeline()
-  {
-
   }
 }

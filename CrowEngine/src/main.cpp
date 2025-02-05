@@ -1,22 +1,12 @@
-#include <iostream>
-#include "Core/App.hpp"
-#include "Utils/GenerateDefaults.hpp"
+#include "Core/Entry.hpp"
 
 int main()
 {
-  GenerateDefaultPipelineConfig();
-  GenerateDefaultRenderPassConfig();
+  Initialize_Resources();
 
-  core::App& app = core::App::GetInstance();
+  Initialize_SubSystems();
 
-  app.StartApplication();
+  Initialize_Application();
 
-  app.RunApplication();
-
-  if(app.ShutdownApplication())
-  {
-    return EXIT_SUCCESS;
-  }
-
-  return EXIT_SUCCESS;
+  Initialize_Shutdown();
 }

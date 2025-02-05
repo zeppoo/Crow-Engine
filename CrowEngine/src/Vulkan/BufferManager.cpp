@@ -1,77 +1,74 @@
 #include "Vulkan/BufferManager.hpp"
 
+#include "Vulkan/Vulkan_Types.hpp"
+
 namespace vulkan
 {
-     BufferManager::BufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager) : device{device}, queueManager{queueManager} {}
+     BufferManager::BufferManager(std::shared_ptr<Device> device, std::shared_ptr<CommandBufferManager> cmdBufferManager) : device{device}, cmdBufferManager{cmdBufferManager} {}
 
      BufferManager::~BufferManager()
     {
-      for (const auto& pair : buffers){
-        vkDestroyBuffer(device->GetDevice(), pair.second.buffer, nullptr);
-        vkFreeMemory(device->GetDevice(), pair.second.bufferMemory, nullptr);
+      for (const auto& buffer : buffers){
+        vkDestroyBuffer(device->GetDevice(), buffer.buffer, nullptr);
+        vkFreeMemory(device->GetDevice(), buffer.memory, nullptr);
       }
     }
 
-    void BufferManager::CreateNewBuffer(const std::string name, Buffer& buffer)
+    int BufferManager::CreateNewBuffer(VkBufferUsageFlagBits usage, void* data, size_t size)
     {
-      if (vkCreateBuffer(device->GetDevice(), buffer.createBufferInfo(), nullptr, &buffer.buffer) != VK_SUCCESS) {
+      Buffer newBuffer{};
+
+       VkBufferCreateInfo bufferInfo{};
+       bufferInfo.size = size;
+       bufferInfo.usage = usage; // Or other usage flags
+       bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+       vkCreateBuffer(device->GetDevice(), &bufferInfo, nullptr, &newBuffer.buffer);
+
+      if (vkCreateBuffer(device->GetDevice(), &bufferInfo, nullptr, &newBuffer.buffer) != VK_SUCCESS) {
         throw std::runtime_error("failed to create vertex buffer!");
       }
 
       VkMemoryRequirements memRequirements;
-      vkGetBufferMemoryRequirements(device->GetDevice(), buffer.buffer, &memRequirements);
+      vkGetBufferMemoryRequirements(device->GetDevice(), newBuffer.buffer, &memRequirements);
 
       VkMemoryAllocateInfo allocInfo{};
       allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
       allocInfo.allocationSize = memRequirements.size;
       allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
-      if (vkAllocateMemory(device->GetDevice(), &allocInfo, nullptr, &buffer.bufferMemory) != VK_SUCCESS) {
+      if (vkAllocateMemory(device->GetDevice(), &allocInfo, nullptr, &newBuffer.memory) != VK_SUCCESS) {
         throw std::runtime_error("failed to allocate vertex buffer memory!");
       }
 
-      vkBindBufferMemory(device->GetDevice(), buffer.buffer, buffer.bufferMemory, 0);
-      buffer.name = name;
-
-      auto result = buffers.insert({name, buffer});
-
-      if (result.second) {
+      if (vkBindBufferMemory(device->GetDevice(), newBuffer.buffer, newBuffer.memory, 0)) {
         std::cout << "Buffer created successfully" << std::endl;
       } else {
         std::cout << "Buffer already exists" << std::endl;
       }
+
+       buffers.push_back(newBuffer);
+       return buffers.size() - 1;
     }
 
     void BufferManager::CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
-      VkCommandBuffer* pCommandBuffer = queueManager->GetCommandBuffer(TRANSFER);
-      VkCommandBufferBeginInfo beginInfo{};
-      beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-      beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-      vkBeginCommandBuffer(*pCommandBuffer, &beginInfo);
+      CommandBuffer commandBuffer = cmdBufferManager->CreateBuffer(TRANSFER, 1);
+      commandBuffer.BeginRecording();
 
       VkBufferCopy copyRegion{};
       copyRegion.size = size;
-      vkCmdCopyBuffer(*pCommandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+      vkCmdCopyBuffer(*commandBuffer.buffer, srcBuffer, dstBuffer, 1, &copyRegion);
 
-      vkEndCommandBuffer(*pCommandBuffer);
-
-      VkSubmitInfo submitInfo{};
-      submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-      submitInfo.commandBufferCount = 1;
-      submitInfo.pCommandBuffers = pCommandBuffer;
-
-      vkQueueSubmit(*queueManager->GetTransferQueues()[0].pQueue, 1, &submitInfo, VK_NULL_HANDLE);
-      vkQueueWaitIdle(*queueManager->GetTransferQueues()[0].pQueue);
-
-      vkResetCommandBuffer(*pCommandBuffer, 0);
+      commandBuffer.EndRecording();
+       cmdBufferManager->QueueBuffer(commandBuffer, 1);
+       cmdBufferManager->SubmitBuffers(TRANSFER, 1);
     }
 
-    void BufferManager::DestroyBuffer(const std::string name)
+    void BufferManager::DestroyBuffer(const int index)
     {
-      vkDestroyBuffer(device->GetDevice(), buffers[name].buffer, nullptr);
-      vkFreeMemory(device->GetDevice(), buffers[name].bufferMemory, nullptr);
-      buffers.erase(name);
+      vkDestroyBuffer(device->GetDevice(), buffers[index].buffer, nullptr);
+      vkFreeMemory(device->GetDevice(), buffers[index].memory, nullptr);
+       buffers.erase(buffers.begin() + index);
     }
 
     uint32_t BufferManager::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {

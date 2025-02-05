@@ -4,12 +4,6 @@
 
 namespace core
 {
-  Window::Window()
-  {
-    InitializeGLFW();
-    InitializeWindow();
-  }
-
   void Window::DestroyWindow()
   {
     glfwDestroyWindow(window);

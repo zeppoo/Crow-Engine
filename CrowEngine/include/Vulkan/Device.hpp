@@ -8,7 +8,7 @@ namespace vulkan
 {
   class Device {
   public:
-    Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager);
+    Device(std::shared_ptr<QueueManager> queueManager);
 
     VkInstance GetVkInstance()
     { return vkInstance; }

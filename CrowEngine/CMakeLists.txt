@@ -1,55 +1,68 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(CrowEngine VERSION 1.0)
+project(PrintTree VERSION 1.0)
+add_executable(PrintTree PrintPathTree.cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(EXTERNAL_DIR ${CMAKE_SOURCE_DIR}/external)
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
-set(LIBS_DIR ${CMAKE_SOURCE_DIR}/libs)
-set(SOURCES_DIR ${CMAKE_SOURCE_DIR}/src)
-set(RESOURCE_DIR ${CMAKE_SOURCE_DIR}/resources)
-set(CPPR ${LIBS_DIR}/cppr/libCPPR.a)
 
-# Link Source Files
-file(GLOB_RECURSE SOURCE_FILES ${SOURCES_DIR}/*.cpp)
-add_executable(CrowEngine ${SOURCE_FILES}
-        src/Engine/Material.cpp
-        src/Engine/Material.hpp
-        src/Engine/Scene.cpp
-        src/Engine/Scene.hpp
-        src/Engine/Object.cpp
-        src/Engine/Object.hpp)
-
-# Set External Libraries
-add_subdirectory(${EXTERNAL_DIR}/glm)
-add_subdirectory(${EXTERNAL_DIR}/glfw)
-add_subdirectory(${EXTERNAL_DIR}/imgui)
-add_subdirectory(${INCLUDE_DIR})
-add_subdirectory(${RESOURCE_DIR})
-
-# Find Packages
+# Find Vulkan package
 find_package(Vulkan REQUIRED)
 
-# Include directories for external libraries and Vulkan
-target_include_directories(CrowEngine PRIVATE
-        external/glfw/include
-        external/glm
-        external/imgui
-        include
-        libs/cppr
-        ${PROJECT_BINARY_DIR}/resources
-        ${PROJECT_BINARY_DIR}/resources
+# Add external dependencies
+add_subdirectory(external/glfw)
+add_subdirectory(external/glm)
+add_subdirectory(external/imgui)
+
+# Collect all source files
+file(GLOB_RECURSE SOURCES
+        "src/*.cpp"
+)
+
+file(GLOB_RECURSE HEADERS
+        "include/*.hpp"
+)
+
+# Set include directories
+set(INCLUDE_DIRS
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/libs/cppr
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/tinyObjLoader
         ${Vulkan_INCLUDE_DIRS}
 )
 
-# Link the libraries
-target_link_libraries(CrowEngine PRIVATE glfw glm imgui Vulkan::Vulkan ${CPPR})
+# Create executable
+add_executable(CrowEngine ${SOURCES} ${HEADERS}
+        src/Renderer/UBO_Manager.cpp
+        src/Renderer/UBO_Manager.hpp)
 
-# Ensure ImGui has access to Vulkan and GLFW libraries
-target_include_directories(imgui PRIVATE
-        ${Vulkan_INCLUDE_DIRS}
-        ${GLFW_INCLUDE_DIRS})
-target_link_libraries(imgui PRIVATE
-        ${Vulkan_LIBRARIES}
-        glfw)
+# Link include directories to target
+target_include_directories(CrowEngine PRIVATE ${INCLUDE_DIRS})
+
+# Add resources directory
+add_subdirectory(resources)
+
+# Link libraries
+target_link_libraries(CrowEngine PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/libs/cppr/libCPPR.a
+        glfw
+        glm
+        imgui
+        tinyObjLoader
+        Vulkan::Vulkan
+)
+
+# Copy shader files to build directory
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources/Shaders
+        DESTINATION ${CMAKE_BINARY_DIR})
+
+# Configure resource paths
+configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/resources/ConfigPaths.in.hpp
+        ${CMAKE_BINARY_DIR}/ConfigPaths.hpp
+)
+target_include_directories(CrowEngine PRIVATE ${CMAKE_BINARY_DIR})

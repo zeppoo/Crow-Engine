@@ -19,7 +19,7 @@ namespace vulkan
 
     ~SwapChain();
 
-    void SetupSwapChain();
+    void InitializeSwapChain();
 
     void RecreateSwapChain();
 
@@ -54,7 +54,6 @@ namespace vulkan
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
-
 
     std::shared_ptr<Device> device;
     std::shared_ptr<QueueManager> queueManager;

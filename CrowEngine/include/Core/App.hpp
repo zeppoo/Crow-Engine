@@ -3,9 +3,14 @@
 #include "Window.hpp"
 #include "../Vulkan/BackendInterface.hpp"
 #include <memory>
-
 namespace core
 {
+  enum AppState {
+    APP_STATE_IDLE = 0,
+    APP_STATE_RUNNING,
+    APP_STATE_SHUTDOWN,
+  };
+
   class App {
   public:
     static App &GetInstance()
@@ -26,7 +31,5 @@ namespace core
 
     // Members
     static App instance;
-    std::shared_ptr<Window> window;
-    std::unique_ptr<vulkan::VulkanModule> vulkanModule;
   };
 }

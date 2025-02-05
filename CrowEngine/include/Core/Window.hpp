@@ -1,12 +1,13 @@
 #pragma once
-
-#include "crow_lib.hpp"
+#include "Vulkan/Vulkan_Types.hpp"
+#include <GLFW/glfw3.h>
 
 namespace core
 {
   class Window {
   public:
-    Window();
+    static Window &GetInstance()
+    { return instance; }
 
     void DestroyWindow();
 
@@ -22,6 +23,14 @@ namespace core
     void windowLoop();
 
   private:
+    Window();
+
+    Window(const Window &) = delete;
+
+    Window &operator=(const Window &) = delete;
+
+    // Members
+    static Window instance;
     GLFWwindow *window;
   };
 }

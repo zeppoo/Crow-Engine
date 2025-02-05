@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <limits>
 #include "ConfigPaths.hpp"
-#include "Logger.hpp"
+#include "Utils/Logger.hpp"
 #include "Utils/FileUtilities.hpp"
 #include "Utils/GenerateDefaults.hpp"
 #include "Vulkan/VulkanUtilities.hpp"
@@ -10,15 +10,15 @@
 
 namespace vulkan
 {
-SwapChain::SwapChain(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager) :
+SwapChain::SwapChain(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager) :
     device{device}, queueManager{queueManager}
 {
-  SetupSwapChain();
+  InitializeSwapChain();
 }
 
 SwapChain::~SwapChain() {}
 
-void SwapChain::SetupSwapChain()
+void SwapChain::InitializeSwapChain()
 {
   createSwapChain(VK_NULL_HANDLE);
   RenderPassConfig renderPassConfig = GenerateDefaultRenderPassConfig();

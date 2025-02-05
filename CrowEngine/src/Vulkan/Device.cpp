@@ -2,19 +2,19 @@
 #include "Vulkan/VulkanUtilities.hpp"
 #include "Vulkan/Debugger.hpp"
 #include "Config/SettingsManager.hpp"
-#include "Logger.hpp"
+#include "Utils/Logger.hpp"
 
 #include <set>
 #include <cstring>
 
 namespace vulkan
 {
-  Device::Device(std::shared_ptr<core::Window> window, std::shared_ptr<QueueManager> queueManager)
+  Device::Device(std::shared_ptr<QueueManager> queueManager)
       : queueManager{queueManager}
   {
     InitVulkan(settings::getEngineConfig().appName.data(), settings::getEngineConfig().engineName.data());
     logger::Info("Succesfully Created Vulkan Instance");
-    surface = window->CreateVulkanSurface(vkInstance);
+    surface = core::Window::GetInstance().CreateVulkanSurface(vkInstance);
     if (FindPhysicalDevice()) {
       logger::Info("Found Physical Device!");
     }

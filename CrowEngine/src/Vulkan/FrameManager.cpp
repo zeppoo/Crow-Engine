@@ -1,9 +1,9 @@
 #include "Vulkan/FrameManager.hpp"
-#include "Logger.hpp"
+#include "Utils/Logger.hpp"
 
 namespace vulkan
 {
-  FrameManager::FrameManager(std::unique_ptr<Device> &device, std::unique_ptr<QueueManager> &queueManager, std::unique_ptr<SwapChain> &swapchain) : device{device}, queueManager{queueManager}, swapchain{swapchain} {}
+  FrameManager::FrameManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager, std::shared_ptr<SwapChain> swapchain) : device{device}, queueManager{queueManager}, swapchain{swapchain} {}
 
   void FrameManager::CreateFrameSyncObjects()
   {

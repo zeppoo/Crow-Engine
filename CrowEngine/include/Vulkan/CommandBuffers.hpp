@@ -1,5 +1,4 @@
 #pragma once
-#include "Logger.hpp"
 #include "Vulkan/Device.hpp"
 #include "Vulkan/QueueManager.hpp"
 #include "crow_lib.hpp"
@@ -24,8 +23,8 @@ class CommandBufferManager {
 public:
   CommandBufferManager(std::shared_ptr<Device> device, std::shared_ptr<QueueManager> queueManager);
 
-  CommandBuffer CreateBuffer(QueueType bufferType);
-  void QueueBuffer(CommandBuffer commandBuffer);
+  CommandBuffer CreateBuffer(QueueType bufferType, uint32_t queueIndex);
+  void QueueBuffer(CommandBuffer commandBuffer, uint32_t queueIndex);
   void SubmitBuffers(QueueType bufferType, uint32_t queueIndex);
 
 private:
